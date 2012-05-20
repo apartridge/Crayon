@@ -22,7 +22,7 @@ Vector3 Lambert::shadeLight(const Light& light, const Ray& ray,
     //float visibility = light.visibility(hit.P, scene);
     
     bool inShadow = false;
-    
+    /*
 	Ray towards_light (hit.P, l, 1);
 	HitInfo towards_light_hit;
 
@@ -35,7 +35,13 @@ Vector3 Lambert::shadeLight(const Light& light, const Ray& ray,
 		{
 			return Vector3(0);
 		}
-	}
+	}*/
+    
+    HitInfo shadowHit;
+    Ray shadowRay;
+    shadowRay.d = l.normalized(); 
+    shadowRay.o = hit.P;
+    inShadow = scene.trace(shadowHit, shadowRay, epsilon, l.length());
   
     // Diffuse component from the light source
     if (!inShadow) 
