@@ -71,9 +71,6 @@ void makeTeapotScene()
 }
 
 
-
-
-
 void makeDualScene()
 {
     g_camera = new Camera;
@@ -619,8 +616,8 @@ void makeCornellScene()
 	
 	Matrix4x4 xformdra;
 	xformdra.setIdentity();
-	xformdra *= translate(-1,0,-2);
-    xformdra *= scale(0.2,0.2,0.2);
+	xformdra *= translate(1.3,0,-1.5);
+    xformdra *= scale(0.15,0.15,0.15);
 	Material* matdragon = new Shiny(Vector3(1, 1, 1), Medium(1.5f), 0, Vector3(0.0, 0.01, 0.0), 1.0);
     TriangleMesh * dragon2 = new TriangleMesh;
     dragon2->load("dragon2.obj", xformdra);
