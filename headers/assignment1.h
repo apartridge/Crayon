@@ -11,7 +11,7 @@
 #include "../headers/geometry/TriangleMesh.h"
 #include "../headers/geometry/Triangle.h"
 #include "../headers/materials/Lambert.h"
-#include "../headers/materials/Shiny.h"
+//#include "../headers/materials/Shiny.h"
 #include "../headers/materials/Skydome.h"
 #include "../headers/geometry/Sphere.h"
 

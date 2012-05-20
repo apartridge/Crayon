@@ -1,7 +1,9 @@
 #include "../headers/assignment2.h"
-#include "../headers/materials/LambertG.h"
+#include "../headers/materials/Lambert.h"
 #include "../headers/materials/LightSource.h"
 #include "../headers/lights/SquareLight.h"
+
+#include "../headers/materials/Glass.h"
 
 // local helper function declarations
 namespace
@@ -157,7 +159,8 @@ void makeBunny1Scene()
     light->setPower(1000);
     g_scene->addLight(light);
 
-    Material* material = new Shiny(Vector3(1.0f), Medium(1.5), 0.0 );
+    Material *notShiny = new Lambert(1);
+    Material* material = notShiny; //new Shiny(Vector3(1.0f), Medium(1.5), 0.0 );
 
     TriangleMesh * bunny = new TriangleMesh;
     bunny->load("bunny.obj");
@@ -207,11 +210,11 @@ void makeDragonScene()
     light->setPower(1000);
     g_scene->addLight(light);
 
-    Material* material = new Shiny(Vector3(1.0f), Medium(1.4), 0.0, 0.0);
+    Material * notShiny = new Lambert(1);
+    Material* material = notShiny; //new Shiny(Vector3(1.0f), Medium(1.4), 0.0, 0.0);
     TriangleMesh * dragon = new TriangleMesh;
     dragon->load("dragon2.obj");
     addMeshTrianglesToScene(dragon, material);
-
 
 	Matrix4x4 xform;
 	xform.setIdentity();
@@ -221,24 +224,20 @@ void makeDragonScene()
     dragon2->load("dragon2.obj", xform);
     addMeshTrianglesToScene(dragon2, material3);
 
-
 	xform.setIdentity();
     xform *= translate(6, 0, -3);
-	Material* material4 = new Shiny(Vector3(0,1,0), Medium(1), 1, 0.1);
+	Material* material4 = notShiny; //new Shiny(Vector3(0,1,0), Medium(1), 1, 0.1);
     TriangleMesh * dragon3 = new TriangleMesh;
     dragon3->load("dragon2.obj", xform);
     addMeshTrianglesToScene(dragon3, material4);
 
-
 	xform.setIdentity();
     xform *= translate(0, 4, 4);
 	xform *= scale(1,1,1);
-	Material* matsphere = new Shiny(Vector3(1.0f), Medium(1.5), 0.0, 0.0);
+	Material* matsphere = notShiny; //new Shiny(Vector3(1.0f), Medium(1.5), 0.0, 0.0);
     TriangleMesh * sphere = new TriangleMesh;
     sphere->load("sphere3.obj", xform);
     addMeshTrianglesToScene(sphere, matsphere);
-
-
 
     // create the floor triangle
     TriangleMesh * floor = new TriangleMesh;
@@ -258,13 +257,6 @@ void makeDragonScene()
     g_scene->addObject(t);
 	g_scene->addMesh(floor);
 
-
-
-
-
-
-
-    
     // let objects do pre-calculations if needed
     g_scene->preCalc();
 }
@@ -538,10 +530,10 @@ void makeCornellScene()
     light->setPower(50);
     g_scene->addLight(light);*/
 
-    Material* materialWhite = new LambertG(Vector3(0.4f, 0.4f, 0.4f));
-	Material* materialRed = new LambertG(Vector3(1.0f, 0, 0));
-	Material* materialGreen = new LambertG(Vector3(0, 1.0f, 0));
-	Material* materialCeiling = new LambertG(Vector3(0.4f, 0.4f, 0.4f));
+    Material* materialWhite = new Lambert(Vector3(0.4f, 0.4f, 0.4f));
+	Material* materialRed = new Lambert(Vector3(1.0f, 0, 0));
+	Material* materialGreen = new Lambert(Vector3(0, 1.0f, 0));
+	Material* materialCeiling = new Lambert(Vector3(0.4f, 0.4f, 0.4f));
 
 
     TriangleMesh * mesh = new TriangleMesh ();
@@ -578,20 +570,20 @@ void makeCornellScene()
 
 	SquareLight * light = new SquareLight;
     light->setColor(Vector3(1, 1, 1));
-    light->setPower(50);
+    light->setPower(2);
 	light->setPosition( Vector3(2.5, 5.55, -3), Vector3(3.0, 5.55, -2.5) ) ;
 	g_scene->addLight(light);
 
 
 	// Ball
-
+    /*
 	Sphere* sphere3 = new Sphere;
     sphere3->setCenter(Vector3(3.7, 2.10, -1.5));
     sphere3->setRadius(0.5);
 	Shiny* material3 = new Shiny(Vector3(1, 1, 1), Medium(1.5f), 1, Vector3(0.0, 0.01, 0.0), 1.0);
 	sphere3->setMaterial(material3);
     g_scene->addObject(sphere3);
-
+    */
 
 	/*
 	Matrix4x4 xformdra;
@@ -650,7 +642,7 @@ void makeCornellSceneGlass()
     {
         // create and place a point light source
         PointLight * light = new PointLight;
-        light->setPosition(Vector3(0, h - 0.5, 0));
+        light->setPosition(Vector3(0, h - 1.5, 0));
         light->setColor(Vector3(1, 1, 1));
         light->setPower(10);
         g_scene->addLight(light);
@@ -679,9 +671,9 @@ void makeCornellSceneGlass()
     int vertexIndices[10][3] = {{0,1,2}, {0,2,3}, {0,4,1}, {4,5,1}, {1,5,2}, {5,6,2}, {2,6,7}, {2,7,3}, {4,5,6}, {4,6,7}};
     int normalIndices[10] = {0, 0, 1, 1, 2, 2, 3, 3, 4, 4};
 
-    Material *red = new LambertG(Vector3(1, 0.5, 0.5));
-    Material *blue = new LambertG(Vector3(0.5, 0.5, 1));
-    Material *gray = new LambertG(1.0);
+    Material *red = new Lambert(Vector3(1, 0.5, 0.5));
+    Material *blue = new Lambert(Vector3(0.5, 0.5, 1));
+    Material *gray = new Lambert(1.0);
 
     for (int i = 0; i < 10; i++)
     {
@@ -697,7 +689,7 @@ void makeCornellSceneGlass()
 
     // Add spheres
     const float radius = 1;
-    Material *glass = new Shiny(Vector3(1, 1, 1), Medium(1.5f), 0, Vector3(0.0, 0.01, 0.0), 1.0);
+    Material *glass = new Glass();
     for (int i = 0; i < 2; ++i)
     {
         Sphere* sphere = new Sphere();
@@ -708,7 +700,6 @@ void makeCornellSceneGlass()
     }
 
     g_scene->preCalc();
-
 }
 
 

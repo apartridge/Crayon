@@ -16,7 +16,8 @@ public:
 
 	virtual void renderGL() = 0;
 
-	virtual const Vector3 getPosition() = 0; // Returns a random position on light surface, t
+    // Returns a random position on light surface, t
+	virtual const Vector3 getPosition() const = 0; 
 
 protected:
     Vector3 m_color;

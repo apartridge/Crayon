@@ -130,7 +130,7 @@ static void drawScanLineY(int scanline, RaytracerScanlinePool* job)
 
 			if (job->scene->trace(hitInfo, ray))
 			{
-				shadeResultAccum += hitInfo.material->shade(ray, hitInfo, *job->scene, 1, 0);
+				shadeResultAccum += hitInfo.material->shade(ray, hitInfo, *job->scene, 0);
 			}
 		}
 

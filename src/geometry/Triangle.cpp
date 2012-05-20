@@ -115,7 +115,7 @@ void Triangle::renderGL()
     const Vector3 & v1 = m_mesh->vertices()[ti3.y]; //vertex b of triangle
     const Vector3 & v2 = m_mesh->vertices()[ti3.z]; //vertex c of triangle
 	
-	Vector3 materialColor = this->m_material->getDiffuseColor();
+	Vector3 materialColor = Vector3(0.5); //this->m_material->getDiffuseColor();
 	glColor3f(materialColor.x, materialColor.y, materialColor.z);
 
     glBegin(GL_TRIANGLES);

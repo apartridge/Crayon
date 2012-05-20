@@ -14,7 +14,7 @@ public:
 		m_max = max;
 	}
 
-	const Vector3 getPosition()
+	const Vector3 getPosition() const
 	{
 		return Vector3 ( m_min.x + Random::uniformRand() * (m_max.x - m_min.x),
 						 m_min.y + Random::uniformRand() * (m_max.y - m_min.y),

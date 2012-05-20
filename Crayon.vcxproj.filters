@@ -1,19 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="src\materials\LambertG.cpp">
-      <Filter>sources\materials</Filter>
-    </ClCompile>
     <ClCompile Include="src\materials\Lambert.cpp">
       <Filter>sources\materials</Filter>
     </ClCompile>
     <ClCompile Include="src\materials\Material.cpp">
-      <Filter>sources\materials</Filter>
-    </ClCompile>
-    <ClCompile Include="src\materials\Shiny.cpp">
-      <Filter>sources\materials</Filter>
-    </ClCompile>
-    <ClCompile Include="src\materials\Stone.cpp">
       <Filter>sources\materials</Filter>
     </ClCompile>
     <ClCompile Include="src\materials\Worley.cpp">
@@ -82,6 +73,12 @@
     <ClCompile Include="src\renderer\Window.cpp">
       <Filter>sources\renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\materials\Glass.cpp">
+      <Filter>sources\materials</Filter>
+    </ClCompile>
+    <ClCompile Include="src\materials\Stone.cpp">
+      <Filter>sources\materials</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\pthread\pthread.h">
@@ -93,19 +90,10 @@
     <ClInclude Include="headers\pthread\semaphore.h">
       <Filter>headers\sysutils\pthread</Filter>
     </ClInclude>
-    <ClInclude Include="headers\materials\LambertG.h">
-      <Filter>headers\materials</Filter>
-    </ClInclude>
     <ClInclude Include="headers\materials\Lambert.h">
       <Filter>headers\materials</Filter>
     </ClInclude>
     <ClInclude Include="headers\materials\Material.h">
-      <Filter>headers\materials</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\materials\Shiny.h">
-      <Filter>headers\materials</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\materials\Stone.h">
       <Filter>headers\materials</Filter>
     </ClInclude>
     <ClInclude Include="headers\materials\Worley.h">
@@ -213,6 +201,12 @@
     <ClInclude Include="headers\renderer\Window.h">
       <Filter>headers\renderer</Filter>
     </ClInclude>
+    <ClInclude Include="headers\materials\Glass.h">
+      <Filter>headers\materials</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\materials\Stone.h">
+      <Filter>headers\materials</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="headers">
@@ -251,5 +245,13 @@
     <Filter Include="headers\lights">
       <UniqueIdentifier>{684d8f69-ac9f-4165-bc40-2ee8dbc71d6b}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="headers\materials\Shiny.h">
+      <Filter>headers\materials</Filter>
+    </None>
+    <None Include="src\materials\Shiny.cpp">
+      <Filter>sources\materials</Filter>
+    </None>
   </ItemGroup>
 </Project>

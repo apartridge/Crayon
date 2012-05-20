@@ -6,7 +6,7 @@
 #include "../headers/sysutils/Random.h"
 
 void spheres()
-{
+{/*
     g_camera = new Camera;
     g_scene = new Scene;
     g_image = new Image;
@@ -40,7 +40,7 @@ void spheres()
 	/*
 	Spheres
 	*/
-
+    /*
 	Sphere* sphere1 = new Sphere;
     sphere1->setCenter(Vector3(-1.25, 1.25, -2.5));
     sphere1->setRadius(1.25);
@@ -74,7 +74,7 @@ void spheres()
 	/*
 	Create the floor triangle
 	*/
-
+    /*
     TriangleMesh * floor = new TriangleMesh;
     floor->createSingleTriangle();
 

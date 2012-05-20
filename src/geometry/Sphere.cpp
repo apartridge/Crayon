@@ -14,8 +14,8 @@ Sphere::~Sphere()
 
 void Sphere::renderGL()
 {
-	Vector3 materialColor = this->m_material->getDiffuseColor();
-	glColor4f(materialColor.x, materialColor.y, materialColor.z, this->m_material->getOpacity());
+	Vector3 materialColor = Vector3(0.5);//this->m_material->getDiffuseColor();
+	glColor4f(materialColor.x, materialColor.y, materialColor.z, 1.0);//this->m_material->getOpacity());
     glTranslatef(m_center.x, m_center.y, m_center.z);
     glutSolidSphere(m_radius, 20, 20);
 	glTranslatef(-m_center.x, -m_center.y, -m_center.z);

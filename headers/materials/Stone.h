@@ -13,12 +13,13 @@ class Stone : public Material
 public:
     Stone();
     virtual ~Stone();
-
     virtual void preCalc() {};
     
+    virtual Vector3 shadeLight(const Light& light, const Ray& ray, const HitInfo& hit, const Scene& scene, const int depth) const;
     static const int WORLEY_ORDER = 4;
-    
-    virtual Vector3 shade(const Ray& ray, const HitInfo& hit, const Scene& scene, float alpha, const int depth) const;
+
+private:
+    Vector3 stoneTexture(const HitInfo& hit) const;
 };
 
 #endif
