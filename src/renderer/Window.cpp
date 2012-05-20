@@ -48,7 +48,7 @@ Window::Window(int * argc, char* argv[]) :
     glutInitWindowSize(g_image->width(), g_image->height());
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
     glutInitWindowPosition(200, 200);
-    glutCreateWindow("Miro - Preview Mode");
+    glutCreateWindow("Crayon - Preview Mode");
 }
 
 
@@ -171,28 +171,28 @@ void Window::keyboard(unsigned char key, int x, int y)
         case 'r':
         case 'R':
             g_camera->setRenderer(Camera::RENDER_RAYTRACE);
-			this->setWindowTitle("Miro - Raytracer Mode");
+			this->setWindowTitle("Crayon - Raytracer Mode");
         break;
 
         case 'g':
         case 'G':
             g_camera->setRenderer(Camera::RENDER_OPENGL);
 			g_camera->setOpenGLRendererMode(Camera::OPENGL_RENDER_WIRE);
-			this->setWindowTitle("Miro - Wireframe Mode");
+			this->setWindowTitle("Crayon - Wireframe Mode");
         break;
 
 		case 'f':
         case 'F':
             g_camera->setRenderer(Camera::RENDER_OPENGL);
 			g_camera->setOpenGLRendererMode(Camera::OPENGL_RENDER_FILL);
-			this->setWindowTitle("Miro - Preview Mode");
+			this->setWindowTitle("Crayon - Preview Mode");
         break;
 
 		case 'b':
         case 'B':
             g_camera->setRenderer(Camera::RENDER_OPENGL);
 			g_camera->setOpenGLRendererMode(Camera::OPENGL_RENDER_BOUNDINGBOX);
-			this->setWindowTitle("Miro - Bounding Boxes");
+			this->setWindowTitle("Crayon - Bounding Boxes");
         break;
 
 
@@ -200,7 +200,7 @@ void Window::keyboard(unsigned char key, int x, int y)
         case 'T':
 			g_camera->setRenderer(Camera::RENDER_OPENGL);
             g_camera->setOpenGLShowTriad(!g_camera->getOpenGLShowTriad());
-			this->setWindowTitle("Miro - Preview Mode");
+			this->setWindowTitle("Crayon - Preview Mode");
         break;
 
         case '+':

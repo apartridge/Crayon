@@ -86,6 +86,13 @@ inline void swap(float& a, float&b)
 
 bool BoundingBox::intersectedByRay(const Ray& ray, float tMinG, float tMaxG) const
 {
+
+	// Always hit if origin is inside box
+
+   if (ray.o.x < max.x && ray.o.y < max.y && ray.o.z < max.z && 
+        ray.o.x > min.x && ray.o.y > min.y && ray.o.z > min.z)
+        return true;
+
 	float divx = 1 / ray.d.x;
 	float tmin = (min.x - ray.o.x) * divx;
 	float tmax = (max.x - ray.o.x) * divx;

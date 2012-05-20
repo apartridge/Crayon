@@ -18,7 +18,7 @@ extern RenderingStats* rendering_statistics;
 
 #define THREADS 8 // Including the main thread
 
-#define PIXEL_SAMPLES 20
+#define PIXEL_SAMPLES 100
 
 Raytracer::Raytracer()
 {
@@ -213,7 +213,8 @@ void Raytracer::drawScene(Scene& scene, Camera& camera, Image* image)
 			{
 				QueryPerformanceCounter(&tick_end);
 				elapsedTime = (float) (tick_end.QuadPart - tick_start.QuadPart)  / frequency.QuadPart;
-				printf("Rendering: %.2f%% with %d SPP at %.2f seconds\r\r", (float)i/image->height()*100, PIXEL_SAMPLES, elapsedTime);
+				printf("Rendering: %.2f%% at %.2f seconds. Guess %.2f seconds.\r",
+						(float)i/image->height()*100, elapsedTime, elapsedTime*float(image->height())/float(i));
 				prev_scanline_drawn_to_screen++;
 				image->drawScanline(i);
 				glFinish();
