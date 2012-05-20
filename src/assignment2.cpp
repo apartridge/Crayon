@@ -12,7 +12,6 @@ namespace
 	inline Matrix4x4 rotate(float angle, float x, float y, float z);
 }
 
-
 void makeTeapotScene()
 {
     g_camera = new Camera;
@@ -69,10 +68,6 @@ void makeTeapotScene()
     // let objects do pre-calculations if needed
     g_scene->preCalc();
 }
-
-
-
-
 
 void makeDualScene()
 {
@@ -140,14 +135,6 @@ void makeDualScene()
     g_scene->preCalc();
 }
 
-
-
-
-
-
-
-
-
 void makeBunny1Scene()
 {
     g_camera = new Camera;
@@ -197,8 +184,6 @@ void makeBunny1Scene()
     // let objects do pre-calculations if needed
     g_scene->preCalc();
 }
-
-
 
 void makeDragonScene()
 {
@@ -283,9 +268,6 @@ void makeDragonScene()
     // let objects do pre-calculations if needed
     g_scene->preCalc();
 }
-
-
-
 
 void makeBunny20Scene()
 {
@@ -503,7 +485,6 @@ void makeBunny20Scene()
     g_scene->preCalc();
 }
 
-
 void makeSponzaScene()
 {
     g_camera = new Camera;
@@ -534,10 +515,6 @@ void makeSponzaScene()
     // let objects do pre-calculations if needed
     g_scene->preCalc();
 }
-
-
-
-
 
 void makeCornellScene()
 {
@@ -639,7 +616,100 @@ void makeCornellScene()
     g_scene->preCalc();
 }
 
+void makeCornellSceneGlass() 
+{
+    g_camera = new Camera;
+    g_scene = new Scene;
+    g_image = new Image;
+    g_image->resize(512, 512);
+    
+    // set up the camera
+    g_camera->setBGColor(Vector3(0.0f, 0.0f, 0.2f));
+    g_camera->setEye(Vector3(0, 3, 9));
+    g_camera->setLookAt(Vector3(0, 2, 0));
+    g_camera->setUp(Vector3(0, 1, 0));
+    g_camera->setFOV(45);
 
+    // Specify cube size
+    const float w = 3, d = 4, h = 5;
+
+    // Create light source
+    if (false)
+    {
+        /*const float scale = 1/3.0;
+        Vector3 vertices[] = { 
+            Vector3(-w*scale, h - epsilon, d*scale),
+            Vector3(-w*scale, h - epsilon, -d*scale),
+            Vector3(w*scale, h - epsilon, -d*scale),
+            Vector3(w*scale, h - epsilon, d*scale)
+        };
+        LightSource * areaLight = new AreaLight(vertices, *g_scene);
+        g_scene->addLight(areaLight);*/
+    }
+    else
+    {
+        // create and place a point light source
+        PointLight * light = new PointLight;
+        light->setPosition(Vector3(0, h - 0.5, 0));
+        light->setColor(Vector3(1, 1, 1));
+        light->setPower(10);
+        g_scene->addLight(light);
+    }
+
+    // Create cube
+    Vector3 *vertex = new Vector3[8];
+    vertex[0] = Vector3(-w, 0, d); // Bottom 4
+    vertex[1] = Vector3(-w, 0, -d);
+    vertex[2] = Vector3(w, 0, -d);
+    vertex[3] = Vector3(w, 0, d);
+    vertex[4] = Vector3(-w, h, d); // Top 4
+    vertex[5] = Vector3(-w, h, -d);
+    vertex[6] = Vector3(w, h, -d);
+    vertex[7] = Vector3(w, h, d);
+
+    Vector3 *normal = new Vector3[5];
+    normal[0] = Vector3(0, 1, 0); // Floor
+    normal[1] = Vector3(1, 0, 0); // Left wall
+    normal[2] = Vector3(0, 0, 1); // Back wall
+    normal[3] = Vector3(-1, 0, 0); // Right wall
+    normal[4] = Vector3(0, -1, 0); // Ceiling
+
+    TriangleMesh *cubeMesh = new TriangleMesh(vertex, normal, 10);
+
+    int vertexIndices[10][3] = {{0,1,2}, {0,2,3}, {0,4,1}, {4,5,1}, {1,5,2}, {5,6,2}, {2,6,7}, {2,7,3}, {4,5,6}, {4,6,7}};
+    int normalIndices[10] = {0, 0, 1, 1, 2, 2, 3, 3, 4, 4};
+
+    Material *red = new LambertG(Vector3(1, 0.5, 0.5));
+    Material *blue = new LambertG(Vector3(0.5, 0.5, 1));
+    Material *gray = new LambertG(1.0);
+
+    for (int i = 0; i < 10; i++)
+    {
+        Triangle *t = cubeMesh->addTriangle(vertexIndices[i][0], vertexIndices[i][1], vertexIndices[i][2], normalIndices[i]);
+        if (i == 2 || i == 3)
+            t->setMaterial(red);
+        else if (i == 6 || i == 7)
+            t->setMaterial(blue);
+        else
+            t->setMaterial(gray);
+        g_scene->addObject(t);
+    }
+
+    // Add spheres
+    const float radius = 1;
+    Material *glass = new Shiny(Vector3(1, 1, 1), Medium(1.5f), 1, Vector3(0.0, 0.01, 0.0), 1.0);
+    for (int i = 0; i < 2; ++i)
+    {
+        Sphere* sphere = new Sphere();
+        sphere->setRadius(radius);
+        sphere->setCenter(Vector3(-w/2.0 + w*i, radius, -d/3.0 + d/2.0*i));
+        sphere->setMaterial(glass);
+        g_scene->addObject(sphere);
+    }
+
+    g_scene->preCalc();
+
+}
 
 
 
@@ -706,5 +776,3 @@ namespace
 	}
 
 }
-
-

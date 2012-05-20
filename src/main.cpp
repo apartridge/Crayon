@@ -109,8 +109,6 @@ void spheres()
 }
 
 
-
-
 int main(int argc, char*argv[])
 {
 	Random::seed();
@@ -124,6 +122,7 @@ int main(int argc, char*argv[])
 	printf("6) Dragon Scene\n");
 	printf("7) Cornell Scene\n");
 	printf("8) Spheres\n");
+    printf("9) Cornell Scene (glass balls)\n");
 
 
 	int option = 0;
@@ -156,6 +155,9 @@ int main(int argc, char*argv[])
 		break;
 	case 8:
 		spheres();
+		break;
+	case 9:
+		makeCornellSceneGlass();
 		break;
 	}
 

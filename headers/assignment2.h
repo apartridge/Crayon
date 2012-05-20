@@ -24,5 +24,6 @@ void makeSponzaScene();
 void makeDualScene();
 void makeDragonScene();
 void makeCornellScene();
+void makeCornellSceneGlass();
 
 #endif

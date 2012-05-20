@@ -8,7 +8,6 @@
 #pragma warning(disable:4996)
 #endif
 
-
 TriangleMesh::TriangleMesh(Material* default_material) :
     m_normals(0),
     m_vertices(0),
@@ -17,8 +16,7 @@ TriangleMesh::TriangleMesh(Material* default_material) :
     m_vertexIndices(0),
     m_texCoordIndices(0),
 	m_hasBoundingBox(false),
-	m_numVertices(0) //,
-	//m_defaultMaterial(default_material)
+	m_numVertices(0)
 {
 
 }
@@ -34,72 +32,40 @@ TriangleMesh::~TriangleMesh()
 }
 
 /*
-void TriangleMesh::addMeshToScene(Scene* scene)
+ * Allocate space to n triangles, with predefined lists of normals and vertices
+ */
+TriangleMesh::TriangleMesh(Vector3 *vertices, Vector3 *normals, size_t numTriangles)
 {
-	for (int i = 0; i < this->numTris(); ++i)
-	{
-		Triangle* t = new Triangle;
-		t->setIndex(i);
-		t->setMesh(this);
-		scene->addObject(t);
+    m_numTris = 0;
+    m_vertices = vertices;
+    m_normals = normals;
 
-		// Set material
-		//t->setMaterial(material);
-
-	}
+    m_vertexIndices = new TupleI3[numTriangles];
+    m_normalIndices = new TupleI3[numTriangles];
 }
 
-void TriangleMesh::connectMaterialToName(Material* a, const char* name)
+Triangle* TriangleMesh::addTriangle(unsigned int a, unsigned int b, unsigned int c,
+    unsigned int na, unsigned int nb, unsigned int nc)
 {
-	TriangleMaterial mat;
-	mat.material = a;
-	mat.name = name;
-	m_materialNames.push_back(mat);
-}
-*/
+    Triangle *t = new Triangle(this, m_numTris);
 
+    m_vertexIndices[m_numTris].x = a;
+    m_vertexIndices[m_numTris].y = b;
+    m_vertexIndices[m_numTris].z = c;
 
-/*
-BoundingBox TriangleMesh::getBoundingBox()
-{
-	if(!m_hasBoundingBox)
-	{
-		calculateBoundingBox();
-	}
-	return m_boundingBox;
+    m_normalIndices[m_numTris].x = na;
+    m_normalIndices[m_numTris].y = nb;
+    m_normalIndices[m_numTris].z = nc;
+
+    m_numTris++;
+    return t;
 }
 
-void TriangleMesh::calculateBoundingBox()
+Triangle* TriangleMesh::addTriangle(unsigned int a, unsigned int b, unsigned int c,
+    unsigned int normal)
 {
-	float minx = 0, miny = 0, minz = 0;
-	float maxx = 0, maxy = 0, maxz = 0;
-
-	for(int i = 0; i < m_numVertices; i++)
-	{
-		Vector3 vertex = vertices()[i];
-		if(vertex.x > maxx || i == 0) maxx = vertex.x;
-		if(vertex.y > maxy || i == 0) maxy = vertex.y;
-		if(vertex.z > maxz || i == 0) maxz = vertex.z;
-		if(vertex.x < minx || i == 0) minx = vertex.x;
-		if(vertex.y < miny || i == 0) miny = vertex.y;
-		if(vertex.z < minz || i == 0) minz = vertex.z;
-	}
-
-	m_hasBoundingBox = true;
-	m_boundingBox.setMax(Vector3(maxx + BOUNDINGBOX_PADDING_DELTA,
-								 maxy + BOUNDINGBOX_PADDING_DELTA,
-								 maxz + BOUNDINGBOX_PADDING_DELTA));
-
-	m_boundingBox.setMin(Vector3(minx - BOUNDINGBOX_PADDING_DELTA,
-								 miny - BOUNDINGBOX_PADDING_DELTA,
-								 minz - BOUNDINGBOX_PADDING_DELTA));
+    return addTriangle(a, b, c, normal, normal, normal);
 }
-
-*/
-
-
-
-
 
 void TriangleMesh::createSingleTriangle()
 {
