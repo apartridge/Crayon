@@ -85,14 +85,13 @@ inline float max(float a, float b, float c){
 
 void Triangle::calculateBoundingBox()
 {
-
 	TriangleMesh::TupleI3 ti3 = m_mesh->vIndices()[m_index];
     const Vector3 & v0 = m_mesh->vertices()[ti3.x];
     const Vector3 & v1 = m_mesh->vertices()[ti3.y];
     const Vector3 & v2 = m_mesh->vertices()[ti3.z];
 
 	float minx, miny, minz, maxx, maxy, maxz;
-	float padd = 0.0001;
+	float padd = 0.00001;
 	
 	minx = min(v0.x, v1.x, v2.x) - padd;
 	maxx = max(v0.x, v1.x, v2.x) + padd;

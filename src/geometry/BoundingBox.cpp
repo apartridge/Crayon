@@ -53,12 +53,16 @@ void BoundingBox::expand(const BoundingBox& other)
 
 float BoundingBox::surfaceArea() const
 {
+	float dx = max.x - min.x;
+	float dy = max.y - min.y;
+	float dz = max.z - min.z;
+	return 2*(dx*dy + dx*dz + dy*dz);
 
-	float sum = 2*( max.x*max.z - max.x*min.z - min.x*max.z + min.x*min.z
+	/*float sum = 2*( max.x*max.z - max.x*min.z - min.x*max.z + min.x*min.z
 					+ max.y*max.x - max.y*min.x - min.y*max.x + min.y*min.x
 					+ max.z*max.y - max.z*min.y - min.z*max.y + min.z*min.y);
 
-	return sum;
+	return sum;*/
 }
 
 void BoundingBox::print() const
@@ -82,6 +86,13 @@ inline void swap(float& a, float&b)
 
 bool BoundingBox::intersectedByRay(const Ray& ray, float tMinG, float tMaxG) const
 {
+
+	// Always hit if origin is inside box
+
+   if (ray.o.x < max.x && ray.o.y < max.y && ray.o.z < max.z && 
+        ray.o.x > min.x && ray.o.y > min.y && ray.o.z > min.z)
+        return true;
+
 	float divx = 1 / ray.d.x;
 	float tmin = (min.x - ray.o.x) * divx;
 	float tmax = (max.x - ray.o.x) * divx;

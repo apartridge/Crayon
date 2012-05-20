@@ -2,8 +2,8 @@
 #include "../../headers\sysutils\PerformanceTimer.h"
 #include <cassert>
 
-#define SPLITS 15
-//#define SPLIT_ALL_AXES
+#define SPLITS 20
+#define SPLIT_ALL_AXES
 
 namespace
 {
@@ -73,7 +73,7 @@ namespace
 // Construct the Bounding Volume Hierarchy
 */
 
-void BVH::build(Objects* objects, TriangleMeshes* meshes, BoundingVolumeNode& root)
+void BVH::build(Objects* objects, BoundingVolumeNode& root)
 {
 
 	PerformanceTimer bvh_construct_timer;
@@ -253,7 +253,7 @@ void BVH::splitNode(BoundingVolumeNode* rootnode, Objects* objects,
 
 		//printf("Comparing node cost %f with best cost %f\n", node_cost, best_cost );
 
-		if(best_cost < node_cost && best_cost > 0)
+		if(best_cost > 0 && best_cost < node_cost)
 		{
 
 			// Have to re-sort on best axis

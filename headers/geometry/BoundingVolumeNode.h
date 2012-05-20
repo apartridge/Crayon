@@ -22,9 +22,6 @@ public:
 		leaves = NULL;
 	}
 
-	bool intersectedByRay(const Ray& ray, float tMin, float tMax);
-
-
 	bool intersect(Ray& ray, HitInfo& minhit,
 				   float tMin, float tMax, int level);
 

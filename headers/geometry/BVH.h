@@ -18,7 +18,7 @@ public:
 	enum SplitAxis {AXIS_X, AXIS_Y, AXIS_Z, AXIS_NONE};
 
 
-    void build(Objects* objects, TriangleMeshes* meshes,  BoundingVolumeNode&);
+    void build(Objects* objects, BoundingVolumeNode&);
 
 	void splitNode(BoundingVolumeNode* rootnode, Objects* objects, 
 					Objects::iterator from, Objects::iterator to,
@@ -27,12 +27,9 @@ public:
     bool intersect(HitInfo& result, Ray& ray,
                    float tMin = 0.0f, float tMax = MIRO_TMAX) const;
 
-	//int trianglesInsideVolume(TriangleMeshes*, BoundingBox&);
-
 	static float sahSplit(int N1, float area1, int N2, float area2, float area_root);
 	static float sahNode(int N, float area);
 
 protected:
-    //const Objects* m_objects;
 	BoundingVolumeNode* m_rootNode;
 };

@@ -5,6 +5,7 @@
 #include "../renderer/Miro.h"
 #include "../materials/Material.h"
 #include "BoundingBox.h"
+#include <cassert>
 
 class Object
 {
@@ -18,7 +19,7 @@ public:
     virtual void preCalc() {}
 
 	virtual void calculateBoundingBox() = 0;
-	const BoundingBox& getBoundingBox(){ return m_boundingBox; }
+	const BoundingBox& getBoundingBox(){return m_boundingBox; }
 
     virtual bool intersect(HitInfo& result, Ray& ray,
                            float tMin = 0.0f, float tMax = MIRO_TMAX) = 0;

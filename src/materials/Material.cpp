@@ -11,8 +11,7 @@ Material::~Material()
 {
 }
 
-Vector3
-Material::shade(const Ray& ray, const HitInfo& hit, const Scene& scene, const int depth) const
+Vector3 Material::shade(const Ray& ray, const HitInfo& hit, const Scene& scene, const int depth) const
 {
     const float GAIN = 1.0f;
 
@@ -34,12 +33,12 @@ Material::shade(const Ray& ray, const HitInfo& hit, const Scene& scene, const in
 
     L += shadeReflectance(ray, hit, scene, depth);
 
-    L += ambient;
+    //L += ambient; // probably not ....
 
     if (depth == 0)
-        return Vector3(pow(L[0] * GAIN, (1/2.2f)),
-                       pow(L[1] * GAIN, (1/2.2f)),
-                       pow(L[2] * GAIN, (1/2.2f)));
+        return Vector3(pow(L[0], (1/2.2f)),
+                       pow(L[1], (1/2.2f)),
+                       pow(L[2], (1/2.2f)));
     else
         return L;
 }

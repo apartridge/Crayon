@@ -22,7 +22,7 @@ void Scene::preCalc()
         pLight->preCalc();
     }
 
-	m_bvh.build(&m_objects, &m_meshes, entireScene);
+	m_bvh.build(&m_objects, entireScene);
 }
 
 bool Scene::trace(HitInfo& minHit, Ray& ray, float tMin, float tMax) const
