@@ -310,6 +310,6 @@ float BVH::sahNode(int N, float area)
 
 bool BVH::intersect(HitInfo& minHit, Ray& ray, float tMin, float tMax) const
 {
-	minHit.t = MIRO_TMAX;
+	minHit.t = tMax;
 	return m_rootNode->intersect(ray, minHit, tMin, tMax, 0);
 }
