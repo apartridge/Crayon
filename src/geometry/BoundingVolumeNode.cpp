@@ -30,7 +30,7 @@ bool BoundingVolumeNode::intersect(Ray& ray, HitInfo& minhit, float tMin,
 
 		for(int i = 0; i < num_leaves; i++)
 		{
-			if( num_leaves == 1 || ++boxIntersections && ((Triangle*)(leaves[i]))->getBoundingBox().intersectedByRay( ray, tMin, minhit.t)   )
+			if( num_leaves == 1 || ++boxIntersections && leaves[i]->getBoundingBox().intersectedByRay( ray, tMin, minhit.t)   )
 			{
 				triangleIntersections++;
 				if ( leaves[i]->intersect(tempMinHit, ray, tMin, minhit.t)  )

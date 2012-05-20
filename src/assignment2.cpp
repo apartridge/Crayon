@@ -616,7 +616,7 @@ void makeCornellScene()
     g_scene->addObject(sphere3);
 
 
-	
+	/*
 	Matrix4x4 xformdra;
 	xformdra.setIdentity();
 	xformdra *= translate(-1,0,-2);
@@ -625,7 +625,7 @@ void makeCornellScene()
     TriangleMesh * dragon2 = new TriangleMesh;
     dragon2->load("dragon2.obj", xformdra);
     addMeshTrianglesToScene(dragon2, matdragon);
-
+    */
 	// Ball 2
 
 	/*Sphere* sphere2 = new Sphere;
