@@ -253,7 +253,7 @@ void BVH::splitNode(BoundingVolumeNode* rootnode, Objects* objects,
 
 		//printf("Comparing node cost %f with best cost %f\n", node_cost, best_cost );
 
-		if(best_cost < node_cost && best_cost > 0)
+		if(best_cost > 0)
 		{
 
 			// Have to re-sort on best axis

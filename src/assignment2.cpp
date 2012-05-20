@@ -570,7 +570,7 @@ void makeCornellScene()
 
 	SquareLight * light = new SquareLight;
     light->setColor(Vector3(1, 1, 1));
-    light->setPower(2);
+    light->setPower(10);
 	light->setPosition( Vector3(2.5, 5.55, -3), Vector3(3.0, 5.55, -2.5) ) ;
 	g_scene->addLight(light);
 
@@ -585,16 +585,16 @@ void makeCornellScene()
     g_scene->addObject(sphere3);
     */
 
-	/*
+	
 	Matrix4x4 xformdra;
 	xformdra.setIdentity();
 	xformdra *= translate(1.3,0,-1.5);
     xformdra *= scale(0.15,0.15,0.15);
-	Material* matdragon = new Shiny(Vector3(1, 1, 1), Medium(1.5f), 0, Vector3(0.0, 0.01, 0.0), 1.0);
+	Material* matdragon = new Glass();
     TriangleMesh * dragon2 = new TriangleMesh;
     dragon2->load("dragon2.obj", xformdra);
     addMeshTrianglesToScene(dragon2, matdragon);
-    */
+    
 	// Ball 2
 
 	/*Sphere* sphere2 = new Sphere;
