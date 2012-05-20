@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>Crayon</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v100</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v100</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>libs/pthreadVC2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Link>
+      <AdditionalDependencies>libs/pthreadVC2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+    </Link>
+    <ClCompile>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+    </ClCompile>
+    <ClCompile>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+    </ClCompile>
+    <ClCompile>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\assignment1.cpp" />
+    <ClCompile Include="src\assignment2.cpp" />
+    <ClCompile Include="src\geometry\BLPatch.cpp" />
+    <ClCompile Include="src\geometry\BoundingBox.cpp" />
+    <ClCompile Include="src\geometry\BoundingVolumeNode.cpp" />
+    <ClCompile Include="src\geometry\BVH.cpp" />
+    <ClCompile Include="src\geometry\Scene.cpp" />
+    <ClCompile Include="src\geometry\Sphere.cpp" />
+    <ClCompile Include="src\geometry\Triangle.cpp" />
+    <ClCompile Include="src\geometry\TriangleMesh.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\materials\Lambert.cpp" />
+    <ClCompile Include="src\materials\LambertG.cpp" />
+    <ClCompile Include="src\materials\LightSource.cpp" />
+    <ClCompile Include="src\materials\Material.cpp" />
+    <ClCompile Include="src\materials\Perlin.cpp" />
+    <ClCompile Include="src\materials\Shiny.cpp" />
+    <ClCompile Include="src\materials\Stone.cpp" />
+    <ClCompile Include="src\materials\Worley.cpp" />
+    <ClCompile Include="src\renderer\Camera.cpp" />
+    <ClCompile Include="src\renderer\Image.cpp" />
+    <ClCompile Include="src\renderer\Window.cpp" />
+    <ClCompile Include="src\renderer\OpenGLRenderer.cpp" />
+    <ClCompile Include="src\renderer\PFMLoader.cpp" />
+    <ClCompile Include="src\renderer\Raytracer.cpp" />
+    <ClCompile Include="src\sysutils\Console.cpp" />
+    <ClCompile Include="src\sysutils\PerformanceTimer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="headers\assignment1.h" />
+    <ClInclude Include="headers\assignment2.h" />
+    <ClInclude Include="headers\geometry\BLPatch.h" />
+    <ClInclude Include="headers\geometry\BoundingBox.h" />
+    <ClInclude Include="headers\geometry\BoundingVolumeNode.h" />
+    <ClInclude Include="headers\geometry\BVH.h" />
+    <ClInclude Include="headers\geometry\Matrix4x4.h" />
+    <ClInclude Include="headers\geometry\Medium.h" />
+    <ClInclude Include="headers\geometry\Object.h" />
+    <ClInclude Include="headers\geometry\Ray.h" />
+    <ClInclude Include="headers\geometry\Scene.h" />
+    <ClInclude Include="headers\geometry\Sphere.h" />
+    <ClInclude Include="headers\geometry\Triangle.h" />
+    <ClInclude Include="headers\geometry\TriangleMesh.h" />
+    <ClInclude Include="headers\geometry\Vector3.h" />
+    <ClInclude Include="headers\geometry\Vector4.h" />
+    <ClInclude Include="headers\lights\SquareLight.h" />
+    <ClInclude Include="headers\lights\Light.h" />
+    <ClInclude Include="headers\lights\PointLight.h" />
+    <ClInclude Include="headers\materials\Lambert.h" />
+    <ClInclude Include="headers\materials\LambertG.h" />
+    <ClInclude Include="headers\materials\LightSource.h" />
+    <ClInclude Include="headers\materials\Material.h" />
+    <ClInclude Include="headers\materials\Perlin.h" />
+    <ClInclude Include="headers\materials\Shiny.h" />
+    <ClInclude Include="headers\materials\Stone.h" />
+    <ClInclude Include="headers\materials\Worley.h" />
+    <ClInclude Include="headers\pthread\pthread.h" />
+    <ClInclude Include="headers\pthread\sched.h" />
+    <ClInclude Include="headers\pthread\semaphore.h" />
+    <ClInclude Include="headers\renderer\Camera.h" />
+    <ClInclude Include="headers\renderer\glut.h" />
+    <ClInclude Include="headers\renderer\Image.h" />
+    <ClInclude Include="headers\renderer\Miro.h" />
+    <ClInclude Include="headers\renderer\Window.h" />
+    <ClInclude Include="headers\renderer\OpenGLRenderer.h" />
+    <ClInclude Include="headers\renderer\PFMLoader.h" />
+    <ClInclude Include="headers\renderer\Raytracer.h" />
+    <ClInclude Include="headers\renderer\Renderer.h" />
+    <ClInclude Include="headers\renderer\RenderingStats.h" />
+    <ClInclude Include="headers\sysutils\Console.h" />
+    <ClInclude Include="headers\sysutils\PerformanceTimer.h" />
+    <ClInclude Include="headers\sysutils\Random.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
