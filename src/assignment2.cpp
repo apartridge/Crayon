@@ -697,7 +697,7 @@ void makeCornellSceneGlass()
 
     // Add spheres
     const float radius = 1;
-    Material *glass = new Shiny(Vector3(1, 1, 1), Medium(1.5f), 1, Vector3(0.0, 0.01, 0.0), 1.0);
+    Material *glass = new Shiny(Vector3(1, 1, 1), Medium(1.5f), 0, Vector3(0.0, 0.01, 0.0), 1.0);
     for (int i = 0; i < 2; ++i)
     {
         Sphere* sphere = new Sphere();
