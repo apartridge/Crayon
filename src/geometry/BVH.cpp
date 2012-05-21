@@ -36,20 +36,20 @@ namespace
 
 	bool sortObjectsX(Object* a, Object* b)
 	{
-		return (a)->getBoundingBox().midpoint().x 
-			   < (b)->getBoundingBox().midpoint().x;
+		return a->getBoundingBox().midpoint().x 
+			   < b->getBoundingBox().midpoint().x;
 	}
 
 	bool sortObjectsY(Object* a, Object* b)
 	{
-		return (a)->getBoundingBox().midpoint().y 
-			   < (b)->getBoundingBox().midpoint().y;
+		return a->getBoundingBox().midpoint().y 
+			   < b->getBoundingBox().midpoint().y;
 	}
 
 	bool sortObjectsZ(Object* a, Object* b)
 	{
-		return (a)->getBoundingBox().midpoint().z 
-			   < (b)->getBoundingBox().midpoint().z;
+		return a->getBoundingBox().midpoint().z 
+			   < b->getBoundingBox().midpoint().z;
 	}
 
 	bool (*sortingFunction(BVH::SplitAxis axis))(Object*, Object*)
@@ -193,7 +193,7 @@ void BVH::splitNode(BoundingVolumeNode* rootnode, Objects* objects,
 			BoundingBox candidate[2];
 			bool startedLeft = false; // Started on the left box?
 
-			for(int split = 0; split < SPLITS; split++, c += step)
+			for(int split = 0; split < SPLITS + 1; split++, c += step)
 			{
 				if(split == SPLITS)
 				{
@@ -217,7 +217,7 @@ void BVH::splitNode(BoundingVolumeNode* rootnode, Objects* objects,
 					}
 					else
 					{
-						rightB = it >= middle;
+						rightB = it > middle;
 					}
 
 					int index = rightB ? 1 : 0;
@@ -238,6 +238,8 @@ void BVH::splitNode(BoundingVolumeNode* rootnode, Objects* objects,
 					candidate_tris[index]++;
 
 				}
+
+				// Better than previous best
 
 				if(candidate_tris[0] > 0 && candidate_tris[1] > 0)
 				{
@@ -263,7 +265,7 @@ void BVH::splitNode(BoundingVolumeNode* rootnode, Objects* objects,
 		
 		// If Best Cost Is Too Low
 
-		if(best_cost >= 0 /*&& best_cost < node_cost*/)
+		if(best_cost >= 0 && best_cost < node_cost)
 		{
 
 			// Have to re-sort on best axis
@@ -297,7 +299,6 @@ void BVH::splitNode(BoundingVolumeNode* rootnode, Objects* objects,
 
 	rootnode->leaves = &(*begin);
 	rootnode->num_leaves = num_triangles;
-	
 }
 
 /*

@@ -646,7 +646,7 @@ void makeCornellScene()
 	Material* matdragon = new Glass();
     TriangleMesh * dragon2 = new TriangleMesh;
     dragon2->load("dragon2.obj", xformdra);
-   // addMeshTrianglesToScene(dragon2, matdragon);
+    addMeshTrianglesToScene(dragon2, matdragon);
     
 	// Ball 2
 
