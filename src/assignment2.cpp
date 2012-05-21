@@ -642,7 +642,7 @@ void makeCornellSceneGlass()
     {
         // create and place a point light source
         PointLight * light = new PointLight;
-        light->setPosition(Vector3(0, h - 1.5, 0));
+        light->setPosition(Vector3(0, h - 0.5, 0));
         light->setColor(Vector3(1, 1, 1));
         light->setPower(10);
         g_scene->addLight(light);
