@@ -27,5 +27,22 @@ public:
 
 	void renderGL();
 
+	int leaf_nodes()
+	{
+		if(num_leaves > 0)
+		{
+			return 1;
+		}
+		else return children[0].leaf_nodes() + children[1].leaf_nodes();
+	}
+
+	int interior_nodes()
+	{
+		if(num_leaves > 0)
+		{
+			return 0;
+		}
+		else return (1 + children[0].interior_nodes()  + children[1].interior_nodes());
+	}
 
 };

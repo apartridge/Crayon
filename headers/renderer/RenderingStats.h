@@ -1,5 +1,5 @@
 #pragma once
-#define RENDERING_STATS 0
+#define RENDERING_STATS 1
 
 #if RENDERING_STATS
 #include "../pthread/pthread.h"

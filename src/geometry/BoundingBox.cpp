@@ -104,7 +104,7 @@ bool BoundingBox::intersectedByRay(const Ray& ray, float tMinG, float tMaxG) con
 
 	if(tmax < 0)
 	{
-		//return false;
+		return false;
 	}
 
 	float divy =  1 / ray.d.y;
@@ -133,7 +133,7 @@ bool BoundingBox::intersectedByRay(const Ray& ray, float tMinG, float tMaxG) con
 
 	if(tmax < 0)
 	{
-		//return false;
+		return false;
 	}
 
 	float divz = 1 / ray.d.z;

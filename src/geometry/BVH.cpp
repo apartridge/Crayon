@@ -109,8 +109,8 @@ void BVH::build(Objects* objects, BoundingVolumeNode& root)
 	bvh_construct_timer.stop();
 
 	printf("Bounding Volume Hierarchy of %d triangles created in %g msecs.\n",
-		   triangles, bvh_construct_timer.elapsedMSec() );
-
+		triangles, bvh_construct_timer.elapsedMSec() );
+	printf("BVH has %d interior and %d leaf nodes.\n",  root.interior_nodes(),  root.leaf_nodes());
 }
 
 /*
@@ -126,7 +126,7 @@ void BVH::splitNode(BoundingVolumeNode* rootnode, Objects* objects,
 
 	int num_triangles = end - begin;
 
-	if(num_triangles > 2)
+	if(num_triangles >= 4)
 	{
 
 		SplitAxis axis;
@@ -159,7 +159,7 @@ void BVH::splitNode(BoundingVolumeNode* rootnode, Objects* objects,
 		float root_area = rootnode->box.surfaceArea();
 		float node_cost = sahNode(num_triangles, root_area);
 
-		float best_cost = -1;
+		float best_cost = -100;
 		BoundingBox best_left;
 		BoundingBox best_right;
 		Objects::iterator best_right_first;
@@ -179,40 +179,50 @@ void BVH::splitNode(BoundingVolumeNode* rootnode, Objects* objects,
 
 			/*
 			// Try splitting planes on axis
-			// We have SPLITS + 1 passes, where the last pass is split-in-the-middle of objects
+			// We have SPLITS + 1 splites, where the last split is split-in-the-middle of objects
 			// This guarantees we'll have one with elements on both sides
 			*/
 
 			Objects::iterator middle = begin + num_triangles / 2;
-			float step = (axisCoord(rootnode->box.max) - axisCoord(rootnode->box.min)) / SPLITS;
-			float c = axisCoord(rootnode->box.min) + step;
 
-			for(int pass = 0; pass < SPLITS + 1; pass++, c += step)
+			float step = (axisCoord(rootnode->box.max) - axisCoord(rootnode->box.min)) / SPLITS;
+			float c = axisCoord(rootnode->box.min);
+
+			int candidate_tris[2] = {0,0};
+			BoundingBox candidate[2];
+
+			for(int split = 0; split < SPLITS + 0; split++, c += step)
 			{
+				if(split == SPLITS)
+				{
+					candidate_tris[0] = 0;
+					candidate[0] = BoundingBox();
+				}
+
+				candidate_tris[1] = 0;
+				candidate[1] = BoundingBox();
 
 				bool rightB = false;
-				int candidate_tris[2] = {0,0};
-				BoundingBox candidate[2];
 
 				// Go thru all triangles, they are sorted on split axis
 				// from left to right
 
-				for(Objects::iterator it = begin; it < end; it++) 
+				for(Objects::iterator it = begin + candidate_tris[0]; it < end; it++) 
 				{
-					const BoundingBox& currBB = ((Triangle*)*it)->getBoundingBox();
+					const BoundingBox& currBB = (*it)->getBoundingBox();
 
-					if(pass < SPLITS)
+					if(split < SPLITS)
 					{
 						rightB = rightB || c <= axisCoord(currBB.midpoint());
 					}
 					else
 					{
-						rightB = it >= middle;
+						rightB = it >= middle; // rightB || c <= axisCoord(currBB.min);
 					}
 
 					int index = rightB ? 1 : 0;
 
-					if(candidate_tris[index] == 0)
+					if(candidate_tris[index] == 0 && (index == 1 || split == 0 || split == SPLITS))
 					{
 						candidate[index] = currBB;
 					}
@@ -224,6 +234,7 @@ void BVH::splitNode(BoundingVolumeNode* rootnode, Objects* objects,
 					candidate_tris[index]++;
 
 				}
+
 				
 				if(candidate_tris[0] > 0 && candidate_tris[1] > 0)
 				{
@@ -249,11 +260,7 @@ void BVH::splitNode(BoundingVolumeNode* rootnode, Objects* objects,
 		
 		// If Best Cost Is Too Low
 
-
-
-		//printf("Comparing node cost %f with best cost %f\n", node_cost, best_cost );
-
-		if(best_cost > 0 && best_cost < node_cost)
+		if(best_cost >= 0 /*&& best_cost < node_cost*/)
 		{
 
 			// Have to re-sort on best axis
@@ -275,8 +282,13 @@ void BVH::splitNode(BoundingVolumeNode* rootnode, Objects* objects,
 			return;
 
 		}
+		/*else if(best_cost < 0 ) 
+		{
+			printf("Best cost %g", best_cost);
+			throw 1;
+		}*/
 
-	} 
+	}
 	
 	// Create leaf node with these objects
 
@@ -290,7 +302,7 @@ void BVH::splitNode(BoundingVolumeNode* rootnode, Objects* objects,
 */
 
 static const float cost_box = 1;
-static const float cost_tri = 3;
+static const float cost_tri = 4;
 
 float BVH::sahSplit(int N1, float area1, int N2, float area2, float area_root)
 {
@@ -310,6 +322,6 @@ float BVH::sahNode(int N, float area)
 
 bool BVH::intersect(HitInfo& minHit, Ray& ray, float tMin, float tMax) const
 {
-	minHit.t = MIRO_TMAX;
+	minHit.t = tMax;
 	return m_rootNode->intersect(ray, minHit, tMin, tMax, 0);
 }

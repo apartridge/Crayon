@@ -34,7 +34,7 @@ bool BoundingVolumeNode::intersect(Ray& ray, HitInfo& minhit, float tMin,
 			{
 #if RENDERING_STATS
 				triangleIntersections++;
-				++boxIntersections++; 
+				boxIntersections++; 
 #endif
 				if ( leaves[i]->intersect(tempMinHit, ray, tMin, minhit.t)  )
 				{
