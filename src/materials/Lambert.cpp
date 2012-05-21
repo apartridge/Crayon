@@ -15,7 +15,7 @@ Lambert::~Lambert()
 Vector3 Lambert::shadeLight(const Light& light, const Ray& ray, 
         const HitInfo& hit, const Scene& scene, const int depth) const
 {
-    const bool SHADOWS = true;
+    const bool SHADOWS = false;
 
     Vector3 L(0);
     Vector3 l = light.getPosition() - hit.P;
