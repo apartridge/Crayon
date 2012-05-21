@@ -193,7 +193,7 @@ void BVH::splitNode(BoundingVolumeNode* rootnode, Objects* objects,
 
 			for(int split = 0; split < SPLITS + 0; split++, c += step)
 			{
-				if(split == SPLITS)
+				//if(split == SPLITS)
 				{
 					candidate_tris[0] = 0;
 					candidate[0] = BoundingBox();
@@ -207,7 +207,7 @@ void BVH::splitNode(BoundingVolumeNode* rootnode, Objects* objects,
 				// Go thru all triangles, they are sorted on split axis
 				// from left to right
 
-				for(Objects::iterator it = begin + candidate_tris[0]; it < end; it++) 
+				for(Objects::iterator it = begin /*+ candidate_tris[0]*/; it < end; it++) 
 				{
 					const BoundingBox& currBB = (*it)->getBoundingBox();
 
@@ -222,8 +222,9 @@ void BVH::splitNode(BoundingVolumeNode* rootnode, Objects* objects,
 
 					int index = rightB ? 1 : 0;
 
-					if(candidate_tris[index] == 0 && (index == 1 || split == 0 || split == SPLITS))
+					if(candidate_tris[index] == 0 /*&& (index == 1 || split == 0 || split == SPLITS)*/)
 					{
+						//printf("Setting candidateindex %d to first\n", index);
 						candidate[index] = currBB;
 					}
 					else
@@ -235,7 +236,6 @@ void BVH::splitNode(BoundingVolumeNode* rootnode, Objects* objects,
 
 				}
 
-				
 				if(candidate_tris[0] > 0 && candidate_tris[1] > 0)
 				{
 					float cost = sahSplit(candidate_tris[0], candidate[0].surfaceArea(),
