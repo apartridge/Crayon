@@ -37,6 +37,59 @@ void makeTeapotScene()
     g_scene->addLight(light);
 
     Material* material = new Lambert(Vector3(1.0f));
+    TriangleMesh * teapot = new TriangleMesh;
+    teapot->load("teapot.obj");
+    addMeshTrianglesToScene(teapot, material);
+    
+    // Extra teapot
+    Matrix4x4 xform;
+    xform.setIdentity();
+    xform *= translate(7.6, .8, .6);
+    TriangleMesh *teapot2 = new TriangleMesh;
+    teapot2->load("teapot.obj", xform);
+    addMeshTrianglesToScene(teapot2, material);
+    
+    // create the floor triangle
+    TriangleMesh * floor = new TriangleMesh;
+    floor->createSingleTriangle();
+    floor->setV1(Vector3(-10, 0, -10));
+    floor->setV2(Vector3(  0, 0,  10));
+    floor->setV3(Vector3( 10, 0, -10));
+    floor->setN1(Vector3(0, 1, 0));
+    floor->setN2(Vector3(0, 1, 0));
+    floor->setN3(Vector3(0, 1, 0));
+    
+    Triangle* t = new Triangle;
+    t->setIndex(0);
+    t->setMesh(floor);
+    t->setMaterial(material); 
+    g_scene->addObject(t);
+    
+    // let objects do pre-calculations if needed
+    g_scene->preCalc();
+
+    /*
+    g_camera = new Camera;
+    g_scene = new Scene;
+    g_image = new Image;
+
+    g_image->resize(512, 512);
+    
+    // set up the camera
+    g_camera->setBGColor(Vector3(0.0f, 0.0f, 0.2f));
+    g_camera->setEye(Vector3(0, 3, 6));
+    g_camera->setLookAt(Vector3(0, 0, 0));
+    g_camera->setUp(Vector3(0, 1, 0));
+    g_camera->setFOV(45);
+
+    // create and place a point light source
+    PointLight * light = new PointLight;
+    light->setPosition(Vector3(10, 10, 10));
+    light->setColor(Vector3(1, 1, 1));
+    light->setPower(700);
+    g_scene->addLight(light);
+
+    Material* material = new Lambert(Vector3(1.0f));
 
 	TriangleMesh* teapot_mesh = new TriangleMesh;
 	teapot_mesh->load("teapot.obj");
@@ -68,7 +121,7 @@ void makeTeapotScene()
 	g_scene->addMesh(floor);
 
     // let objects do pre-calculations if needed
-    g_scene->preCalc();
+    g_scene->preCalc();*/
 }
 
 void makeDualScene()
