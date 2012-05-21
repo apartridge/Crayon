@@ -16,9 +16,9 @@
 extern RenderingStats* rendering_statistics;
 #endif
 
-#define THREADS 4 // Including the main thread
+#define THREADS 1 // Including the main thread
 
-#define PIXEL_SAMPLES 1
+#define PIXEL_SAMPLES 10
 
 Raytracer::Raytracer()
 {
@@ -242,13 +242,12 @@ void Raytracer::drawScene(Scene& scene, Camera& camera, Image* image)
 	printf("Rendering: 100.00%% at %.2f seconds using %d threads and %d SPP.\n", elapsedTime, THREADS, PIXEL_SAMPLES);
 
 #if RENDERING_STATS
-	printf("Statistics: %d rays, %d box and %d tri' intersections.\n",
-			rendering_statistics->rays, rendering_statistics->box_intersections,
-			rendering_statistics->triangle_intersections);
-	printf("Box intersections per ray: %.1f\n",
-			(float)rendering_statistics->box_intersections / rendering_statistics->rays);
-	printf("Triangle intersections per ray: %.1f\n",
-			(float)rendering_statistics->triangle_intersections / rendering_statistics->rays);
+	printf("Rays: %d\n", rendering_statistics->rays);
+	printf("Box int.: %d\n", rendering_statistics->box_intersections);
+	printf("Triangle int.: %d\n", rendering_statistics->triangle_intersections);
+	printf("Box/ray: %.1f\n", (float)rendering_statistics->box_intersections / rendering_statistics->rays);
+	printf("Triangle/ray: %.1f\n", (float)rendering_statistics->triangle_intersections / rendering_statistics->rays);
+	printf("Render time: %.1f sec\n", elapsedTime);
 #endif
 
 }

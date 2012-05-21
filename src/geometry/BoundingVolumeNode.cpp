@@ -30,11 +30,10 @@ bool BoundingVolumeNode::intersect(Ray& ray, HitInfo& minhit, float tMin,
 
 		for(int i = 0; i < num_leaves; i++)
 		{
-			if( num_leaves <= 2 || leaves[i]->getBoundingBox().intersectedByRay( ray, tMin, minhit.t)   )
+			if( num_leaves <= 2 || ++boxIntersections && leaves[i]->getBoundingBox().intersectedByRay( ray, tMin, minhit.t)   )
 			{
 #if RENDERING_STATS
 				triangleIntersections++;
-				boxIntersections++; 
 #endif
 				if ( leaves[i]->intersect(tempMinHit, ray, tMin, minhit.t)  )
 				{
@@ -47,7 +46,6 @@ bool BoundingVolumeNode::intersect(Ray& ray, HitInfo& minhit, float tMin,
 			}
 		}
 
-		
 #if RENDERING_STATS
 		rendering_statistics->lock();
 		rendering_statistics->triangle_intersections += triangleIntersections;
@@ -56,14 +54,12 @@ bool BoundingVolumeNode::intersect(Ray& ray, HitInfo& minhit, float tMin,
 #endif
 
 		return hit;
-
 	}
 	
 	bool left = this->children[0].intersect(ray, minhit, tMin, minhit.t, level+1);
 	bool right = this->children[1].intersect(ray, minhit, tMin, minhit.t, level+1);
 	
 	return left || right;
-
 }
 
 void BoundingVolumeNode::renderGL()

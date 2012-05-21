@@ -110,7 +110,8 @@ void BVH::build(Objects* objects, BoundingVolumeNode& root)
 
 	printf("Bounding Volume Hierarchy of %d triangles created in %g msecs.\n",
 		triangles, bvh_construct_timer.elapsedMSec() );
-	printf("BVH has %d interior and %d leaf nodes.\n",  root.interior_nodes(),  root.leaf_nodes());
+	printf("BVH nodes: %d\n",  root.interior_nodes() + root.leaf_nodes());
+	printf("BVH leaves: %d\n",  root.leaf_nodes());
 }
 
 /*
@@ -192,7 +193,7 @@ void BVH::splitNode(BoundingVolumeNode* rootnode, Objects* objects,
 			BoundingBox candidate[2];
 			bool startedLeft = false; // Started on the left box?
 
-			for(int split = 0; split < SPLITS + 1; split++, c += step)
+			for(int split = 0; split < SPLITS; split++, c += step)
 			{
 				if(split == SPLITS)
 				{
