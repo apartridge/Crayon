@@ -6,9 +6,9 @@
 class RenderingStats
 {
 public:
-	int rays;
-	int box_intersections;
-	int triangle_intersections;
+	unsigned long long rays;
+	unsigned long long box_intersections;
+	unsigned long long triangle_intersections;
 	int bvh_nodes;
 	int bvh_leaf_nodes;
 
