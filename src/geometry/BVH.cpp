@@ -190,24 +190,23 @@ void BVH::splitNode(BoundingVolumeNode* rootnode, Objects* objects,
 
 			int candidate_tris[2] = {0,0};
 			BoundingBox candidate[2];
+			bool startedLeft = false; // Started on the left box?
 
-			for(int split = 0; split < SPLITS + 0; split++, c += step)
+			for(int split = 0; split < SPLITS + 1; split++, c += step)
 			{
-				//if(split == SPLITS)
+				if(split == SPLITS)
 				{
 					candidate_tris[0] = 0;
-					candidate[0] = BoundingBox();
 				}
 
 				candidate_tris[1] = 0;
-				candidate[1] = BoundingBox();
 
 				bool rightB = false;
 
 				// Go thru all triangles, they are sorted on split axis
 				// from left to right
 
-				for(Objects::iterator it = begin /*+ candidate_tris[0]*/; it < end; it++) 
+				for(Objects::iterator it = begin + candidate_tris[0]; it < end; it++) 
 				{
 					const BoundingBox& currBB = (*it)->getBoundingBox();
 
@@ -217,14 +216,17 @@ void BVH::splitNode(BoundingVolumeNode* rootnode, Objects* objects,
 					}
 					else
 					{
-						rightB = it >= middle; // rightB || c <= axisCoord(currBB.min);
+						rightB = it >= middle;
 					}
 
 					int index = rightB ? 1 : 0;
 
-					if(candidate_tris[index] == 0 /*&& (index == 1 || split == 0 || split == SPLITS)*/)
+					if(candidate_tris[index] == 0 && (!startedLeft || index == 1 )   )
 					{
-						//printf("Setting candidateindex %d to first\n", index);
+						if(index == 0)
+						{
+							startedLeft = true;
+						}
 						candidate[index] = currBB;
 					}
 					else
