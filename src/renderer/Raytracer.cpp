@@ -16,7 +16,7 @@
 extern RenderingStats* rendering_statistics;
 #endif
 
-#define THREADS 2 // Including the main thread
+#define THREADS 1 // Including the main thread
 
 #define PIXEL_SAMPLES 5
 
