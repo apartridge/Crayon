@@ -25,7 +25,7 @@ Raytracer::Raytracer()
 
 }
 
-static int num_ray_object_intersections = 0;
+//static int num_ray_object_intersections = 0;
 
 /*
 Pointer to this class given to each thread in the MT setup
@@ -163,7 +163,7 @@ static void drawNextScanlines(void* arg)
 
 void Raytracer::drawScene(Scene& scene, Camera& camera, Image* image)
 {
-	num_ray_object_intersections = 0;
+	//num_ray_object_intersections = 0;
 	
 	LARGE_INTEGER frequency, tick_start, tick_end;
     float elapsedTime;
@@ -242,9 +242,9 @@ void Raytracer::drawScene(Scene& scene, Camera& camera, Image* image)
 	printf("Rendering: 100.00%% at %.2f seconds using %d threads and %d SPP.\n", elapsedTime, THREADS, PIXEL_SAMPLES);
 
 #if RENDERING_STATS
-	printf("Rays: %d\n", rendering_statistics->rays);
-	printf("Box int.: %d\n", rendering_statistics->box_intersections);
-	printf("Triangle int.: %d\n", rendering_statistics->triangle_intersections);
+	printf("Rays: %Lu\n", rendering_statistics->rays);
+	printf("Box int.: %Lu\n", rendering_statistics->box_intersections);
+	printf("Triangle int.: %Lu\n", rendering_statistics->triangle_intersections);
 	printf("Box/ray: %.1f\n", (float)rendering_statistics->box_intersections / rendering_statistics->rays);
 	printf("Triangle/ray: %.1f\n", (float)rendering_statistics->triangle_intersections / rendering_statistics->rays);
 	printf("Render time: %.1f sec\n", elapsedTime);
