@@ -6,6 +6,7 @@
 #include "renderer/Image.h"
 #include "sysutils/Console.h"
 #include "renderer/PhotonTracer.h"
+#include "sysutils/PerformanceTimer.h"
 
 Scene * g_scene = 0;
 
@@ -27,9 +28,15 @@ void Scene::preCalc()
 	m_bvh.build(&m_objects, entireScene);
 
     printf("Tracing %d photons\n", PhotonTracer::DefaultNumberOfPhotons);
+    PerformanceTimer timer;
+    timer.start();
+
     PhotonTracer* phTracer = new PhotonTracer();
     phTracer->traceScene(*this, PhotonTracer::DefaultNumberOfPhotons);
     this->m_phmap = phTracer->getPhotonMap();
+
+    timer.stop();
+    printf("Photon tracing done in %f seconds\n", timer.elapsedSec());
 }
 
 bool Scene::trace(HitInfo& minHit, Ray& ray, float tMin, float tMax) const
