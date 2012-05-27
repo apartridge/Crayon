@@ -82,6 +82,9 @@
     <ClCompile Include="src\finalsproject.cpp">
       <Filter>sources</Filter>
     </ClCompile>
+    <ClCompile Include="src\renderer\PhotonMap.cpp">
+      <Filter>sources\renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\pthread\pthread.h">
@@ -212,6 +215,9 @@
     </ClInclude>
     <ClInclude Include="headers\finalsproject.h">
       <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\renderer\PhotonMap.h">
+      <Filter>headers\renderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
