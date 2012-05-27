@@ -85,6 +85,9 @@
     <ClCompile Include="src\renderer\PhotonMap.cpp">
       <Filter>sources\renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\renderer\PhotonTracer.cpp">
+      <Filter>sources\renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\pthread\pthread.h">
@@ -217,6 +220,9 @@
       <Filter>headers</Filter>
     </ClInclude>
     <ClInclude Include="headers\renderer\PhotonMap.h">
+      <Filter>headers\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\renderer\PhotonTracer.h">
       <Filter>headers\renderer</Filter>
     </ClInclude>
   </ItemGroup>
