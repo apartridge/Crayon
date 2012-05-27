@@ -1,7 +1,7 @@
 #ifndef CRAYON_IMAGE_H_INCLUDED
 #define CRAYON_IMAGE_H_INCLUDED
 
-#include "../../headers/geometry/Vector3.h"
+#include "geometry/Vector3.h"
 
 class Image
 {

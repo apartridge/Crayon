@@ -1,7 +1,7 @@
 #ifndef CRAYON_SHINY_H_INCLUDED
 #define CRAYON_SHINY_H_INCLUDED
 
-#include "../../headers/materials/Material.h"
+#include "materials/Material.h"
 
 class Shiny : public Material
 {

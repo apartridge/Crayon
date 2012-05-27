@@ -1,4 +1,4 @@
-﻿#include "../../headers/geometry/BoundingBox.h"
+﻿#include "geometry/BoundingBox.h"
 
 BoundingBox::BoundingBox()
 {

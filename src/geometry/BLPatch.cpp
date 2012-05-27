@@ -1,6 +1,6 @@
-/*#include "../../headers/geometry/BLPatch.h"
-#include "../../headers/geometry/Ray.h"
-#include "../../headers/sysutils/Console.h"
+/*#include "geometry/BLPatch.h"
+#include "geometry/Ray.h"
+#include "sysutils/Console.h"
 
 BLPatch::BLPatch()
 {

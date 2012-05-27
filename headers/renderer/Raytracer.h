@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../headers/renderer/renderer.h"
+#include "renderer/renderer.h"
 
 
 class Raytracer : Renderer

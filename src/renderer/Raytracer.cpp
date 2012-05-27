@@ -1,24 +1,24 @@
-#include "../../headers/renderer/raytracer.h"
-#include "../../headers/renderer/Miro.h"
-#include "../../headers/geometry/Scene.h"
-#include "../../headers/renderer/Camera.h"
-#include "../../headers/renderer/Image.h"
-#include "../../headers/sysutils/Console.h"
+#include "renderer/raytracer.h"
+#include "renderer/Miro.h"
+#include "geometry/Scene.h"
+#include "renderer/Camera.h"
+#include "renderer/Image.h"
+#include "sysutils/Console.h"
 #include <time.h>
 #include <Windows.h>
 
-#include "../../headers/pthread/pthread.h"
-#include "../../headers/renderer/glut.h"
-#include "../../headers/renderer/RenderingStats.h"
-#include "../../headers/sysutils/Random.h"
+#include "pthread/pthread.h"
+#include "renderer/glut.h"
+#include "renderer/RenderingStats.h"
+#include "sysutils/Random.h"
 
 #if RENDERING_STATS
 extern RenderingStats* rendering_statistics;
 #endif
 
-#define THREADS 2 // Including the main thread
+#define THREADS 8 // Including the main thread
 
-#define PIXEL_SAMPLES 100
+#define PIXEL_SAMPLES 5
 
 Raytracer::Raytracer()
 {

@@ -1,8 +1,8 @@
-#include "../../headers/renderer/Miro.h"
-#include "../../headers/geometry/Scene.h"
-#include "../../headers/renderer/Camera.h"
-#include "../../headers/renderer/Image.h"
-#include "../../headers/sysutils/Console.h"
+#include "renderer/Miro.h"
+#include "geometry/Scene.h"
+#include "renderer/Camera.h"
+#include "renderer/Image.h"
+#include "sysutils/Console.h"
 #include <time.h>
 
 Scene * g_scene = 0;

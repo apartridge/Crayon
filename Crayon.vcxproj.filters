@@ -79,6 +79,9 @@
     <ClCompile Include="src\materials\Stone.cpp">
       <Filter>sources\materials</Filter>
     </ClCompile>
+    <ClCompile Include="src\finalsproject.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\pthread\pthread.h">
@@ -206,6 +209,9 @@
     </ClInclude>
     <ClInclude Include="headers\materials\Stone.h">
       <Filter>headers\materials</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\finalsproject.h">
+      <Filter>headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

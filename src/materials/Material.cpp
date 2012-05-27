@@ -1,6 +1,6 @@
-#include "../../headers/materials/Material.h"
-#include "../../headers/geometry/Ray.h"
-#include "../../headers/geometry/Scene.h"
+#include "materials/Material.h"
+#include "geometry/Ray.h"
+#include "geometry/Scene.h"
 
 
 Material::Material(const Vector3& a) : ambient(a)

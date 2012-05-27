@@ -1,7 +1,7 @@
-#include "../headers/assignment2.h"
-#include "../headers/materials/Lambert.h"
-#include "../headers/materials/LightSource.h"
-#include "../headers/lights/SquareLight.h"
+#include "assignment2.h"
+#include "materials/Lambert.h"
+#include "materials/LightSource.h"
+#include "lights/SquareLight.h"
 
 #include "../headers/materials/Glass.h"
 
@@ -646,7 +646,7 @@ void makeCornellScene()
 	Material* matdragon = new Glass();
     TriangleMesh * dragon2 = new TriangleMesh;
     dragon2->load("dragon2.obj", xformdra);
-   // addMeshTrianglesToScene(dragon2, matdragon);
+    addMeshTrianglesToScene(dragon2, matdragon);
     
 	// Ball 2
 

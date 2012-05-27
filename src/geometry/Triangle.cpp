@@ -1,6 +1,6 @@
-#include "../../headers/geometry/Triangle.h"
-#include "../../headers/geometry/TriangleMesh.h"
-#include "../../headers/geometry/Ray.h"
+#include "geometry/Triangle.h"
+#include "geometry/TriangleMesh.h"
+#include "geometry/Ray.h"
 #include "../../headers\renderer\glut.h"
 
 Triangle::Triangle(TriangleMesh * m, unsigned int i, Vector3 gNormal) :

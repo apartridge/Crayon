@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../../headers/geometry/Vector3.h"
-#include "../../headers/renderer/Miro.h"
-#include "../../headers/geometry/Ray.h"
+#include "geometry/Vector3.h"
+#include "renderer/Miro.h"
+#include "geometry/Ray.h"
 
 class OpenGLRenderer;
 class Raytracer;

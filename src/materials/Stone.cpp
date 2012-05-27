@@ -1,4 +1,4 @@
-#include "../../headers/materials/Stone.h"
+#include "materials/Stone.h"
 
 #include <cassert>
 

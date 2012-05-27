@@ -1,4 +1,4 @@
-#include "../../headers/renderer/openglrenderer.h"
+#include "renderer/openglrenderer.h"
 
 OpenGLRenderer::OpenGLRenderer()
 {

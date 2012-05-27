@@ -1,7 +1,7 @@
-#include "../../headers/materials/Lambert.h"
-#include "../../headers/geometry/Ray.h"
-#include "../../headers/geometry/Scene.h"
-#include "../../headers/sysutils/Random.h"
+#include "materials/Lambert.h"
+#include "geometry/Ray.h"
+#include "geometry/Scene.h"
+#include "sysutils/Random.h"
 
 Lambert::Lambert(const Vector3 & d, const Vector3 & a) :
     Material(a), m_kd(d)

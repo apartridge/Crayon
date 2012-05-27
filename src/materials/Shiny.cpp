@@ -1,6 +1,6 @@
-#include "../../headers/materials/Shiny.h"
-#include "../../headers/geometry/Ray.h"
-#include "../../headers/geometry/Scene.h"
+#include "materials/Shiny.h"
+#include "geometry/Ray.h"
+#include "geometry/Scene.h"
 #include <iostream>
 
 Shiny::Shiny(const Vector3 & kd, const Medium & medium, float opacity, const Vector3 & ka, float reflectiveness) :
