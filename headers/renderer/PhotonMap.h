@@ -67,6 +67,8 @@ public:
       return photons[i];
     }
 
+    void renderGL();
+
 private:
     void balance_segment(Photon **pbal, Photon **porg, const int index, const int start, const int end);
     void median_split(Photon **p, const int start, const int end, const int median, const int axis);

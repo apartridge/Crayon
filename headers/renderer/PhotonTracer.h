@@ -15,8 +15,6 @@ public:
     // Return photon map generated from traceScene
     PhotonMap* getPhotonMap() const;
 
-    static void renderGL(const PhotonMap* map);
-
 private:
     const Scene* _scene;
     PhotonMap* _photonMap;

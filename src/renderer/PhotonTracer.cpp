@@ -1,6 +1,7 @@
 #include "renderer/PhotonTracer.h"
 
 #include "sysutils/Random.h"
+#include "renderer/glut.h"
 
 void PhotonTracer::traceScene(const Scene& scene, int numberOfPhotons)
 {
@@ -16,6 +17,7 @@ void PhotonTracer::traceScene(const Scene& scene, int numberOfPhotons)
     {
         const Light* l = *it;
         traceLight(*l, numberOfPhotons / (float)numberOfLights);
+        _photonMap->scale_photon_power(numberOfLights / (float)numberOfPhotons); // ?
     }
 
     _photonMap->balance();
@@ -136,9 +138,13 @@ PhotonMap* PhotonTracer::getPhotonMap() const
     return _photonMap;
 }
 
-void PhotonTracer::renderGL(const PhotonMap* map)
+void PhotonMap::renderGL()
 {
-
+    glBegin(GL_POINTS);
+    for (int i = 0; i < stored_photons; ++i)
+    {
+        Photon ph = getPhoton(i);
+        glVertex3f(ph.pos[0], ph.pos[1], ph.pos[2]);
+    }
+    glEnd();
 }
-
-
