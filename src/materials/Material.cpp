@@ -3,7 +3,7 @@
 #include "geometry/Scene.h"
 
 
-Material::Material(const Vector3& a) : ambient(a)
+Material::Material(const Vector3& d, const Vector3& s, const Vector3& t) : ambient(d), rd(d), rs(s), rt(t)
 {
 }
 
