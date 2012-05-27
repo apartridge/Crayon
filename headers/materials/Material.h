@@ -31,11 +31,11 @@ public:
     const Vector3& Rs() const { return rs; }
     const Vector3& Rt() const { return rt; }
 
-protected:
     static float reflectance(float costheta, float n1, float n2);
     static Vector3 refract(const Ray& ray, const HitInfo& hit, float n1, float n2);
     static Vector3 reflect(const Ray& ray, const HitInfo& hit);
 
+protected:
     // Diffuse, specular and transmittance components
     Vector3 rd, rs, rt;
 

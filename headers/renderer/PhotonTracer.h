@@ -13,7 +13,9 @@ public:
     void traceScene(const Scene& scene, int numberOfPhotons);
 
     // Return photon map generated from traceScene
-    PhotonMap* getPhotonMap();
+    PhotonMap* getPhotonMap() const;
+
+    static void renderGL(const PhotonMap* map);
 
 private:
     const Scene* _scene;
@@ -23,8 +25,9 @@ private:
     void traceLight(const Light& light, int numberOfPhotons);
 
     // Trace a photon through the scene
-    void PhotonTracer::tracePhoton(Ray& ray);
+    bool PhotonTracer::tracePhoton(const Ray& ray, Vector3 power, int bounce = 0);
 
+    const static int MaxPhotonBounces = 5;
 };
 
 #endif
