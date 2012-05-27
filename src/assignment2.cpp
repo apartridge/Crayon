@@ -726,7 +726,7 @@ void makeCornellSceneGlass()
 
     Material *red = new Lambert(Vector3(1, 0.5, 0.5));
     Material *blue = new Lambert(Vector3(0.5, 0.5, 1));
-    Material *gray = new Lambert(Vector3(0.8));
+    Material *gray = new Lambert(Vector3(0.6));
 
     for (int i = 0; i < 10; i++)
     {

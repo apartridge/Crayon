@@ -2,12 +2,13 @@
 #include "geometry/Ray.h"
 #include "geometry/Scene.h"
 
-Glass::Glass() : Material(Vector3(0), Vector3(0.7), Vector3(0.3))
+Glass::Glass() : Material(Vector3(0), Vector3(0.3), Vector3(0.7))
 {
     Rd = Vector3(0);
     Rs = Vector3(0.8);
     Shininess = 500;
-    RefractiveIndex = 1.5;
+    RefractiveIndex = 1.5; // Deprecated
+    indexOfRefraction = 1.5; // Override Material
 }
 
 Glass::~Glass()

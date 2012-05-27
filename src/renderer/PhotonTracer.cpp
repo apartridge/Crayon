@@ -112,13 +112,12 @@ bool PhotonTracer::tracePhoton(const Ray& ray, Vector3 power, int bounce)
     {
         power = (power * mat->Rt()) / rt_avg;
 
-        // TODO: Material's refractive index. Solution: Make refract non-static.
-        Ray refract;
-        refract.o = hit.P;
-        refract.mediumOfTravel.indexOfRefraction = ray.mediumOfTravel.indexOfRefraction; 
-        refract.d = Material::refract(ray, hit, ray.mediumOfTravel.indexOfRefraction, refract.mediumOfTravel.indexOfRefraction);
+        Ray refract = mat->refractRay(ray, hit);
 
-        return tracePhoton(refract, power, bounce + 1);
+        if (refract.d != Vector3(0.0))
+            return tracePhoton(refract, power, bounce + 1);
+        else
+            return 0;
     }
 
     // Absorb

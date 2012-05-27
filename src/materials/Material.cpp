@@ -5,6 +5,7 @@
 
 Material::Material(const Vector3& d, const Vector3& s, const Vector3& t) : ambient(d), rd(d), rs(s), rt(t)
 {
+    indexOfRefraction = 1.0;
 }
 
 Material::~Material()
@@ -46,6 +47,30 @@ Vector3 Material::shade(const Ray& ray, const HitInfo& hit, const Scene& scene, 
 Vector3 Material::reflect(const Ray& ray, const HitInfo& hit)
 {
     return (ray.d - 2*dot(ray.d, hit.N)*hit.N).normalized();
+}
+
+Ray Material::refractRay(const Ray& ray, const HitInfo& hit) const
+{
+    float n1 = ray.mediumOfTravel.indexOfRefraction;
+    float n2 = this->indexOfRefraction;
+
+    Ray refractRay;
+    refractRay.o = hit.P;
+    refractRay.mediumOfTravel = n2;
+
+    Vector3 n = hit.N;
+    if (dot(ray.d, n) > 0) // Hit from inside
+        n *= -1;
+    const float n1n2 = (n1/n2);
+    const float cosi = dot(-ray.d, n);
+    const float sin2t = n1n2*n1n2*(1 - cosi*cosi);
+
+    if (sin2t > 1.0) 
+        refractRay.d = Vector3(0.0); // No refraction
+    else
+        refractRay.d = (n1n2*ray.d + (n1n2*cosi - sqrt(1.0 - sin2t))*n).normalized();
+
+    return refractRay;
 }
 
 Vector3 Material::refract(const Ray& ray, const HitInfo& hit, float n1, float n2)
