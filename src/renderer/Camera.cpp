@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../../headers/renderer/Miro.h"
-#include "../../headers/renderer/Camera.h"
-#include "../../headers/renderer/Image.h"
-#include "../../headers/geometry/Scene.h"
-#include "../../headers/sysutils/Console.h" 
-#include "../../headers/renderer/glut.h"
-#include "../../headers/renderer/openglrenderer.h"
-#include "../../headers/renderer/raytracer.h"
-#include "../../headers/renderer/RenderingStats.h"
+#include "renderer/Miro.h"
+#include "renderer/Camera.h"
+#include "renderer/Image.h"
+#include "geometry/Scene.h"
+#include "sysutils/Console.h" 
+#include "renderer/glut.h"
+#include "renderer/openglrenderer.h"
+#include "renderer/raytracer.h"
+#include "renderer/RenderingStats.h"
 
 Camera * g_camera = 0;
 #if RENDERING_STATS

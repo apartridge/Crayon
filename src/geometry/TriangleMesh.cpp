@@ -1,7 +1,7 @@
-#include "../../headers/geometry/TriangleMesh.h"
-#include "../../headers/geometry/Triangle.h"
-#include "../../headers/geometry/Scene.h"
-#include "../../headers/sysutils/Console.h"
+#include "geometry/TriangleMesh.h"
+#include "geometry/Triangle.h"
+#include "geometry/Scene.h"
+#include "sysutils/Console.h"
 
 #ifdef WIN32
 // disable useless warnings

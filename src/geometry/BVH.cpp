@@ -1,4 +1,4 @@
-#include "../../headers/geometry/BVH.h"
+#include "geometry/BVH.h"
 #include "../../headers\sysutils\PerformanceTimer.h"
 #include <cassert>
 

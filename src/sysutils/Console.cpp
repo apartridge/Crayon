@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
-#include "../../headers/sysutils/Console.h"
+#include "sysutils/Console.h"
 
 #ifdef WIN32
 #include <windows.h>

@@ -47,6 +47,9 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>$(ProjectDir)headers;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -93,6 +96,7 @@
   <ItemGroup>
     <ClCompile Include="src\assignment1.cpp" />
     <ClCompile Include="src\assignment2.cpp" />
+    <ClCompile Include="src\finalsproject.cpp" />
     <ClCompile Include="src\geometry\BLPatch.cpp" />
     <ClCompile Include="src\geometry\BoundingBox.cpp" />
     <ClCompile Include="src\geometry\BoundingVolumeNode.cpp" />
@@ -122,6 +126,7 @@
   <ItemGroup>
     <ClInclude Include="headers\assignment1.h" />
     <ClInclude Include="headers\assignment2.h" />
+    <ClInclude Include="headers\finalsproject.h" />
     <ClInclude Include="headers\geometry\BLPatch.h" />
     <ClInclude Include="headers\geometry\BoundingBox.h" />
     <ClInclude Include="headers\geometry\BoundingVolumeNode.h" />

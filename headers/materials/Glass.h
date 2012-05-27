@@ -1,7 +1,7 @@
 #ifndef GLASS_H_INCLUDED
 #define GLASS_H_INCLUDED
 
-#include "../../headers/materials/Material.h"
+#include "materials/Material.h"
 
 class Glass : public Material
 {

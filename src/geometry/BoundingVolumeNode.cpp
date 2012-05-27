@@ -1,5 +1,5 @@
-﻿#include "../../headers/geometry/BoundingVolumeNode.h"
-#include "../../headers/renderer/RenderingStats.h"
+﻿#include "geometry/BoundingVolumeNode.h"
+#include "renderer/RenderingStats.h"
 
 #if RENDERING_STATS
 extern RenderingStats* rendering_statistics;

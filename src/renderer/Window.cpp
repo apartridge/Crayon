@@ -1,8 +1,8 @@
-#include "../../headers/renderer/Window.h"
-#include "../../headers/renderer/glut.h"
-#include "../../headers/renderer/Miro.h"
-#include "../../headers/renderer/Camera.h"
-#include "../../headers/renderer/Image.h"
+#include "renderer/Window.h"
+#include "renderer/glut.h"
+#include "renderer/Miro.h"
+#include "renderer/Camera.h"
+#include "renderer/Image.h"
 #include <stdlib.h>
 #include <time.h>
 

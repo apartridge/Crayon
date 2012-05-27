@@ -1,6 +1,6 @@
-#include "../../headers/materials/Glass.h"
-#include "../../headers/geometry/Ray.h"
-#include "../../headers/geometry/Scene.h"
+#include "materials/Glass.h"
+#include "geometry/Ray.h"
+#include "geometry/Scene.h"
 
 Glass::Glass() : Material(Vector3(0))
 {

@@ -1,10 +1,10 @@
-#include "../../headers/renderer/Miro.h"
-#include "../../headers/renderer/Image.h"
+#include "renderer/Miro.h"
+#include "renderer/Image.h"
+#include "renderer/glut.h"
+
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
-#include "../../headers/renderer/glut.h"
-
 
 #ifdef WIN32
 // disable useless warnings

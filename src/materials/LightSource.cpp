@@ -1,6 +1,6 @@
-#include "../../headers/materials/LightSource.h"
-#include "../../headers/geometry/Ray.h"
-#include "../../headers/geometry/Scene.h"
+#include "materials/LightSource.h"
+#include "geometry/Ray.h"
+#include "geometry/Scene.h"
 
 LightSource::LightSource() : Material(Vector3(0))
 {

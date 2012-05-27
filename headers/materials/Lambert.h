@@ -1,7 +1,7 @@
 #ifndef CRAYON_LAMBERT_H_INCLUDED
 #define CRAYON_LAMBERT_H_INCLUDED
 
-#include "../../headers/materials/Material.h"
+#include "materials/Material.h"
 
 class Lambert : public Material
 {

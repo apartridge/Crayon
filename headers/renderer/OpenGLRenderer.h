@@ -7,9 +7,9 @@
 #include "glut.h"
 #include "renderer.h"
 
-#include "../../headers/geometry/Vector3.h"
+#include "geometry/Vector3.h"
 #include "Camera.h"
-#include "../../headers/geometry/BoundingBox.h"
+#include "geometry/BoundingBox.h"
 
 class OpenGLRenderer : public Renderer
 {

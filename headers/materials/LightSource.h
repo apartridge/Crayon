@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../headers/materials/Material.h"
+#include "materials/Material.h"
 
 class LightSource : public Material
 {

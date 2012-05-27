@@ -1,6 +1,6 @@
-#include "../../headers/geometry/Sphere.h"
-#include "../../headers/geometry/Ray.h"
-#include "../../headers/sysutils/Console.h"
+#include "geometry/Sphere.h"
+#include "geometry/Ray.h"
+#include "sysutils/Console.h"
 #include "../../headers\renderer\glut.h"
 
 

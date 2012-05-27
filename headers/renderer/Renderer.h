@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../../headers/geometry/scene.h"
-#include "../../headers/renderer/camera.h"
-#include "../../headers/renderer/image.h"
+#include "geometry/scene.h"
+#include "renderer/camera.h"
+#include "renderer/image.h"
 
 class Renderer
 {
