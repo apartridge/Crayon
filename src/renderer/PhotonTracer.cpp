@@ -95,7 +95,7 @@ bool PhotonTracer::tracePhoton(const Ray& ray, Vector3 power, int bounce)
     }
 
     // Specular reflection
-    else if (e < rs_avg)
+    else if (e < rs_avg + rd_avg)
     {
         power = (power * mat->Rs()) / rs_avg;
 
@@ -108,7 +108,7 @@ bool PhotonTracer::tracePhoton(const Ray& ray, Vector3 power, int bounce)
     }
 
     // Transmission
-    else if (e < rt_avg)
+    else if (e < rt_avg + rs_avg + rd_avg)
     {
         power = (power * mat->Rt()) / rt_avg;
 

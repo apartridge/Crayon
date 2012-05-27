@@ -2,7 +2,7 @@
 #include "geometry/Ray.h"
 #include "geometry/Scene.h"
 
-Glass::Glass() : Material(Vector3(0))
+Glass::Glass() : Material(Vector3(0), Vector3(0.7), Vector3(0.3))
 {
     Rd = Vector3(0);
     Rs = Vector3(0.8);
