@@ -15,6 +15,9 @@ public:
     // Return photon map generated from traceScene
     PhotonMap* getPhotonMap() const;
 
+    const static int MaxPhotonBounces = 5;
+    const static int DefaultNumberOfPhotons = 10000;
+
 private:
     const Scene* _scene;
     PhotonMap* _photonMap;
@@ -24,8 +27,6 @@ private:
 
     // Trace a photon through the scene
     bool PhotonTracer::tracePhoton(const Ray& ray, Vector3 power, int bounce = 0);
-
-    const static int MaxPhotonBounces = 5;
 };
 
 #endif

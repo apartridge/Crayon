@@ -1,9 +1,11 @@
+#include <time.h>
+
 #include "renderer/Miro.h"
 #include "geometry/Scene.h"
 #include "renderer/Camera.h"
 #include "renderer/Image.h"
 #include "sysutils/Console.h"
-#include <time.h>
+#include "renderer/PhotonTracer.h"
 
 Scene * g_scene = 0;
 
@@ -23,6 +25,11 @@ void Scene::preCalc()
     }
 
 	m_bvh.build(&m_objects, entireScene);
+
+    printf("Tracing %d photons\n", PhotonTracer::DefaultNumberOfPhotons);
+    PhotonTracer* phTracer = new PhotonTracer();
+    phTracer->traceScene(*this, PhotonTracer::DefaultNumberOfPhotons);
+    this->m_phmap = phTracer->getPhotonMap();
 }
 
 bool Scene::trace(HitInfo& minHit, Ray& ray, float tMin, float tMax) const
