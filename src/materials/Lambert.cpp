@@ -30,7 +30,7 @@ Vector3 Lambert::shadeLight(const Light& light, const Ray& ray,
         Ray shadowRay;
         shadowRay.d = l.normalized(); 
         shadowRay.o = hit.P;
-        inShadow = scene.trace(shadowHit, shadowRay, epsilon, l.length());
+        inShadow = scene.trace(shadowHit, shadowRay, epsilon, l.length() - 10*epsilon);
     }
 
     // Diffuse component from the light source
@@ -53,7 +53,7 @@ Vector3 Lambert::shadeGlobalIllumination(const Ray& ray, const HitInfo& hit, con
     if (true)
     {
         Vector3 irradiance;
-        scene.photonMap()->irradiance_estimate(&irradiance[0], &hit.P[0], &hit.N[0], 0.5, 50);
+        scene.photonMap()->irradiance_estimate(&irradiance[0], &hit.P[0], &hit.N[0], 1, 100);
 
         L += Rd() * (1/PI) * irradiance; // ??
     }

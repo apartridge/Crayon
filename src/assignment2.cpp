@@ -690,6 +690,35 @@ void makeCornellSceneGlass()
         };
         LightSource * areaLight = new AreaLight(vertices, *g_scene);
         g_scene->addLight(areaLight);*/
+        
+        const int ld = 4.0;
+        const int yd = epsilon;
+        Vector3 *vertex = new Vector3[4];
+        vertex[0] = Vector3(-w/ld, h - yd, d/ld);
+        vertex[1] = Vector3(-w/ld, h - yd, -d/ld);
+        vertex[2] = Vector3(w/ld, h - yd, -d/ld);
+        vertex[3] = Vector3(w/ld, h - yd, d/ld);
+/*
+        Vector3 *normal = new Vector3(0, -1, 0);
+        int vertexIndices[2][3] = {{0,1,2}, {0,2,3}};
+        int normalIndices[2] = {0, 0};
+        
+        TriangleMesh *lightMesh = new TriangleMesh(vertex, normal, 2);
+	    Material *lightMaterial = new LightSource();
+
+        for (int i = 0; i < 2; ++i)
+        {
+            Triangle *t = lightMesh->addTriangle(vertexIndices[i][0], vertexIndices[i][1], vertexIndices[i][2], normalIndices[i]);
+            t->setMaterial(lightMaterial);
+            g_scene->addObject(t);
+        }
+        */
+	    SquareLight * light = new SquareLight;
+        light->setColor(Vector3(1, 1, 1));
+        light->setPower(10);
+	    light->setPosition(vertex[1], vertex[3]) ;
+	    g_scene->addLight(light);
+
     }
     else
     {
