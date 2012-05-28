@@ -82,6 +82,12 @@
     <ClCompile Include="src\finalsproject.cpp">
       <Filter>sources</Filter>
     </ClCompile>
+    <ClCompile Include="src\renderer\PhotonMap.cpp">
+      <Filter>sources\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\PhotonTracer.cpp">
+      <Filter>sources\renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\materials.cpp">
       <Filter>sources</Filter>
     </ClCompile>
@@ -218,6 +224,12 @@
     </ClInclude>
     <ClInclude Include="headers\finalsproject.h">
       <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\renderer\PhotonMap.h">
+      <Filter>headers\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\renderer\PhotonTracer.h">
+      <Filter>headers\renderer</Filter>
     </ClInclude>
     <ClInclude Include="headers\materials.h">
       <Filter>headers</Filter>

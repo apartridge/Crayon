@@ -85,6 +85,9 @@ void OpenGLRenderer::drawScene(Scene& scene, Camera& camera, Image* image)
 		drawVolumeNode(scene.entireScene, 0);
 	}
 
+    // Draw photon map (todo: key toggle)
+    scene.photonMap()->renderGL();
+
     glutSwapBuffers();
 
 }

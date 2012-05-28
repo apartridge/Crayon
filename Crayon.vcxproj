@@ -118,6 +118,8 @@
     <ClCompile Include="src\materials\Worley.cpp" />
     <ClCompile Include="src\renderer\Camera.cpp" />
     <ClCompile Include="src\renderer\Image.cpp" />
+    <ClCompile Include="src\renderer\PhotonMap.cpp" />
+    <ClCompile Include="src\renderer\PhotonTracer.cpp" />
     <ClCompile Include="src\renderer\Window.cpp" />
     <ClCompile Include="src\renderer\OpenGLRenderer.cpp" />
     <ClCompile Include="src\renderer\PFMLoader.cpp" />
@@ -163,6 +165,8 @@
     <ClInclude Include="headers\renderer\glut.h" />
     <ClInclude Include="headers\renderer\Image.h" />
     <ClInclude Include="headers\renderer\Miro.h" />
+    <ClInclude Include="headers\renderer\PhotonMap.h" />
+    <ClInclude Include="headers\renderer\PhotonTracer.h" />
     <ClInclude Include="headers\renderer\Window.h" />
     <ClInclude Include="headers\renderer\OpenGLRenderer.h" />
     <ClInclude Include="headers\renderer\PFMLoader.h" />

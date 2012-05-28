@@ -1,11 +1,12 @@
 #ifndef CRAYON_SCENE_H_INCLUDED
 #define CRAYON_SCENE_H_INCLUDED
 
-#include "../renderer/Miro.h"
-#include "../geometry/Object.h"
-#include "../lights/Light.h"
-#include "../geometry/BVH.h"
-#include "../geometry/TriangleMesh.h"
+#include "renderer/Miro.h"
+#include "geometry/Object.h"
+#include "lights/Light.h"
+#include "geometry/BVH.h"
+#include "geometry/TriangleMesh.h"
+#include "renderer/PhotonMap.h"
 
 class Camera;
 class Image;
@@ -28,10 +29,16 @@ public:
 
 	BoundingVolumeNode entireScene;
 
+    PhotonMap* photonMap()
+    {
+        return m_phmap;
+    }
+
 protected:
     Objects m_objects;
     BVH m_bvh;
     Lights m_lights;
+    PhotonMap* m_phmap;
 };
 
 extern Scene * g_scene;

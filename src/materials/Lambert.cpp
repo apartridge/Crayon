@@ -3,8 +3,8 @@
 #include "geometry/Scene.h"
 #include "sysutils/Random.h"
 
-Lambert::Lambert(const Vector3 & d, const Vector3 & a) :
-    Material(a), m_kd(d)
+Lambert::Lambert(const Vector3& d, const Vector3& a) :
+    Material(d), m_kd(d)
 {
 }
 
@@ -40,7 +40,7 @@ Vector3 Lambert::shadeLight(const Light& light, const Ray& ray,
         l /= sqrt(falloff);
 
         float nDotL = dot(hit.N, l);
-        L += m_kd * std::max(0.0f, nDotL/falloff * light.power() / PI) * light.color();
+        L += Rd() * std::max(0.0f, nDotL/falloff * light.power() / PI) * light.color();
     }
 
     return L;
@@ -71,7 +71,7 @@ Vector3 Lambert::shadeGlobalIllumination(const Ray& ray, const HitInfo& hit, con
     if (scene.trace(pathHit, pathRay, epsilon))
     {
         if (pathHit.material != NULL)
-            L += m_kd * (1/PI) * pathHit.material->shade(pathRay, pathHit, scene, depth + 1);
+            L += Rd() * (1/PI) * pathHit.material->shade(pathRay, pathHit, scene, depth + 1);
     }
     return L;
 }

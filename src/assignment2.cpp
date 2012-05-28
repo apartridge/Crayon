@@ -624,7 +624,7 @@ void makeCornellScene()
 	SquareLight * light = new SquareLight;
     light->setColor(Vector3(1, 1, 1));
     light->setPower(10);
-	light->setPosition( Vector3(2.5, 5.55, -3), Vector3(3.0, 5.55, -2.5) ) ;
+	light->setPosition( Vector3(2.5, 5.50, -3), Vector3(3.0, 5.50, -2.5) ) ;
 	g_scene->addLight(light);
 
 
@@ -726,7 +726,7 @@ void makeCornellSceneGlass()
 
     Material *red = new Lambert(Vector3(1, 0.5, 0.5));
     Material *blue = new Lambert(Vector3(0.5, 0.5, 1));
-    Material *gray = new Lambert(1.0);
+    Material *gray = new Lambert(Vector3(0.6));
 
     for (int i = 0; i < 10; i++)
     {

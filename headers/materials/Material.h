@@ -1,15 +1,15 @@
-#ifndef CRAYON_MATERIAL_H_INCLUDED
-#define CRAYON_MATERIAL_H_INCLUDED
+#ifndef CRAYON_MATERIAL_H
+#define CRAYON_MATERIAL_H
 
-#include "../renderer/Miro.h"
-#include "../geometry/Vector3.h"
-#include "../geometry/Medium.h"
-#include "../lights/Light.h"
+#include "renderer/Miro.h"
+#include "geometry/Vector3.h"
+#include "geometry/Medium.h"
+#include "lights/Light.h"
 
 class Material
 {
 public:
-    Material(const Vector3& ambient = Vector3(0));
+    Material(const Vector3& d = Vector3(0), const Vector3& s = Vector3(0), const Vector3& t = Vector3(0));
     virtual ~Material();
 
     virtual void preCalc() {};
@@ -27,43 +27,25 @@ public:
     virtual Vector3 shadeReflectance(const Ray& ray, 
         const HitInfo& hit, const Scene& scene, const int depth) const { return Vector3(0); };
 
-protected:
+    const Vector3& Rd() const { return rd; }
+    const Vector3& Rs() const { return rs; }
+    const Vector3& Rt() const { return rt; }
+
+    Ray refractRay(const Ray& ray, const HitInfo& hit) const;
+
     static float reflectance(float costheta, float n1, float n2);
-    static Vector3 refract(const Ray& ray, const HitInfo& hit, float n1, float n2);
+    static Vector3 refract(const Ray& ray, const HitInfo& hit, float n1, float n2); // Deprecated for member function
     static Vector3 reflect(const Ray& ray, const HitInfo& hit);
 
+protected:
+    // Diffuse, specular and transmittance components
+    Vector3 rd, rs, rt;
+
+    float indexOfRefraction;
+
 private:
-    Vector3 ambient;
+    Vector3 ambient; // Deprecated
     static const int RecursionLimit = 5;
 };
 
-/*
-class Material
-{
-public:
-    Material(Vector3 a, Medium m, float f);
-    virtual ~Material();
-
-    virtual void preCalc() {}
-
-	const Vector3 & Material::getDiffuseColor() const;
-
-	Medium getMedium() const
-	{
-		return m_medium;
-	}
-
-	float getOpacity() const {
-		return m_opacity;
-	}
-
-    virtual Vector3 shade(const Ray& ray, const HitInfo& hit, const Scene& scene,
-						  float alpha, const int depth) const;
-
-private:
-	Medium m_medium;
-	Vector3 m_diffuseColor;
-	float m_opacity;
-};*/
-
-#endif // CRAYON_MATERIAL_H_INCLUDED
+#endif 
