@@ -1,4 +1,6 @@
-# Blender v2.63 (sub 0) OBJ File: ''
+
+<!-- saved from url=(0058)https://raw.github.com/apartridge/Crayon/master/monkey.obj -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;"># Blender v2.63 (sub 0) OBJ File: ''
 # www.blender.org
 mtllib monkey.mtl
 o Cube.001_Cube
@@ -23909,3 +23911,4 @@ f 4531//6039 5288//5539 5857//5503
 f 4531//6039 5857//5503 5363//5693
 f 4531//6039 5363//5693 5927//5623
 f 4531//6039 5927//5623 5504//5975
+</pre></body></html>

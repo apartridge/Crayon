@@ -114,6 +114,7 @@
     <ClCompile Include="src\materials\Perlin.cpp" />
     <None Include="src\materials\Shiny.cpp" />
     <ClCompile Include="src\materials\Stone.cpp" />
+    <ClCompile Include="src\materials\Wood.cpp" />
     <ClCompile Include="src\materials\Worley.cpp" />
     <ClCompile Include="src\renderer\Camera.cpp" />
     <ClCompile Include="src\renderer\Image.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="headers\materials\Perlin.h" />
     <None Include="headers\materials\Shiny.h" />
     <ClInclude Include="headers\materials\Stone.h" />
+    <ClInclude Include="headers\materials\Wood.h" />
     <ClInclude Include="headers\materials\Worley.h" />
     <ClInclude Include="headers\pthread\pthread.h" />
     <ClInclude Include="headers\pthread\sched.h" />
