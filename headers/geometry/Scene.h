@@ -29,7 +29,7 @@ public:
 
 	BoundingVolumeNode entireScene;
 
-    PhotonMap* photonMap()
+    PhotonMap* photonMap() const
     {
         return m_phmap;
     }

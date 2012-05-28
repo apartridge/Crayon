@@ -50,6 +50,15 @@ Vector3 Lambert::shadeGlobalIllumination(const Ray& ray, const HitInfo& hit, con
 {
     Vector3 L(0);
 
+    if (true)
+    {
+        Vector3 irradiance;
+        scene.photonMap()->irradiance_estimate(&irradiance[0], &hit.P[0], &hit.N[0], 0.5, 100);
+
+        L += Rd() * irradiance; // ??
+    }
+    else
+    {
     // Find (u, v) for local coordinate system
     Vector3 n = hit.N;
 	Vector3 u = n.perpendicular();
@@ -73,5 +82,8 @@ Vector3 Lambert::shadeGlobalIllumination(const Ray& ray, const HitInfo& hit, con
         if (pathHit.material != NULL)
             L += Rd() * (1/PI) * pathHit.material->shade(pathRay, pathHit, scene, depth + 1);
     }
+    }
+
+
     return L;
 }
