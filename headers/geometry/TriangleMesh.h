@@ -51,16 +51,24 @@ public:
     Vector3* normals()      {return m_normals;}
     TupleI3* vIndices()     {return m_vertexIndices;}
     TupleI3* nIndices()     {return m_normalIndices;}
+	Material** materials()     {return m_materials;}
     int numTris()           {return m_numTris;}
 	
-	void connectMaterialToName(Material* a, const char* name); // ?
+	void connectNameToMaterial(const char* name, Material* material);
+	void setDefaultMaterial(Material* m)
+	{
+		m_defaultMaterial = m;
+	}	
+	
+	Material* findMaterialByName(const char* const name);
+
+	void addMeshToScene(Scene* scene);
 
 	int numVertices()
 	{
 		return m_numVertices;
 	}
 
-	void addMeshToScene(Scene* scene);
 
 protected:
     void loadObj(FILE* fp, const Matrix4x4& ctm);
@@ -69,15 +77,24 @@ protected:
     Vector3* m_normals;
     Vector3* m_vertices;
     VectorR2* m_texCoords;
+	Material** m_materials;
 
     TupleI3* m_normalIndices;
     TupleI3* m_vertexIndices;
     TupleI3* m_texCoordIndices;
     unsigned int m_numTris;
 	unsigned int m_numVertices;
+	unsigned int m_numMaterials;
 
 	bool m_hasBoundingBox;
 	BoundingBox m_boundingBox;
-};
 
-typedef std::vector<TriangleMesh*> TriangleMeshes;
+
+	Material* m_defaultMaterial;
+	std::vector<Material*> m_materialList;
+	std::vector<const char*> m_materialNames;
+
+	
+
+
+};

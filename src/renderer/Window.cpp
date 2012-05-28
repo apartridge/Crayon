@@ -34,7 +34,6 @@ int levels[100];
 
 
 
-
 Window::Window(int * argc, char* argv[]) :
     m_scaleFact(0.4f),
     m_activeButton(0),
@@ -48,7 +47,7 @@ Window::Window(int * argc, char* argv[]) :
     glutInitWindowSize(g_image->width(), g_image->height());
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
     glutInitWindowPosition(200, 200);
-    glutCreateWindow("Crayon - Preview Mode");
+    glutCreateWindow("Crayon");
 }
 
 

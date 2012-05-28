@@ -1,19 +1,19 @@
 #pragma once
 
 #include <math.h>
-#include "../headers/renderer/Miro.h"
-#include "../headers/geometry/Scene.h"
-#include "../headers/renderer/Camera.h"
-#include "../headers/renderer/Image.h"
-#include "../headers/sysutils/Console.h"
+#include "renderer/Miro.h"
+#include "geometry/Scene.h"
+#include "renderer/Camera.h"
+#include "renderer/Image.h"
+#include "sysutils/Console.h"
 
-#include "../headers/lights/PointLight.h"
-#include "../headers/geometry/TriangleMesh.h"
-#include "../headers/geometry/Triangle.h"
-#include "../headers/materials/Lambert.h"
-//#include "../headers/materials/Shiny.h"
-#include "../headers/materials/Skydome.h"
-#include "../headers/geometry/Sphere.h"
+#include "lights/PointLight.h"
+#include "geometry/TriangleMesh.h"
+#include "geometry/Triangle.h"
+#include "materials/Lambert.h"
+//#include "materials/Shiny.h"
+#include "materials/Skydome.h"
+#include "geometry/Sphere.h"
 
 void makeBunnyScene();
 void makeSphereScene();

@@ -17,10 +17,7 @@ public:
     void addObject(Object* pObj)        {m_objects.push_back(pObj);}
     const Objects* objects() const      {return &m_objects;}
 
-
-	void addMesh(TriangleMesh* mesh)	 {m_meshes.push_back(mesh);}
-    const TriangleMeshes* meshes() const {return &m_meshes;}
-
+	void addMesh(TriangleMesh* mesh);
 
     void addLight(Light* pObj)     {m_lights.push_back(pObj);}
     const Lights* lights() const        {return &m_lights;}
@@ -41,8 +38,6 @@ protected:
     Objects m_objects;
     BVH m_bvh;
     Lights m_lights;
-	TriangleMeshes m_meshes; // replace for objects?
-
     PhotonMap* m_phmap;
 };
 
