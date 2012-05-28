@@ -85,6 +85,9 @@
     <ClCompile Include="src\materials.cpp">
       <Filter>sources</Filter>
     </ClCompile>
+    <ClCompile Include="src\materials\Wood.cpp">
+      <Filter>sources\materials</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\pthread\pthread.h">
@@ -218,6 +221,9 @@
     </ClInclude>
     <ClInclude Include="headers\materials.h">
       <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\materials\Wood.h">
+      <Filter>headers\materials</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
