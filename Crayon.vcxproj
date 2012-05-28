@@ -106,6 +106,7 @@
     <ClCompile Include="src\geometry\Triangle.cpp" />
     <ClCompile Include="src\geometry\TriangleMesh.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\materials.cpp" />
     <ClCompile Include="src\materials\Glass.cpp" />
     <ClCompile Include="src\materials\Lambert.cpp" />
     <ClCompile Include="src\materials\LightSource.cpp" />
@@ -144,6 +145,7 @@
     <ClInclude Include="headers\lights\SquareLight.h" />
     <ClInclude Include="headers\lights\Light.h" />
     <ClInclude Include="headers\lights\PointLight.h" />
+    <ClInclude Include="headers\materials.h" />
     <ClInclude Include="headers\materials\Glass.h" />
     <ClInclude Include="headers\materials\Lambert.h" />
     <ClInclude Include="headers\materials\LightSource.h" />

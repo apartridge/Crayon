@@ -37,7 +37,7 @@ void makeFinalScene()
     g_scene->addLight(light);
 
 	PointLight * light2 = new PointLight;
-    light2->setPosition(Vector3(-2, 6, -2));
+    light2->setPosition(Vector3(-7, 6, -7));
     light2->setColor(Vector3(1, 1, 1));
     light2->setPower(10);
     g_scene->addLight(light2);

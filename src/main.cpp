@@ -2,6 +2,7 @@
 #include "assignment1.h"
 #include "assignment2.h"
 #include "finalsproject.h"
+#include "materials.h"
 #include "renderer/Window.h"
 #include <iostream>
 #include "sysutils/Random.h"
@@ -122,7 +123,7 @@ int main(int argc, char*argv[])
 	printf("5) Teapot\n");
 	printf("6) Dragon Scene\n");
 	printf("7) Cornell Scene\n");
-	printf("8) Spheres\n");
+	printf("8) Materials: Wood\n");
     printf("9) Cornell Scene (glass balls)\n");
 
 
@@ -155,7 +156,7 @@ int main(int argc, char*argv[])
 		makeCornellScene();
 		break;
 	case 8:
-		spheres();
+		makeWoodScene();
 		break;
 	case 9:
 		makeCornellSceneGlass();

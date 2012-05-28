@@ -82,6 +82,9 @@
     <ClCompile Include="src\finalsproject.cpp">
       <Filter>sources</Filter>
     </ClCompile>
+    <ClCompile Include="src\materials.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\pthread\pthread.h">
@@ -211,6 +214,9 @@
       <Filter>headers\materials</Filter>
     </ClInclude>
     <ClInclude Include="headers\finalsproject.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\materials.h">
       <Filter>headers</Filter>
     </ClInclude>
   </ItemGroup>

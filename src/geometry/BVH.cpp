@@ -108,10 +108,10 @@ void BVH::build(Objects* objects, BoundingVolumeNode& root)
 
 	bvh_construct_timer.stop();
 
-	printf("Bounding Volume Hierarchy of %d triangles created in %g msecs.\n",
+	printf("Scene BVH of %d triangles created in %g msecs.\n",
 		triangles, bvh_construct_timer.elapsedMSec() );
-	printf("BVH nodes: %d\n",  root.interior_nodes() + root.leaf_nodes());
-	printf("BVH leaves: %d\n",  root.leaf_nodes());
+	printf("Nodes: %d. ", root.interior_nodes() + root.leaf_nodes());
+	printf("Leaves: %d.\n", root.leaf_nodes());
 }
 
 /*
