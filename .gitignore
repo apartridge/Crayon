@@ -4,3 +4,5 @@ Crayon.suo
 /Release
 /Crayon.suo
 /Profile
+*.sdf
+*.opensdf
