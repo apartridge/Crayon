@@ -2,6 +2,7 @@
 #include "geometry/Triangle.h"
 #include "geometry/Scene.h"
 #include "sysutils/Console.h"
+#include <cstring>
 
 #ifdef WIN32
 // disable useless warnings
@@ -16,7 +17,9 @@ TriangleMesh::TriangleMesh(Material* default_material) :
     m_vertexIndices(0),
     m_texCoordIndices(0),
 	m_hasBoundingBox(false),
-	m_numVertices(0)
+	m_numVertices(0),
+	m_numMaterials(0),
+	m_defaultMaterial(NULL)
 {
 
 }
@@ -100,6 +103,13 @@ void TriangleMesh::createSingleTriangle()
 	m_numVertices = 3;
 }
 
+void TriangleMesh::connectNameToMaterial(const char* name, Material* material)
+{
+	m_materialList.push_back(material);
+	m_materialNames.push_back(name);
+}
+
+
 //************************************************************************
 // You probably don't want to modify the following functions
 // They are for loading .obj files
@@ -110,14 +120,14 @@ bool TriangleMesh::load(char* file, const Matrix4x4& ctm)
     FILE *fp = fopen(file, "rb");
     if (!fp)
     {
-        error("Cannot open \"%s\" for reading\n",file);
+        error("Cannot open \"%s\" for reading.\n",file);
         return false;
 		exit(1);
     }
-    //debug("Loading \"%s\"...\n", file);
 
     loadObj(fp, ctm);
-    debug("Loaded \"%s\" with %d triangles\n", file, m_numTris);
+    printf("Loaded \"%s\" with %d tri's, %d vertices and %d materials.\n",
+			file, m_numTris, m_numVertices, m_numMaterials);
     fclose(fp);
 
     return true;
@@ -180,6 +190,9 @@ void TriangleMesh::loadObj(FILE* fp, const Matrix4x4& ctm)
 
     m_normals = new Vector3[std::max(nv,nf)];
     m_vertices = new Vector3[nv];
+	m_materials = new Material*[nf];
+
+	Material* currentMaterial = m_defaultMaterial;
 
     if (nt)
     {   // got texture coordinates
@@ -269,17 +282,38 @@ void TriangleMesh::loadObj(FILE* fp, const Matrix4x4& ctm)
                 nn++;
             }
 
+			if(currentMaterial == NULL)
+			{
+				error("Missing a material for this object. Set default material.\n");
+				exit(1);
+			}
+
+			m_materials[m_numTris] = currentMaterial;
+
             m_numTris++;
         } 
+		// Update the current material
 		else if(line[0] == 'u' && line[1] == 's' && line[2] == 'e' && line[3] == 'm' && line[4] == 't' && line[5] == 'l')
 		{
-			/*char materialName[100];
+			char materialName[100];
 			sscanf(&line[6], "%s\n", materialName);
-			printf("Found material %s\n", materialName);*/
+			printf("Contains material name \"%s\".\n", materialName);
+			currentMaterial = findMaterialByName(materialName);
+			m_numMaterials++;
 		}
     }
 
 	m_numVertices = nvertices;
-
 }
 
+Material* TriangleMesh::findMaterialByName(const char* const name)
+{
+	for(int i = 0; i < m_materialNames.size(); i++)
+	{
+		if(strcmp(name, m_materialNames.at(i)) == 0)
+		{
+			return m_materialList.at(i);
+		}
+	}
+	return m_defaultMaterial;
+}

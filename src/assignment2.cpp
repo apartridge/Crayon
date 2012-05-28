@@ -3,7 +3,7 @@
 #include "materials/LightSource.h"
 #include "lights/SquareLight.h"
 
-#include "../headers/materials/Glass.h"
+#include "materials/Glass.h"
 
 // local helper function declarations
 namespace

@@ -1,4 +1,4 @@
-// #include "../headers/assignment1.h"
+// #include "assignment1.h"
 
 /*
 void makeBunnyScene()

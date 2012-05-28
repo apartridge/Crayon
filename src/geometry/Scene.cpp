@@ -25,7 +25,21 @@ void Scene::preCalc()
 	m_bvh.build(&m_objects, entireScene);
 }
 
+void Scene::addMesh(TriangleMesh* mesh)
+{
+	for (int i = 0; i < mesh->numTris(); ++i)
+	{
+		Triangle* t = new Triangle;
+		t->setIndex(i);
+		t->setMesh(mesh);
+		t->setMaterial(mesh->materials()[i]);
+		g_scene->addObject(t);
+	}
+}
+
+
 bool Scene::trace(HitInfo& minHit, Ray& ray, float tMin, float tMax) const
 {
     return m_bvh.intersect(minHit, ray, tMin, tMax);
 }
+
