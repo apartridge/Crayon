@@ -22,7 +22,7 @@ Vector3 Lambert::shadeLight(const Light& light, const Ray& ray,
 
     // Find visibility of light
     //float visibility = light.visibility(hit.P, scene);
-    
+    /*
     bool inShadow = false;
     if (SHADOWS)
     {
@@ -41,7 +41,7 @@ Vector3 Lambert::shadeLight(const Light& light, const Ray& ray,
 
         float nDotL = dot(hit.N, l);
         L += Rd() * std::max(0.0f, nDotL/falloff * light.power() / PI) * light.color();
-    }
+    }*/
 
     return L;
 }
@@ -53,9 +53,9 @@ Vector3 Lambert::shadeGlobalIllumination(const Ray& ray, const HitInfo& hit, con
     if (true)
     {
         Vector3 irradiance;
-        scene.photonMap()->irradiance_estimate(&irradiance[0], &hit.P[0], &hit.N[0], 1, 100);
+        scene.photonMap()->irradiance_estimate(&irradiance[0], &hit.P[0], &hit.N[0], 0.5, 200);
 
-        L += Rd() * (1/PI) * irradiance; // ??
+        L += Rd() */* (1/PI) **/ irradiance; // ??
     }
     else
     {
