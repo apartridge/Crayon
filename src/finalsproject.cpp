@@ -43,12 +43,12 @@ void makeFinalScene()
     g_scene->addLight(light2);
 
 
-    Material* materialOne = new Lambert(0.9*Vector3(1.0f, 1.0f, 1.0f));
-    Material* floor = new Lambert(Vector3(0, 1.0f, 0));
-    Material* walls = new Lambert(Vector3(0, 0, 1.0f));
-	Material* tableWood = new Lambert(Vector3(1.0f, 0, 1.0f));
+    Material* materialOne = new Lambert(0.5*Vector3(1.0f, 1.0f, 1.0f));
+    Material* floor = new Lambert(0.5*Vector3(0, 1.0f, 0));
+    Material* walls = new Lambert(0.5*Vector3(0, 0, 1.0f));
+	Material* tableWood = new Lambert(0.5*Vector3(1.0f, 0, 1.0f));
 	
-	Material* glassWine = new Lambert(Vector3(1.0f, 1.0f, 0));
+	Material* glassWine = new Lambert(0.5*Vector3(1.0f, 1.0f, 0));
 
 	
 	TriangleMesh * mesh = new TriangleMesh;
