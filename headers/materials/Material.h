@@ -42,6 +42,7 @@ protected:
     Vector3 rd, rs, rt;
 
     float indexOfRefraction;
+    float shininess;
 
 private:
     Vector3 ambient; // Deprecated

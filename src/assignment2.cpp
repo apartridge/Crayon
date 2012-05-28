@@ -4,6 +4,7 @@
 #include "lights/SquareLight.h"
 
 #include "materials/Glass.h"
+#include "materials/Mirror.h"
 
 // local helper function declarations
 namespace
@@ -771,13 +772,13 @@ void makeCornellSceneGlass()
 
     // Add spheres
     const float radius = 1;
-    Material *glass = new Glass();
+    Material *glass[] = {new Mirror(), new Glass()};
     for (int i = 0; i < 2; ++i)
     {
         Sphere* sphere = new Sphere();
         sphere->setRadius(radius);
         sphere->setCenter(Vector3(-w/2.0 + w*i, radius, -d/3.0 + d/2.0*i));
-        sphere->setMaterial(glass);
+        sphere->setMaterial(glass[i]);
         g_scene->addObject(sphere);
     }
 

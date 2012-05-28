@@ -94,6 +94,9 @@
     <ClCompile Include="src\materials\Wood.cpp">
       <Filter>sources\materials</Filter>
     </ClCompile>
+    <ClCompile Include="src\materials\Mirror.cpp">
+      <Filter>sources\materials</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\pthread\pthread.h">
@@ -237,6 +240,9 @@
     <ClInclude Include="headers\materials\Wood.h">
       <Filter>headers\materials</Filter>
     </ClInclude>
+    <ClInclude Include="headers\materials\Mirror.h">
+      <Filter>headers\materials</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="headers">
@@ -275,13 +281,5 @@
     <Filter Include="headers\lights">
       <UniqueIdentifier>{684d8f69-ac9f-4165-bc40-2ee8dbc71d6b}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="headers\materials\Shiny.h">
-      <Filter>headers\materials</Filter>
-    </None>
-    <None Include="src\materials\Shiny.cpp">
-      <Filter>sources\materials</Filter>
-    </None>
   </ItemGroup>
 </Project>

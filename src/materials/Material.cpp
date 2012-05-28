@@ -6,6 +6,7 @@
 Material::Material(const Vector3& d, const Vector3& s, const Vector3& t) : ambient(d), rd(d), rs(s), rt(t)
 {
     indexOfRefraction = 1.0;
+    shininess = 0.0;
 }
 
 Material::~Material()
