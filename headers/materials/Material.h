@@ -6,6 +6,8 @@
 #include "geometry/Medium.h"
 #include "lights/Light.h"
 
+class Light;
+
 class Material
 {
 public:

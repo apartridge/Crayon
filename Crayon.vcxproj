@@ -105,6 +105,7 @@
     <ClCompile Include="src\geometry\Sphere.cpp" />
     <ClCompile Include="src\geometry\Triangle.cpp" />
     <ClCompile Include="src\geometry\TriangleMesh.cpp" />
+    <ClCompile Include="src\lights\Light.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\materials.cpp" />
     <ClCompile Include="src\materials\Glass.cpp" />

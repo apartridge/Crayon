@@ -9,6 +9,7 @@ class PointLight : public Light
 {
 public:
 	void setPosition(const Vector3& v)  {m_position = v;}
+
 	const Vector3 getPosition() const
 	{
 		return m_position;

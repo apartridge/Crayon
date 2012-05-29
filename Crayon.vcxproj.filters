@@ -97,6 +97,9 @@
     <ClCompile Include="src\materials\Mirror.cpp">
       <Filter>sources\materials</Filter>
     </ClCompile>
+    <ClCompile Include="src\lights\Light.cpp">
+      <Filter>sources\lights</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\pthread\pthread.h">
@@ -280,6 +283,9 @@
     </Filter>
     <Filter Include="headers\lights">
       <UniqueIdentifier>{684d8f69-ac9f-4165-bc40-2ee8dbc71d6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sources\lights">
+      <UniqueIdentifier>{0e8f218d-886e-42dd-af16-488010458966}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
