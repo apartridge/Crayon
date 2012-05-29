@@ -16,8 +16,9 @@ void PhotonTracer::traceScene(const Scene& scene, int numberOfPhotons)
     for (it = lightlist->begin(); it != lightlist->end(); ++it)
     {
         const Light* l = *it;
-        traceLight(*l, numberOfPhotons / (float)numberOfLights);
-        _photonMap->scale_photon_power(numberOfLights / (float)numberOfPhotons); // ?
+        const int numEmittedPhotons = numberOfPhotons / numberOfLights;
+        traceLight(*l, numEmittedPhotons);
+        _photonMap->scale_photon_power(1 / (float)numEmittedPhotons); 
     }
 
     _photonMap->balance();
@@ -123,11 +124,7 @@ bool PhotonTracer::tracePhoton(const Ray& ray, Vector3 power, int bounce)
     // Absorb
     else
     {
-        float pow[3] = {power.x, power.y, power.z};
-        float pos[3] = {hit.P.x, hit.P.y, hit.P.z};
-        float dir[3] = {ray.d.x, ray.d.y, ray.d.z};
-
-        _photonMap->store(pow, pos, dir);
+        _photonMap->store(&power[0], &hit.P[0], &ray.d[0]);
         return 1;
     }
 }

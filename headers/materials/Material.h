@@ -6,6 +6,8 @@
 #include "geometry/Medium.h"
 #include "lights/Light.h"
 
+class Light;
+
 class Material
 {
 public:
@@ -42,6 +44,7 @@ protected:
     Vector3 rd, rs, rt;
 
     float indexOfRefraction;
+    float shininess;
 
 private:
     Vector3 ambient; // Deprecated

@@ -1,9 +1,10 @@
 #pragma once
 
 #include <vector>
-#include "Light.h"
-#include "../renderer/glut.h"
-#include "../sysutils/Random.h"
+
+#include "lights/Light.h"
+#include "renderer/glut.h"
+#include "sysutils/Random.h"
 
 class SquareLight : public Light
 {
@@ -22,6 +23,8 @@ public:
 
 		return m_min;
 	}
+
+    virtual float visibility(const Vector3& p, const Scene& scene) const;
 
 	void renderGL()
 	{

@@ -1,7 +1,10 @@
 #pragma once
 
 #include <vector>
-#include "../geometry/Vector3.h"
+#include "geometry/Vector3.h"
+#include "geometry/Ray.h"
+
+class Scene;
 
 class Light
 {
@@ -18,6 +21,9 @@ public:
 
     // Returns a random position on light surface, t
 	virtual const Vector3 getPosition() const = 0; 
+
+    // Approximate visibility from a given point
+    virtual float visibility(const Vector3& p, const Scene& scene) const;
 
 protected:
     Vector3 m_color;
