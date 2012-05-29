@@ -55,6 +55,11 @@ public:
     TupleI3* nIndices()     {return m_normalIndices;}
 	TupleI3* texCoordIndices() {return m_texCoordIndices;}
 
+	bool hasTexCoords()
+	{
+		return m_hasTextureCoords;
+	}
+
 
 	Material** materials()  {return m_materials;}
     int numTris()           {return m_numTris;}
@@ -87,9 +92,11 @@ protected:
     TupleI3* m_normalIndices;
     TupleI3* m_vertexIndices;
     TupleI3* m_texCoordIndices;
+
     unsigned int m_numTris;
 	unsigned int m_numVertices;
 	unsigned int m_numMaterials;
+	bool m_hasTextureCoords;
 
 	bool m_hasBoundingBox;
 	BoundingBox m_boundingBox;
