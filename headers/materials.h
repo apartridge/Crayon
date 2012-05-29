@@ -17,3 +17,4 @@
 #include "geometry/Sphere.h"
 
 void makeWoodScene();
+void makeGlassScene();

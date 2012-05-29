@@ -113,6 +113,7 @@
     <ClCompile Include="src\lights\Light.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\materials.cpp" />
+    <ClCompile Include="src\materials\FrostedGlass.cpp" />
     <ClCompile Include="src\materials\Glass.cpp" />
     <ClCompile Include="src\materials\Lambert.cpp" />
     <ClCompile Include="src\materials\LightSource.cpp" />
