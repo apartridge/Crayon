@@ -4,6 +4,7 @@
 #include "lights/SquareLight.h"
 
 #include "materials/Glass.h"
+#include "materials/Wood.h"
 
 // local helper function declarations
 namespace
@@ -46,16 +47,72 @@ void makeFinalScene()
     Material* materialOne = new Lambert(0.5*Vector3(1.0f, 1.0f, 1.0f));
     Material* floor = new Lambert(0.5*Vector3(0, 1.0f, 0));
     Material* walls = new Lambert(0.5*Vector3(0, 0, 1.0f));
-	Material* tableWood = new Lambert(0.5*Vector3(1.0f, 0, 1.0f));
+
 	
 	Material* glassWine = new Lambert(0.5*Vector3(1.0f, 1.0f, 0));
 
 	
 	TriangleMesh * mesh = new TriangleMesh;
 	mesh->setDefaultMaterial(materialOne);
+
+
+
+
 	mesh->connectNameToMaterial("Floor", floor);
+
+
+
 	mesh->connectNameToMaterial("Walls", walls);
+
+	/*
+	// Wodden Table
+	*/
+		
+	Vector3 baseColor = Vector3(33, 16, 8)/255.0;
+	baseColor = Vector3(1,0,0);
+	Vector3 highColor = Vector3(132, 82, 49)/255.0;
+	const float scale = 0.54;
+	float perlinScale = 20;
+	Wood* tableWood = new Wood(baseColor, highColor, scale, perlinScale);
+	Vector3 glossColor = Vector3(1);
+	int glossPower = 500;
+	float glossFactor = 0.05;
+	tableWood->setGlossiness(glossPower, glossFactor, glossColor);
 	mesh->connectNameToMaterial("TableWood", tableWood);
+
+	/*
+	// Chess Board
+	*/
+	Material* white = new Lambert(Vector3(1,1,1));
+	Material* black = new Lambert(Vector3(1,1,1));
+	mesh->connectNameToMaterial("ChessBoardWhite", white);
+	mesh->connectNameToMaterial("ChessBoardBlack", black);
+
+	/*
+	// Staircase Light Sides
+	*/
+
+	Vector3 stairCaseBaseColor = Vector3(170, 85, 34)/255.0;
+	Vector3 stairCaseHighColor = Vector3(218, 133, 34)/255.0;
+	Material* staircaseSides = new Wood(stairCaseBaseColor, stairCaseHighColor, 0.53, 12);
+	mesh->connectNameToMaterial("StairCaseSides", staircaseSides);
+
+
+	/*
+	// Sofa
+	*/
+	Material* sofaFabric = new Lambert(Vector3(1,0,0));
+	mesh->connectNameToMaterial("SofaFabric", sofaFabric);
+
+	Material* sofaFeet = new Lambert(Vector3(1,1,0));
+	mesh->connectNameToMaterial("SofaFeet", sofaFeet);
+
+
+
+
+
+
+
 	mesh->connectNameToMaterial("GlassWine", glassWine);
     mesh->load("world.obj");
 	g_scene->addMesh(mesh);

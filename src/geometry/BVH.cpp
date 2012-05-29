@@ -2,8 +2,8 @@
 #include "../../headers\sysutils\PerformanceTimer.h"
 #include <cassert>
 
-#define SPLITS 8
-#define SPLIT_ALL_AXES
+#define SPLITS 10
+//#define SPLIT_ALL_AXES
 
 namespace
 {

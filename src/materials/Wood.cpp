@@ -17,6 +17,7 @@ Wood::~Wood()
 
 Vector3 Wood::shadeLight(const Light& light, const Ray& ray, const HitInfo& hit, const Scene& scene, const int depth) const
 {
+
 	Vector3 normal = hit.N;
 
 	/*
@@ -90,5 +91,7 @@ Vector3 Wood::shadeLight(const Light& light, const Ray& ray, const HitInfo& hit,
 
 
     }
+	return Vector3(dot(normal, l));
+
     return L;
 }

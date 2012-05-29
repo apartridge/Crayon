@@ -297,7 +297,7 @@ void TriangleMesh::loadObj(FILE* fp, const Matrix4x4& ctm)
 		{
 			char materialName[100];
 			sscanf(&line[6], "%s\n", materialName);
-			if(strlen(materialName) > 0)
+			if(strlen(materialName) > 1)
 			{
 				printf("Contains material \"%s\".\n", materialName);
 				currentMaterial = findMaterialByName(materialName);
