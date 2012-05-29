@@ -15,17 +15,21 @@ class Ray
 public:
     Vector3 o,      //!< Origin of ray
             d;      //!< Direction of ray
+	Vector3 dInverse;
+
 
 	Medium mediumOfTravel;
 
     Ray() : o(), d(Vector3(0.0f,0.0f,1.0f)), mediumOfTravel(Medium(1.0f))
     {
 		addRayToStatistics();
+		dInverse = d;
     }
 
 	Ray(const Vector3& o, const Vector3& d, const Medium & m) : o(o), d(d), mediumOfTravel(m)
     {
 		addRayToStatistics();
+		dInverse = Vector3(1/d.x, 1/d.y, 1/d.z);
     }
 
 	void addRayToStatistics()
@@ -52,13 +56,15 @@ public:
     Vector3 P;                          //!< The hit point
     Vector3 N;                          //!< Shading normal vector
     const Material* material;           //!< Material of the intersected object
-	//int intersections; // Number of intersections checked
+
+	float textureU;
+	float textureV;
 
     //! Default constructor.
     explicit HitInfo(float t = 0.0f,
                      const Vector3& P = Vector3(),
                      const Vector3& N = Vector3(0.0f, 1.0f, 0.0f)) :
-        t(t), P(P), N(N), material (0)
+        t(t), P(P), N(N), material (0), textureU(0), textureV(0)
     {
         // empty
 		//intersections = 0;

@@ -43,9 +43,6 @@
     <ClCompile Include="src\renderer\OpenGLRenderer.cpp">
       <Filter>sources\renderer</Filter>
     </ClCompile>
-    <ClCompile Include="src\renderer\PFMLoader.cpp">
-      <Filter>sources\renderer</Filter>
-    </ClCompile>
     <ClCompile Include="src\renderer\Raytracer.cpp">
       <Filter>sources\renderer</Filter>
     </ClCompile>
@@ -99,6 +96,18 @@
     </ClCompile>
     <ClCompile Include="src\lights\Light.cpp">
       <Filter>sources\lights</Filter>
+    </ClCompile>
+    <ClCompile Include="src\materials\Texture.cpp">
+      <Filter>sources\materials</Filter>
+    </ClCompile>
+    <ClCompile Include="src\materials\TextureImage.cpp">
+      <Filter>sources\materials</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sysutils\PFMLoader.cpp">
+      <Filter>sources\sysutils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\materials\Skydome.cpp">
+      <Filter>sources\materials</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -177,9 +186,6 @@
     <ClInclude Include="headers\renderer\OpenGLRenderer.h">
       <Filter>headers\renderer</Filter>
     </ClInclude>
-    <ClInclude Include="headers\renderer\PFMLoader.h">
-      <Filter>headers\renderer</Filter>
-    </ClInclude>
     <ClInclude Include="headers\renderer\Raytracer.h">
       <Filter>headers\renderer</Filter>
     </ClInclude>
@@ -244,6 +250,18 @@
       <Filter>headers\materials</Filter>
     </ClInclude>
     <ClInclude Include="headers\materials\Mirror.h">
+      <Filter>headers\materials</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\materials\Texture.h">
+      <Filter>headers\materials</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\materials\TextureImage.h">
+      <Filter>headers\materials</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\sysutils\PFMLoader.h">
+      <Filter>headers\sysutils</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\materials\Skydome.h">
       <Filter>headers\materials</Filter>
     </ClInclude>
   </ItemGroup>

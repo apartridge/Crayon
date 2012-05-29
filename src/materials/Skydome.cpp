@@ -1,12 +1,11 @@
-#include "Skydome.h"
-#include "Ray.h"
-#include "Scene.h"
-#include "PFMLoader.h"
+#include "materials/Skydome.h"
+#include "geometry/Ray.h"
+#include "geometry/Scene.h"
+#include "sysutils/PFMLoader.h"
 #include <iostream>
 
 
-Skydome::Skydome(const char* filename) :
-			Material(Vector3(0,0.3,0), Medium(1), 0)
+Skydome::Skydome(const char* filename) : Material()
 {
 	this->image = readPFMImage(filename, &this->width, &this->height);
 }

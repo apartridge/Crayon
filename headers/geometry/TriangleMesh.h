@@ -49,9 +49,14 @@ public:
 
     Vector3* vertices()     {return m_vertices;}
     Vector3* normals()      {return m_normals;}
+	VectorR2* texCoords()	{return m_texCoords;}
+
     TupleI3* vIndices()     {return m_vertexIndices;}
     TupleI3* nIndices()     {return m_normalIndices;}
-	Material** materials()     {return m_materials;}
+	TupleI3* texCoordIndices() {return m_texCoordIndices;}
+
+
+	Material** materials()  {return m_materials;}
     int numTris()           {return m_numTris;}
 	
 	void connectNameToMaterial(const char* name, Material* material);

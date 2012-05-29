@@ -119,7 +119,10 @@
     <ClCompile Include="src\materials\Material.cpp" />
     <ClCompile Include="src\materials\Perlin.cpp" />
     <ClCompile Include="src\materials\Mirror.cpp" />
+    <ClCompile Include="src\materials\Skydome.cpp" />
     <ClCompile Include="src\materials\Stone.cpp" />
+    <ClCompile Include="src\materials\Texture.cpp" />
+    <ClCompile Include="src\materials\TextureImage.cpp" />
     <ClCompile Include="src\materials\Wood.cpp" />
     <ClCompile Include="src\materials\Worley.cpp" />
     <ClCompile Include="src\renderer\Camera.cpp" />
@@ -128,10 +131,10 @@
     <ClCompile Include="src\renderer\PhotonTracer.cpp" />
     <ClCompile Include="src\renderer\Window.cpp" />
     <ClCompile Include="src\renderer\OpenGLRenderer.cpp" />
-    <ClCompile Include="src\renderer\PFMLoader.cpp" />
     <ClCompile Include="src\renderer\Raytracer.cpp" />
     <ClCompile Include="src\sysutils\Console.cpp" />
     <ClCompile Include="src\sysutils\PerformanceTimer.cpp" />
+    <ClCompile Include="src\sysutils\PFMLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\assignment1.h" />
@@ -161,7 +164,10 @@
     <ClInclude Include="headers\materials\Material.h" />
     <ClInclude Include="headers\materials\Perlin.h" />
     <ClInclude Include="headers\materials\Mirror.h" />
+    <ClInclude Include="headers\materials\Skydome.h" />
     <ClInclude Include="headers\materials\Stone.h" />
+    <ClInclude Include="headers\materials\Texture.h" />
+    <ClInclude Include="headers\materials\TextureImage.h" />
     <ClInclude Include="headers\materials\Wood.h" />
     <ClInclude Include="headers\materials\Worley.h" />
     <ClInclude Include="headers\pthread\pthread.h" />
@@ -175,12 +181,12 @@
     <ClInclude Include="headers\renderer\PhotonTracer.h" />
     <ClInclude Include="headers\renderer\Window.h" />
     <ClInclude Include="headers\renderer\OpenGLRenderer.h" />
-    <ClInclude Include="headers\renderer\PFMLoader.h" />
     <ClInclude Include="headers\renderer\Raytracer.h" />
     <ClInclude Include="headers\renderer\Renderer.h" />
     <ClInclude Include="headers\renderer\RenderingStats.h" />
     <ClInclude Include="headers\sysutils\Console.h" />
     <ClInclude Include="headers\sysutils\PerformanceTimer.h" />
+    <ClInclude Include="headers\sysutils\PFMLoader.h" />
     <ClInclude Include="headers\sysutils\Random.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

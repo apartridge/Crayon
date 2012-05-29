@@ -26,7 +26,6 @@ public:
     virtual bool intersect(HitInfo& result, Ray& ray,
                            float tMin = 0.0f, float tMax = MIRO_TMAX);
 
-
 protected:
     TriangleMesh* m_mesh;
     unsigned int m_index;
