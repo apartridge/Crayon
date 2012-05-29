@@ -31,6 +31,7 @@ Vector3 Wood::shadeLight(const Light& light, const Ray& ray, const HitInfo& hit,
 	}
 
 	float g = woodDetail - int(woodDetail);
+
 	/*
 	// Details
 	*/
@@ -49,16 +50,7 @@ Vector3 Wood::shadeLight(const Light& light, const Ray& ray, const HitInfo& hit,
 
 	float gFine = woodDetailFine - int(woodDetailFine);
 
-
-
-
-
-
     Vector3 woodenColor =  (m_baseColor + 0.5*g*m_highColor + gFine*detailsColor);
-
-
-
-
 
 
     Vector3 L(0);
@@ -69,29 +61,24 @@ Vector3 Wood::shadeLight(const Light& light, const Ray& ray, const HitInfo& hit,
     Ray shadowRay;
     shadowRay.d = l.normalized(); 
     shadowRay.o = hit.P;
-    bool inShadow = scene.trace(shadowHit, shadowRay, epsilon);
-    bool outside = dot(-ray.d, normal) > 0;
+    
+	float visibility = light.visibility(hit.P, scene);
+	
+	float falloff = l.length2();
+	l /= sqrt(falloff);
 
-    if (outside && !inShadow) 
-    {
-        float falloff = l.length2();
-        l /= sqrt(falloff);
+    float nDotL = dot(normal, l);
+		
+    L += woodenColor * std::max(0.0f, nDotL/falloff * light.power() / PI) * light.color();
 
-        float nDotL = dot(normal, l);
-        L += woodenColor * std::max(0.0f, nDotL/falloff * light.power() / PI) * light.color();
+	// Phong Specular For Glossiness / "Lakkert" wood
 
-		// Phong Specular For Glossiness / "Lakkert" wood
+	if(m_glossFactor > 0)
+	{
+		Vector3 halfway = l - ray.d;
+		halfway.normalize();
+		L += 0.1*m_glossFactor*pow(dot(normal, halfway), m_glossPower)*m_glossColor*(m_glossPower+1)/(2*PI);
+	}
 
-		if(m_glossFactor > 0)
-		{
-			Vector3 halfway = l - ray.d;
-			halfway.normalize();
-			L += 0.1*m_glossFactor*pow(dot(normal, halfway), m_glossPower)*m_glossColor*(m_glossPower+1)/(2*PI);
-		}
-
-
-    }
-	return Vector3(dot(normal, l));
-
-    return L;
+    return L*visibility;
 }

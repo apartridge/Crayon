@@ -18,7 +18,7 @@ extern RenderingStats* rendering_statistics;
 
 #define THREADS 8 // Including the main thread
 
-#define PIXEL_SAMPLES 1
+#define PIXEL_SAMPLES 4
 
 Raytracer::Raytracer()
 {
@@ -125,6 +125,11 @@ static void drawScanLineY(int scanline, RaytracerScanlinePool* job)
 		{
 			float dx = Random::uniformRand() - 0.5;
 			float dy = Random::uniformRand() - 0.5;
+
+#if PIXEL_SAMPLES == 1
+			dx = 0;
+			dy = 0;
+#endif
 
 			ray = job->camera->eyeRay(i+dx, scanline+dy, job->image->width(), job->image->height());
 

@@ -2,8 +2,8 @@
 #include "../../headers\sysutils\PerformanceTimer.h"
 #include <cassert>
 
-#define SPLITS 10
-//#define SPLIT_ALL_AXES
+#define SPLITS 7
+#define SPLIT_ALL_AXES
 
 namespace
 {
@@ -191,18 +191,22 @@ void BVH::splitNode(BoundingVolumeNode* rootnode, Objects* objects,
 
 			int candidate_tris[2] = {0,0};
 			BoundingBox candidate[2];
-			bool startedLeft = false; // Started on the left box?
+
+			 // Started on the left box?
+			bool startedLeft = false;
 
 			for(int split = 0; split < SPLITS + 1; split++, c += step)
 			{
 				if(split == SPLITS)
 				{
 					candidate_tris[0] = 0;
+					startedLeft = false;
 				}
 
 				candidate_tris[1] = 0;
 
 				bool rightB = false;
+				
 
 				// Go thru all triangles, they are sorted on split axis
 				// from left to right

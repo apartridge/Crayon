@@ -17,6 +17,10 @@ namespace
 
 void makeFinalScene() 
 {
+	// This factor adjusts the Noise scale from the Materials.cpp test scenes to
+	// world.obj
+	const float SCALE_FROM_MATERIALS_TO_FINALSCENE = 1.1;
+
     g_camera = new Camera;
     g_scene = new Scene;
     g_image = new Image;
@@ -65,20 +69,27 @@ void makeFinalScene()
 	mesh->connectNameToMaterial("Walls", walls);
 
 	/*
-	// Wodden Table
+	// WOODEN TABLE AND CHAIRS
 	*/
 		
 	Vector3 baseColor = Vector3(33, 16, 8)/255.0;
 	baseColor = Vector3(1,0,0);
-	Vector3 highColor = Vector3(132, 82, 49)/255.0;
+	Vector3 highColor = Vector3(120, 82, 49)/255.0;
 	const float scale = 0.54;
 	float perlinScale = 20;
 	Wood* tableWood = new Wood(baseColor, highColor, scale, perlinScale);
-	Vector3 glossColor = Vector3(1);
-	int glossPower = 500;
-	float glossFactor = 0.05;
-	tableWood->setGlossiness(glossPower, glossFactor, glossColor);
-	mesh->connectNameToMaterial("TableWood", tableWood);
+	tableWood->setGlossiness(500, 0.025, Vector3(1));
+	mesh->connectNameToMaterial("TableWood_FW_WD_BB.JPG", tableWood);  // have to remove this .jpg crap
+	mesh->connectNameToMaterial("ChairWood_CHR00401.jpg", tableWood);
+	
+	
+	Material* chairFabric = new Lambert(Vector3(0.8, 0, 0));
+	mesh->connectNameToMaterial("ChairFabric_CHR00402.jpg", chairFabric);  // have to remove this .jpg
+
+
+
+	
+
 
 	/*
 	// Chess Board
@@ -89,18 +100,34 @@ void makeFinalScene()
 	mesh->connectNameToMaterial("ChessBoardBlack", black);
 
 	/*
-	// Staircase Light Sides
+	// STAIRS
 	*/
+
+	// Light Sides
 
 	Vector3 stairCaseBaseColor = Vector3(170, 85, 34)/255.0;
 	Vector3 stairCaseHighColor = Vector3(218, 133, 34)/255.0;
-	Material* staircaseSides = new Wood(stairCaseBaseColor, stairCaseHighColor, 0.53, 12);
+	Material* staircaseSides = new Wood(stairCaseBaseColor, stairCaseHighColor, SCALE_FROM_MATERIALS_TO_FINALSCENE*0.53, 12);
 	mesh->connectNameToMaterial("StairCaseSides", staircaseSides);
 
+	// Dark Steps
+
+	Vector3 staircaseDarkStepBase = Vector3(45, 30, 18)/255.0;
+	Vector3 staircaseDarkStepHigh = Vector3(123, 82, 49)/255.0;
+
+	const float staircaseDarkStepScale = 1.5;
+	float staircaseDarkStepPerlinScale = 10;
+	Material* materialStairDarkSteps = new Wood(staircaseDarkStepBase, staircaseDarkStepHigh,
+												SCALE_FROM_MATERIALS_TO_FINALSCENE*staircaseDarkStepScale,
+												staircaseDarkStepPerlinScale);
+
+	mesh->connectNameToMaterial("StairCaseSteps", materialStairDarkSteps);
+	mesh->connectNameToMaterial("StairCaseHandGuards", tableWood);
 
 	/*
-	// Sofa
+	// SOFA AND TABLE
 	*/
+
 	Material* sofaFabric = new Lambert(Vector3(1,0,0));
 	mesh->connectNameToMaterial("SofaFabric", sofaFabric);
 
