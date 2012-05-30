@@ -38,6 +38,11 @@ Vector3 FrostedGlass::shadeLight(const Light& light, const Ray& ray, const HitIn
     return L;
 }
 
+
+/*
+ * Microfacet reflectance, holy crap :S
+ * http://www.cs.cornell.edu/~srm/publications/EGSR07-btdf.pdf
+ */
 Vector3 FrostedGlass::shadeReflectance(const Ray& ray, const HitInfo& hit, const Scene& scene, const int depth) const
 {
     Vector3 L(0, 0, 0);

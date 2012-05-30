@@ -193,11 +193,13 @@ void TriangleMesh::loadObj(FILE* fp, const Matrix4x4& ctm)
 	m_materials = new Material*[nf];
 
 	Material* currentMaterial = m_defaultMaterial;
+	m_hasTextureCoords = false;
 
     if (nt)
     {   // got texture coordinates
         m_texCoords = new VectorR2[nt];
         m_texCoordIndices = new TupleI3[nf];
+		m_hasTextureCoords = true;
     }
 
     m_normalIndices = new TupleI3[nf]; // always make normals

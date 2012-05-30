@@ -168,6 +168,19 @@ bool Triangle::intersect(HitInfo& result, Ray& r, float tMin, float tMax)
 			result.t = t;
 			result.material = m_material;
 
+			// Texture Coordinates
+
+			if(m_mesh->hasTexCoords())
+			{
+				TriangleMesh::TupleI3 texcoords3 = m_mesh->texCoordIndices()[m_index];
+				const TriangleMesh::VectorR2 uv1 = m_mesh->texCoords()[texcoords3.x];
+				const TriangleMesh::VectorR2 uv2 = m_mesh->texCoords()[texcoords3.y];
+				const TriangleMesh::VectorR2 uv3 = m_mesh->texCoords()[texcoords3.z];
+
+				result.textureU = (1-alpha-beta)*uv1.x + alpha*uv2.x + beta*uv3.x;
+				result.textureV = (1-alpha-beta)*uv1.y + alpha*uv2.y + beta*uv3.y;
+			}
+
 			return true;
 		}
 	}

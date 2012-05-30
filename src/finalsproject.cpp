@@ -5,6 +5,7 @@
 
 #include "materials/Glass.h"
 #include "materials/Wood.h"
+#include "materials/Texture.h"
 
 // local helper function declarations
 namespace
@@ -49,7 +50,7 @@ void makeFinalScene()
 
 
     Material* materialOne = new Lambert(0.5*Vector3(1.0f, 1.0f, 1.0f));
-    Material* floor = new Lambert(0.5*Vector3(0, 1.0f, 0));
+    
     Material* walls = new Lambert(0.5*Vector3(0, 0, 1.0f));
 
 	
@@ -61,8 +62,17 @@ void makeFinalScene()
 
 
 
+	/*
+	// Floor
+	*/
 
+	Texture* floor = new Texture();
+	TextureImage* diffuse = TextureImage::loadFromPFM("materials/floor.Pfm");
 	mesh->connectNameToMaterial("Floor", floor);
+
+
+
+
 
 
 

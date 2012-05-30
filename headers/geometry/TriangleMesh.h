@@ -49,9 +49,19 @@ public:
 
     Vector3* vertices()     {return m_vertices;}
     Vector3* normals()      {return m_normals;}
+	VectorR2* texCoords()	{return m_texCoords;}
+
     TupleI3* vIndices()     {return m_vertexIndices;}
     TupleI3* nIndices()     {return m_normalIndices;}
-	Material** materials()     {return m_materials;}
+	TupleI3* texCoordIndices() {return m_texCoordIndices;}
+
+	bool hasTexCoords()
+	{
+		return m_hasTextureCoords;
+	}
+
+
+	Material** materials()  {return m_materials;}
     int numTris()           {return m_numTris;}
 	
 	void connectNameToMaterial(const char* name, Material* material);
@@ -82,9 +92,11 @@ protected:
     TupleI3* m_normalIndices;
     TupleI3* m_vertexIndices;
     TupleI3* m_texCoordIndices;
+
     unsigned int m_numTris;
 	unsigned int m_numVertices;
 	unsigned int m_numMaterials;
+	bool m_hasTextureCoords;
 
 	bool m_hasBoundingBox;
 	BoundingBox m_boundingBox;
