@@ -129,6 +129,7 @@ void makeWoodScene()
 	
 	TriangleMesh * mesh = new TriangleMesh;
 	mesh->setDefaultMaterial(material0);
+	mesh->connectNameToMaterial("Glass", new FrostedGlass(Vector3(0.2), Vector3(0.9, 0.9, 1.0)));
 	mesh->connectNameToMaterial("MaterialOne", materialWood);
 	mesh->connectNameToMaterial("MaterialTwo", materialWood2);
 	mesh->connectNameToMaterial("MaterialThree", materialWood3);
