@@ -69,7 +69,7 @@ Vector3 FrostedGlass::shadeReflectance(const Ray& ray, const HitInfo& hit, const
 
         // Generate random angles proportional to cos(theta)^n
         const float phi = 2*PI*Random::uniformRand();
-        const float theta = acos(pow(Random::uniformRand(), 1/(float)e));
+        const float theta = acos(pow(Random::uniformRand(), 1/(float)(e+1)));
 
         Vector3 d = (cos(phi) * sin(theta) * u + 
                      sin(phi) * sin(theta) * v +
@@ -99,7 +99,7 @@ Vector3 FrostedGlass::shadeReflectance(const Ray& ray, const HitInfo& hit, const
 
         // Generate random angles proportional to cos(theta)^n
         const float phi = 2*PI*Random::uniformRand();
-        const float theta = acos(pow(Random::uniformRand(), 1/(float)e));
+        const float theta = acos(pow(Random::uniformRand(), 1/(float)(e+1)));
 
         Vector3 d = (cos(phi) * sin(theta) * u + 
                      sin(phi) * sin(theta) * v +

@@ -110,10 +110,10 @@ void makeFinalScene()
 	/*
 	// Chess Board
 	*/
-	Material* white = new Lambert(Vector3(1,1,1));
-	Material* black = new Lambert(Vector3(0.1, 0.1, 0.1));
-	mesh->connectNameToMaterial("ChessBoardWhite", white);
-	mesh->connectNameToMaterial("ChessBoardBlack", black);
+	Material* white = new Lambert(Vector3(1));
+	Material* black = new Lambert(Vector3(0));
+	mesh->connectNameToMaterial("ChessWhite", white);
+	mesh->connectNameToMaterial("ChessBlack", black);
 
     Material* glassChessPieceWhite = new Glass();
     Material* glassChessPieceBlack = new Glass();
