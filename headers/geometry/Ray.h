@@ -12,24 +12,46 @@ extern RenderingStats* rendering_statistics;
 
 class Ray
 {
-public:
-    Vector3 o,      //!< Origin of ray
-            d;      //!< Direction of ray
-	Vector3 dInverse;
+private:
+    Vector3 m_origin,      //!< Origin of ray
+            m_direction;      //!< Direction of ray
+	Vector3 m_dInverse;
 
+public:
 
 	Medium mediumOfTravel;
 
-    Ray() : o(), d(Vector3(0.0f,0.0f,1.0f)), mediumOfTravel(Medium(1.0f))
+	const Vector3& origin() const
+	{
+		return m_origin;
+	}
+
+	const Vector3& direction() const
+	{
+		return m_direction;
+	}
+
+	const Vector3& dInverse() const
+	{
+		return m_dInverse;
+	}
+
+    Ray() : m_origin(), m_direction(Vector3(0.0f,0.0f,1.0f)), mediumOfTravel(Medium(1.0f))
     {
 		addRayToStatistics();
-		dInverse = d;
+		m_dInverse = m_direction;
     }
 
-	Ray(const Vector3& o, const Vector3& d, const Medium & m) : o(o), d(d), mediumOfTravel(m)
+	Ray(const Vector3& o, const Vector3& d) : m_origin(o), m_direction(d)
     {
 		addRayToStatistics();
-		dInverse = Vector3(1/d.x, 1/d.y, 1/d.z);
+		m_dInverse = Vector3(1/d.x, 1/d.y, 1/d.z);
+    }
+
+	Ray(const Vector3& o, const Vector3& d, const Medium & m) : m_origin(o), m_direction(d), mediumOfTravel(m)
+    {
+		addRayToStatistics();
+		m_dInverse = Vector3(1/d.x, 1/d.y, 1/d.z);
     }
 
 	void addRayToStatistics()

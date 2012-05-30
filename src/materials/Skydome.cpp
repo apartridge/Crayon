@@ -28,7 +28,7 @@ Vector3 Skydome::shade(const Ray& ray, const HitInfo& hit, const Scene& scene, f
 
 	
 	int uvCoordinatesNormalized[2];
-	sphereCoordinates(ray.d, uvCoordinatesNormalized);
+	sphereCoordinates(ray.direction(), uvCoordinatesNormalized);
 
 
 

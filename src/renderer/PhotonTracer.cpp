@@ -40,9 +40,9 @@ void PhotonTracer::traceLight(const Light& light, int numberOfPhotons)
             dir.z = 2*Random::uniformRand() - 1;
         } while (dot(dir, dir) > 1);
         
-        Ray ray;
-        ray.o = pos;
-        ray.d = dir.normalized();
+        Ray ray (pos, dir.normalized());
+        /*ray.o = pos;
+        ray.d = dir.normalized();*/
         ray.mediumOfTravel.indexOfRefraction = 1.0;
 
         Vector3 power = light.power() * light.color();
@@ -87,10 +87,10 @@ bool PhotonTracer::tracePhoton(const Ray& ray, Vector3 power, int bounce)
                      sin(phi) * sin(theta) * v +
                      cos(theta) * n).normalized();
 
-        Ray reflect;
-        reflect.d = d;
+        Ray reflect (hit.P, d);
+        //reflect.d = d;
         reflect.mediumOfTravel.indexOfRefraction = ray.mediumOfTravel.indexOfRefraction;
-        reflect.o = hit.P;
+       // reflect.o = hit.P;
 
         return tracePhoton(reflect, power, bounce + 1);
     }
@@ -100,10 +100,10 @@ bool PhotonTracer::tracePhoton(const Ray& ray, Vector3 power, int bounce)
     {
         power = (power * mat->Rs()) / rs_avg;
 
-        Ray reflect;
-        reflect.o = hit.P;
+        Ray reflect (hit.P, Material::reflect(ray, hit));
+        //reflect.o = hit.P;
         reflect.mediumOfTravel.indexOfRefraction = ray.mediumOfTravel.indexOfRefraction;
-        reflect.d = Material::reflect(ray, hit);
+        //reflect.d = Material::reflect(ray, hit);
 
         return tracePhoton(reflect, power, bounce + 1);
     }
@@ -115,7 +115,7 @@ bool PhotonTracer::tracePhoton(const Ray& ray, Vector3 power, int bounce)
 
         Ray refract = mat->refractRay(ray, hit);
 
-        if (refract.d != Vector3(0.0))
+        if (refract.direction() != Vector3(0.0))
             return tracePhoton(refract, power, bounce + 1);
         else
             return 0;
@@ -124,7 +124,7 @@ bool PhotonTracer::tracePhoton(const Ray& ray, Vector3 power, int bounce)
     // Absorb
     else
     {
-        _photonMap->store(&power[0], &hit.P[0], &ray.d[0]);
+        _photonMap->store(&power[0], &hit.P[0], &ray.direction()[0]);
         return 1;
     }
 }

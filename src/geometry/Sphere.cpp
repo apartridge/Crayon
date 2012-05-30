@@ -30,10 +30,10 @@ void Sphere::calculateBoundingBox()
 
 bool Sphere::intersect(HitInfo& result, Ray& ray, float tMin, float tMax)
 {
-    const Vector3 toO = ray.o - m_center; 
+    const Vector3 toO = ray.origin() - m_center; 
 
-    const float a = ray.d.length2(); 
-    const float b = dot(2*ray.d, toO);
+    const float a = ray.direction().length2(); 
+    const float b = dot(2*ray.direction(), toO);
     const float c = toO.length2() - m_radius*m_radius;
 
     const float discrim = b*b-4.0f*a*c; 
@@ -62,7 +62,7 @@ bool Sphere::intersect(HitInfo& result, Ray& ray, float tMin, float tMax)
         return false; 
     }
 
-    result.P = ray.o + result.t*ray.d; 
+    result.P = ray.origin() + result.t*ray.direction(); 
     result.N = (result.P-m_center); 
     result.N.normalize(); 
     result.material = this->m_material; 

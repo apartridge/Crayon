@@ -58,9 +58,9 @@ Vector3 Wood::shadeLight(const Light& light, const Ray& ray, const HitInfo& hit,
 
     // Calculate shadow ray
     HitInfo shadowHit;
-    Ray shadowRay;
-    shadowRay.d = l.normalized(); 
-    shadowRay.o = hit.P;
+    Ray shadowRay (hit.P, l.normalized());
+    /*shadowRay.d = l.normalized(); 
+    shadowRay.o = hit.P;*/
     
 	float visibility = light.visibility(hit.P, scene);
 	
@@ -75,7 +75,7 @@ Vector3 Wood::shadeLight(const Light& light, const Ray& ray, const HitInfo& hit,
 
 	if(m_glossFactor > 0)
 	{
-		Vector3 halfway = l - ray.d;
+		Vector3 halfway = l - ray.direction();
 		halfway.normalize();
 		L += 0.1*m_glossFactor*pow(dot(normal, halfway), m_glossPower)*m_glossColor*(m_glossPower+1)/(2*PI);
 	}

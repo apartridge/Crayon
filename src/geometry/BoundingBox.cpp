@@ -89,14 +89,14 @@ bool BoundingBox::intersectedByRay(const Ray& ray, float tMinG, float tMaxG) con
 
 	// Always hit if origin is inside box
 
-   if (ray.o.x < max.x && ray.o.y < max.y && ray.o.z < max.z && 
-        ray.o.x > min.x && ray.o.y > min.y && ray.o.z > min.z)
+   if (ray.origin().x < max.x && ray.origin().y < max.y && ray.origin().z < max.z && 
+        ray.origin().x > min.x && ray.origin().y > min.y && ray.origin().z > min.z)
         return true;
 
-	float divx =  1 / ray.d.x;
+	float divx = ray.dInverse().x; //  1 / ray.direction().x;
 
-	float tmin = (min.x - ray.o.x) * divx;
-	float tmax = (max.x - ray.o.x) * divx;
+	float tmin = (min.x - ray.origin().x) * divx;
+	float tmax = (max.x - ray.origin().x) * divx;
 
 	if(divx < 0)
 	{
@@ -108,9 +108,9 @@ bool BoundingBox::intersectedByRay(const Ray& ray, float tMinG, float tMaxG) con
 		return false;
 	}
 
-	float divy =  1 / ray.d.y;
-	float tminy = (min.y - ray.o.y) * divy;
-	float tmaxy = (max.y - ray.o.y) * divy;
+	float divy = ray.dInverse().y; //  1 / ray.direction().y;
+	float tminy = (min.y - ray.origin().y) * divy;
+	float tmaxy = (max.y - ray.origin().y) * divy;
 
 	if(divy  < 0)
 	{
@@ -137,9 +137,9 @@ bool BoundingBox::intersectedByRay(const Ray& ray, float tMinG, float tMaxG) con
 		return false;
 	}
 
-	float divz = 1 / ray.d.z;
-	float tminz = (min.z - ray.o.z) * divz;
-	float tmaxz = (max.z - ray.o.z) * divz;
+	float divz = ray.dInverse().z; // 1 / ray.direction().z;
+	float tminz = (min.z - ray.origin().z) * divz;
+	float tmaxz = (max.z - ray.origin().z) * divz;
 
 	if(divz <  0)
 	{
