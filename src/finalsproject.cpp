@@ -51,7 +51,7 @@ void makeFinalScene()
 
     Material* materialOne = new Lambert(0.5*Vector3(1.0f, 1.0f, 1.0f));
     
-    Material* walls = new Lambert(0.5*Vector3(0, 0, 1.0f));
+    
 
 	
 	Material* glassWine = new Lambert(0.5*Vector3(1.0f, 1.0f, 0));
@@ -75,13 +75,13 @@ void makeFinalScene()
 	floor->setNormalMap(normal, objWorld, 1);
 	mesh->connectNameToMaterial("Floor", floor);
 
+	/*
+	// Walls
+	*/
 
-
-
-
-
-
+	Material* walls = new Lambert(0.99*Vector3(1, 1, 1.0f));
 	mesh->connectNameToMaterial("Walls", walls);
+	mesh->connectNameToMaterial("Ceiling", walls);
 
 	/*
 	// WOODEN TABLE AND CHAIRS

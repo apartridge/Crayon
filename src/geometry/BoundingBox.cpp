@@ -77,7 +77,7 @@ void BoundingBox::print() const
 // http://people.csail.mit.edu/amy/papers/box-jgt.pdf
 */
 
-inline void swap(float& a, float&b)
+inline void swap(float& a, float& b)
 {
 	float temp = a;
 	a = b;
@@ -108,7 +108,7 @@ bool BoundingBox::intersectedByRay(const Ray& ray, float tMinG, float tMaxG) con
 		return false;
 	}
 
-	float divy = ray.dInverse().y; //  1 / ray.direction().y;
+	float divy = ray.dInverse().y; // 1 / ray.direction().y;
 	float tminy = (min.y - ray.origin().y) * divy;
 	float tmaxy = (max.y - ray.origin().y) * divy;
 

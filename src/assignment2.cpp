@@ -610,7 +610,7 @@ void makeCornellScene()
     Material* materialWhite = new Lambert(Vector3(0.4f, 0.4f, 0.4f));
 	Material* materialRed = new Lambert(Vector3(1.0f, 0, 0));
 	Material* materialGreen = new Lambert(Vector3(0, 1.0f, 0));
-	Material* materialCeiling = new Lambert(Vector3(0.4f, 0.4f, 0.4f));
+	Material* materialCeiling = new Lambert(Vector3(0.4f, 0.0f, 0.0f));
 
     TriangleMesh * mesh = new TriangleMesh ();
 
