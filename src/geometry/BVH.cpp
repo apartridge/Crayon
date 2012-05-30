@@ -192,7 +192,7 @@ void BVH::splitNode(BoundingVolumeNode* rootnode, Objects* objects,
 			int candidate_tris[2] = {0,0};
 			BoundingBox candidate[2];
 
-			 // Started on the left box?
+			// Started on the left box?
 			bool startedLeft = false;
 
 			for(int split = 0; split < SPLITS + 1; split++, c += step)

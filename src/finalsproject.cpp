@@ -67,7 +67,12 @@ void makeFinalScene()
 	*/
 
 	Texture* floor = new Texture();
-	TextureImage* diffuse = TextureImage::loadFromPFM("materials/floor.Pfm");
+	TextureImage* diffuse = TextureImage::loadFromPFM("materials/floor.pfm");
+	TextureImage* normal = TextureImage::loadFromPFM("materials/floorNM.pfm");
+	floor->setDiffuse(diffuse);
+	Matrix4x4 objWorld;
+	objWorld.setIdentity();
+	floor->setNormalMap(normal, objWorld, 1);
 	mesh->connectNameToMaterial("Floor", floor);
 
 

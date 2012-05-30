@@ -17,6 +17,7 @@ TriangleMesh::TriangleMesh(Material* default_material) :
     m_vertexIndices(0),
     m_texCoordIndices(0),
 	m_hasBoundingBox(false),
+	m_hasTextureCoords(false),
 	m_numVertices(0),
 	m_numMaterials(0),
 	m_defaultMaterial(NULL)
@@ -42,6 +43,7 @@ TriangleMesh::TriangleMesh(Vector3 *vertices, Vector3 *normals, size_t numTriang
     m_numTris = 0;
     m_vertices = vertices;
     m_normals = normals;
+	m_hasTextureCoords = false;
 
     m_vertexIndices = new TupleI3[numTriangles];
     m_normalIndices = new TupleI3[numTriangles];
@@ -101,6 +103,7 @@ void TriangleMesh::createSingleTriangle()
 
     m_numTris = 1;
 	m_numVertices = 3;
+	m_hasTextureCoords = false;
 }
 
 void TriangleMesh::connectNameToMaterial(const char* name, Material* material)
@@ -195,7 +198,7 @@ void TriangleMesh::loadObj(FILE* fp, const Matrix4x4& ctm)
 	Material* currentMaterial = m_defaultMaterial;
 	m_hasTextureCoords = false;
 
-    if (nt)
+    if (nt > 0)
     {   // got texture coordinates
         m_texCoords = new VectorR2[nt];
         m_texCoordIndices = new TupleI3[nf];

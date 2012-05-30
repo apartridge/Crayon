@@ -52,7 +52,7 @@ illum 2
 map_Kd C:\Users\Stian\Documents\Blender\CSE168Project\ObjectsFromNet\Chair2\CHR00401.jpg
 
 
-newmtl ChessBoardBlack
+newmtl ChessBlack
 Ns 96.078431
 Ka 0.000000 0.000000 0.000000
 Kd 0.006275 0.006275 0.006275
@@ -62,7 +62,7 @@ d 1.000000
 illum 2
 
 
-newmtl ChessBoardGround
+newmtl ChessBoard
 Ns 96.078431
 Ka 0.000000 0.000000 0.000000
 Kd 0.407843 0.203922 0.103529
@@ -72,17 +72,17 @@ d 1.000000
 illum 2
 
 
-newmtl ChessBoardWhite
+newmtl ChessPiecesOne
 Ns 96.078431
 Ka 0.000000 0.000000 0.000000
-Kd 0.800000 0.800000 0.800000
-Ks 0.500000 0.500000 0.500000
+Kd 0.442353 0.000000 0.000000
+Ks 0.500000 0.282353 0.282353
 Ni 1.000000
-d 1.000000
+d 0.480000
 illum 2
 
 
-newmtl ChessPiecesOne
+newmtl ChessPiecesTwo
 Ns 96.078431
 Ka 0.000000 0.000000 0.000000
 Kd 0.000000 0.000000 0.451765
@@ -92,13 +92,13 @@ d 0.320000
 illum 2
 
 
-newmtl ChessPiecesTwo
+newmtl ChessWhite
 Ns 96.078431
 Ka 0.000000 0.000000 0.000000
-Kd 0.442353 0.000000 0.000000
-Ks 0.500000 0.282353 0.282353
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
 Ni 1.000000
-d 0.480000
+d 1.000000
 illum 2
 
 
