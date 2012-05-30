@@ -12,29 +12,11 @@ FrostedGlass::FrostedGlass(Vector3 d, Vector3 t) : Material(d, Vector3(0), t)
 Vector3 FrostedGlass::shadeLight(const Light& light, const Ray& ray, const HitInfo& hit, const Scene& scene, const int depth) const
 {
     Vector3 L(0);
-    Vector3 l = light.getPosition() - hit.P;
-    float r2 = l.length2();
-    l /= sqrt(r2);
-    
-    HitInfo shadowHit;
-    Ray shadowRay;
-    shadowRay.d = l; 
-    shadowRay.o = hit.P;
-    bool inShadow = scene.trace(shadowHit, shadowRay, epsilon);
-    bool outside = dot(-ray.d, hit.N) > 0;
-
-    if (outside && !inShadow)
-    {
-        // Diffuse shading
+    /*float v
+    if (light.visibility(hit.P, scene) > 0)
         float costheta = dot(hit.N, l);
-        L += Rd() * std::max(0.0f, costheta/r2 * light.power() / PI) * light.color();
-
-        // Specular highlight (Phong)
-        // Missed something here last, tme, what was that??
         Vector3 wr = reflect(ray, hit);
-        L += Rs() * (pow(dot(wr, l), shininess) / costheta) * light.color();
-    }
-
+        L += Rs * (pow(dot(wr, l), shininess) / costheta) * light.color();*/
     return L;
 }
 
@@ -47,58 +29,33 @@ Vector3 FrostedGlass::shadeReflectance(const Ray& ray, const HitInfo& hit, const
 {
     Vector3 L(0, 0, 0);
 
-    Vector3 rndVec;
-    do
-    {
-        rndVec = Vector3(Random::uniformRand(), Random::uniformRand(), Random::uniformRand());
-    }
-    while (rndVec.length2() < epsilon);
-    rndVec = 0.5 * rndVec.normalized();
-
-    Vector3 n = (hit.N + rndVec).normalized();
-    HitInfo nHit = hit;
-    nHit.N = n;
-
-    float n1 = ray.mediumOfTravel.indexOfRefraction, 
-          n2 = indexOfRefraction, 
-          R  = reflectance(dot(nHit.N, -ray.d), n1, n2);
+    // Sharpness
+    const float e = 500;
     
-    bool outside = dot(-ray.d, nHit.N) > 0;
+    // Reflecting direction
+    Vector3 r = Material::reflect(ray, hit);
 
-    // Assume going back to air when hitting from the inside
-    if (!outside)
-    {
-        n1 = indexOfRefraction;
-        n2 = 1.0; 
-        R  = reflectance(dot(nHit.N, ray.d), n1, n2);
-    }
+    // Find (u, v) for local coordinate system around r
+    Vector3 u = r.perpendicular();
+    Vector3 v = cross(r, u).normalized();
 
-    Vector3 refractVector = refract(ray, nHit, n1, n2);
-    
-    if (refractVector != Vector3(0))
-    {
-        Ray refractionRay;
-        refractionRay.o = hit.P;
-        refractionRay.d = refractVector;
-        refractionRay.mediumOfTravel.indexOfRefraction = n2;
-        HitInfo refractionHit;
+    // Generate random angles proportional to cos(theta)^n
+    const float phi = 2*PI*Random::uniformRand();
+    const float theta = acos(pow(Random::uniformRand(), 1/(float)e));
 
-        if (scene.trace(refractionHit, refractionRay, epsilon))
-        {
-            Vector3 refractedColor = refractionHit.material->shade(refractionRay, refractionHit, scene, depth + 1);
-            L += Rt() * (1 - R) * refractedColor;
-        }
-    }
-    
-    HitInfo refObjHit;
-    Ray refRay;
-    refRay.o = hit.P;
-    refRay.d = reflect(ray, nHit);
+    Vector3 d = (cos(phi) * sin(theta) * u + 
+                 sin(phi) * sin(theta) * v +
+                 cos(theta) * r).normalized();
 
-    if (outside && scene.trace(refObjHit, refRay, epsilon)) 
-    {
-        Vector3 reflectedColor = refObjHit.material->shade(refRay, refObjHit, scene, depth + 1);
-        L += R * reflectedColor;
-    }
+    // Mirror direction if pointing inside surface
+    if (dot(hit.N, d) < 0)
+        d = Vector3(-r.x, -r.y, r.z);
+
+    HitInfo reflectHit;
+    Ray reflectRay(hit.P, d, ray.mediumOfTravel);
+
+    if (scene.trace(reflectHit, reflectRay, epsilon))
+        L += reflectHit.material->shade(reflectRay, reflectHit, scene, depth + 1);
+
     return L;
 }

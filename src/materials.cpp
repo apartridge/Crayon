@@ -111,13 +111,13 @@ void makeWoodScene()
 
     // Add spheres
     const float radius = 1;
-    Material *glass = new Glass();
+    Material *glass[] = {new FrostedGlass(Vector3(0.2), Vector3(1.0)), new Glass()};
     for (int i = 0; i < 2; ++i)
     {
         Sphere* sphere = new Sphere();
         sphere->setRadius(radius);
         sphere->setCenter(Vector3(-5/2.0 + 5*i, radius, -5/3.0 + 5/2.0*i));
-        sphere->setMaterial(glass);
+        sphere->setMaterial(glass[i]);
         g_scene->addObject(sphere);
     }
 
