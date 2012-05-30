@@ -59,9 +59,6 @@ int main(int argc, char*argv[])
 	case 9:
 		makeCornellSceneGlass();
 		break;
-	case 0:
-		makeGlassScene();
-		break;
 	}
 
 
