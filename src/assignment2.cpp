@@ -9,7 +9,6 @@
 // local helper function declarations
 namespace
 {
-	void addMeshTrianglesToScene(TriangleMesh * mesh, Material * material);
 	inline Matrix4x4 translate(float x, float y, float z);
 	inline Matrix4x4 scale(float x, float y, float z);
 	inline Matrix4x4 rotate(float angle, float x, float y, float z);
@@ -40,7 +39,7 @@ void makeTeapotScene()
     Material* material = new Lambert(Vector3(1.0f));
     TriangleMesh * teapot = new TriangleMesh;
     teapot->load("teapot.obj");
-    addMeshTrianglesToScene(teapot, material);
+    //addMeshTrianglesToScene(teapot, material);
     
     // Extra teapot
     Matrix4x4 xform;
@@ -48,7 +47,7 @@ void makeTeapotScene()
     xform *= translate(7.6, .8, .6);
     TriangleMesh *teapot2 = new TriangleMesh;
     teapot2->load("teapot.obj", xform);
-    addMeshTrianglesToScene(teapot2, material);
+    //addMeshTrianglesToScene(teapot2, material);
     
     // create the floor triangle
     TriangleMesh * floor = new TriangleMesh;
@@ -156,20 +155,27 @@ void makeDualScene()
 	TriangleMesh * mesh;
 
     // bunny 1
+
     xform.setIdentity();
     mesh = new TriangleMesh;
+	mesh->setDefaultMaterial(material);
     mesh->load("bunny.obj", xform);
-    addMeshTrianglesToScene(mesh, material);
+	g_scene->addMesh(mesh);
+    //
 
     // bunny 2
     xform.setIdentity();
 	xform *= translate(2, 0, 0);
     mesh = new TriangleMesh;
+	mesh->setDefaultMaterial(material);
     mesh->load("bunny.obj", xform);
-    addMeshTrianglesToScene(mesh, material);
+	g_scene->addMesh(mesh);
+
+
+    //
 
     // create the floor triangle
-    TriangleMesh * floor = new TriangleMesh;
+    /*TriangleMesh * floor = new TriangleMesh;
     floor->createSingleTriangle();
     floor->setV1(Vector3(-10, 0, -10));
     floor->setV2(Vector3(  0, 0,  10));
@@ -183,7 +189,7 @@ void makeDualScene()
     t->setMesh(floor);
 
 	Material* material2 = new Lambert(Vector3(0, 1.0f, 0 ));
-    t->setMaterial(material2); 
+    t->setMaterial(material2); */
     //g_scene->addObject(t);
 	//g_scene->addMesh(floor);
 
@@ -218,7 +224,7 @@ void makeBunny1Scene()
 
     TriangleMesh * bunny = new TriangleMesh;
     bunny->load("bunny.obj");
-    addMeshTrianglesToScene(bunny, material);
+    //addMeshTrianglesToScene(bunny, material);
     
     // create the floor triangle
     TriangleMesh * floor = new TriangleMesh;
@@ -268,7 +274,7 @@ void makeDragonScene()
     Material* material = notShiny; //new Shiny(Vector3(1.0f), Medium(1.4), 0.0, 0.0);
     TriangleMesh * dragon = new TriangleMesh;
     dragon->load("dragon2.obj");
-    addMeshTrianglesToScene(dragon, material);
+    //addMeshTrianglesToScene(dragon, material);
 
 	Matrix4x4 xform;
 	xform.setIdentity();
@@ -276,14 +282,14 @@ void makeDragonScene()
 	Material* material3 = new Lambert(Vector3(1,0,0));
     TriangleMesh * dragon2 = new TriangleMesh;
     dragon2->load("dragon2.obj", xform);
-    addMeshTrianglesToScene(dragon2, material3);
+    //addMeshTrianglesToScene(dragon2, material3);
 
 	xform.setIdentity();
     xform *= translate(6, 0, -3);
 	Material* material4 = notShiny; //new Shiny(Vector3(0,1,0), Medium(1), 1, 0.1);
     TriangleMesh * dragon3 = new TriangleMesh;
     dragon3->load("dragon2.obj", xform);
-    addMeshTrianglesToScene(dragon3, material4);
+    //addMeshTrianglesToScene(dragon3, material4);
 
 	xform.setIdentity();
     xform *= translate(0, 4, 4);
@@ -291,7 +297,7 @@ void makeDragonScene()
 	Material* matsphere = notShiny; //new Shiny(Vector3(1.0f), Medium(1.5), 0.0, 0.0);
     TriangleMesh * sphere = new TriangleMesh;
     sphere->load("sphere3.obj", xform);
-    addMeshTrianglesToScene(sphere, matsphere);
+    //addMeshTrianglesToScene(sphere, matsphere);
 
     // create the floor triangle
     TriangleMesh * floor = new TriangleMesh;
@@ -351,47 +357,57 @@ void makeBunny20Scene()
     xform *= translate(-1, .4, .3);
     xform *= rotate(25, .3, .1, .6);
     mesh = new TriangleMesh;
+	mesh->setDefaultMaterial(material); 
     mesh->load("bunny.obj", xform);
-    addMeshTrianglesToScene(mesh, material);
+	g_scene->addMesh(mesh);
+    
 
     // bunny 2
     xform.setIdentity();
     xform *= scale(.6, 1.2, .9);
     xform *= translate(7.6, .8, .6);
     mesh = new TriangleMesh;
+	mesh->setDefaultMaterial(material); 
     mesh->load("bunny.obj", xform);
-    addMeshTrianglesToScene(mesh, material);
+	g_scene->addMesh(mesh);
+    
 
     // bunny 3
     xform.setIdentity();
     xform *= translate(.7, 0, -2);
     xform *= rotate(120, 0, .6, 1);
     mesh = new TriangleMesh;
+	mesh->setDefaultMaterial(material); 
     mesh->load("bunny.obj", xform);
-    addMeshTrianglesToScene(mesh, material);
+	g_scene->addMesh(mesh);
+    
 
     // bunny 4
     xform.setIdentity();
     xform *= translate(3.6, 3, -1);
     mesh = new TriangleMesh;
+		mesh->setDefaultMaterial(material); 
     mesh->load("bunny.obj", xform);
-    addMeshTrianglesToScene(mesh, material);
+	g_scene->addMesh(mesh);
+    
 
     // bunny 5
     xform.setIdentity();
     xform *= translate(-2.4, 2, 3);
     xform *= scale(1, .8, 2);
     mesh = new TriangleMesh;
+	mesh->setDefaultMaterial(material); 
     mesh->load("bunny.obj", xform);
-    addMeshTrianglesToScene(mesh, material);
+    g_scene->addMesh(mesh);
 
     // bunny 6
     xform.setIdentity();
     xform *= translate(5.5, -.5, 1);
     xform *= scale(1, 2, 1);
     mesh = new TriangleMesh;
+	mesh->setDefaultMaterial(material);
     mesh->load("bunny.obj", xform);
-    addMeshTrianglesToScene(mesh, material);
+     g_scene->addMesh(mesh);
 
     // bunny 7
     xform.setIdentity();
@@ -399,24 +415,27 @@ void makeBunny20Scene()
     xform *= translate(-4, -.5, -6);
     xform *= scale(1, 2, 1);
     mesh = new TriangleMesh;
+	mesh->setDefaultMaterial(material); 
     mesh->load("bunny.obj", xform);
-    addMeshTrianglesToScene(mesh, material);
+    g_scene->addMesh(mesh);
 
     // bunny 8
     xform.setIdentity();
     xform *= rotate(60, 0, 1, 0);
     xform *= translate(5, .1, 3);
     mesh = new TriangleMesh;
+	mesh->setDefaultMaterial(material);
     mesh->load("bunny.obj", xform);
-    addMeshTrianglesToScene(mesh, material);
+     g_scene->addMesh(mesh);
 
     // bunny 9
     xform.setIdentity();
     xform *= translate(-3, .4, 6);
     xform *= rotate(-30, 0, 1, 0);
     mesh = new TriangleMesh;
+	mesh->setDefaultMaterial(material);
     mesh->load("bunny.obj", xform);
-    addMeshTrianglesToScene(mesh, material);
+     g_scene->addMesh(mesh);
 
     // bunny 10
     xform.setIdentity();
@@ -424,8 +443,9 @@ void makeBunny20Scene()
     xform *= rotate(180, 0, 1, 0);
     xform *= scale(1.5, 1.5, 1.5);
     mesh = new TriangleMesh;
+	mesh->setDefaultMaterial(material);
     mesh->load("bunny.obj", xform);
-    addMeshTrianglesToScene(mesh, material);
+     g_scene->addMesh(mesh);
 
     // bunny 11
     xform = xform2;
@@ -433,47 +453,53 @@ void makeBunny20Scene()
     xform *= translate(-1, .4, .3);
     xform *= rotate(25, .3, .1, .6);
     mesh = new TriangleMesh;
+	mesh->setDefaultMaterial(material); 
     mesh->load("bunny.obj", xform);
-    addMeshTrianglesToScene(mesh, material);
+    g_scene->addMesh(mesh);
 
     // bunny 12
     xform = xform2;
     xform *= scale(.6, 1.2, .9);
     xform *= translate(7.6, .8, .6);
     mesh = new TriangleMesh;
+	mesh->setDefaultMaterial(material); 
     mesh->load("bunny.obj", xform);
-    addMeshTrianglesToScene(mesh, material);
+    g_scene->addMesh(mesh);
 
     // bunny 13
     xform = xform2;
     xform *= translate(.7, 0, -2);
     xform *= rotate(120, 0, .6, 1);
     mesh = new TriangleMesh;
+	mesh->setDefaultMaterial(material); 
     mesh->load("bunny.obj", xform);
-    addMeshTrianglesToScene(mesh, material);
+    g_scene->addMesh(mesh);
 
     // bunny 14
     xform = xform2;
     xform *= translate(3.6, 3, -1);
     mesh = new TriangleMesh;
+	mesh->setDefaultMaterial(material);
     mesh->load("bunny.obj", xform);
-    addMeshTrianglesToScene(mesh, material);
+     g_scene->addMesh(mesh);
 
     // bunny 15
     xform = xform2;
     xform *= translate(-2.4, 2, 3);
     xform *= scale(1, .8, 2);
     mesh = new TriangleMesh;
+	mesh->setDefaultMaterial(material);
     mesh->load("bunny.obj", xform);
-    addMeshTrianglesToScene(mesh, material);
+     g_scene->addMesh(mesh);
 
     // bunny 16
     xform = xform2;
     xform *= translate(5.5, -.5, 1);
     xform *= scale(1, 2, 1);
     mesh = new TriangleMesh;
+	mesh->setDefaultMaterial(material); 
     mesh->load("bunny.obj", xform);
-    addMeshTrianglesToScene(mesh, material);
+    g_scene->addMesh(mesh);
 
     // bunny 17
     xform = xform2;
@@ -481,24 +507,27 @@ void makeBunny20Scene()
     xform *= translate(-4, -.5, -6);
     xform *= scale(1, 2, 1);
     mesh = new TriangleMesh;
+	mesh->setDefaultMaterial(material);
     mesh->load("bunny.obj", xform);
-    addMeshTrianglesToScene(mesh, material);
+     g_scene->addMesh(mesh);
 
     // bunny 18
     xform = xform2;
     xform *= rotate(60, 0, 1, 0);
     xform *= translate(5, .1, 3);
     mesh = new TriangleMesh;
+	mesh->setDefaultMaterial(material);
     mesh->load("bunny.obj", xform);
-    addMeshTrianglesToScene(mesh, material);
+     g_scene->addMesh(mesh);
 
     // bunny 19
     xform = xform2;
     xform *= translate(-3, .4, 6);
     xform *= rotate(-30, 0, 1, 0);
     mesh = new TriangleMesh;
+	mesh->setDefaultMaterial(material); 
     mesh->load("bunny.obj", xform);
-    addMeshTrianglesToScene(mesh, material);
+    g_scene->addMesh(mesh);
 
     // bunny 20
     xform = xform2;
@@ -506,8 +535,9 @@ void makeBunny20Scene()
     xform *= rotate(180, 0, 1, 0);
     xform *= scale(1.5, 1.5, 1.5);
     mesh = new TriangleMesh;
+	mesh->setDefaultMaterial(material); 
     mesh->load("bunny.obj", xform);
-    addMeshTrianglesToScene(mesh, material);
+    g_scene->addMesh(mesh);
 
 
     // create the floor triangle
@@ -524,8 +554,8 @@ void makeBunny20Scene()
     t->setIndex(0);
     t->setMesh(mesh);
     t->setMaterial(material); 
-    g_scene->addObject(t);
-	g_scene->addMesh(mesh);
+    //g_scene->addObject(t);
+	//g_scene->addMesh(mesh);
     
     // let objects do pre-calculations if needed
     g_scene->preCalc();
@@ -556,7 +586,7 @@ void makeSponzaScene()
     Material* material = new Lambert(Vector3(1.0f));
     TriangleMesh * mesh = new TriangleMesh;
     mesh->load("sponza.obj");
-    addMeshTrianglesToScene(mesh, material);
+    
     
     // let objects do pre-calculations if needed
     g_scene->preCalc();
@@ -577,24 +607,16 @@ void makeCornellScene()
     g_camera->setUp(Vector3(0, 1, 0));
     g_camera->setFOV(55);
 
-    // create and place a point light source
-    /*PointLight * light = new PointLight;
-    light->setPosition(Vector3(3, 5, -3));
-    light->setColor(Vector3(1, 1, 1));
-    light->setPower(50);
-    g_scene->addLight(light);*/
-
     Material* materialWhite = new Lambert(Vector3(0.4f, 0.4f, 0.4f));
 	Material* materialRed = new Lambert(Vector3(1.0f, 0, 0));
 	Material* materialGreen = new Lambert(Vector3(0, 1.0f, 0));
 	Material* materialCeiling = new Lambert(Vector3(0.4f, 0.4f, 0.4f));
 
-
     TriangleMesh * mesh = new TriangleMesh ();
-	//mesh->connectMaterialToName( materialRed, "Cornell_Box_-_Red");
-    mesh->load("cornell_box.obj");
-	//mesh->addMeshToScene(g_scene);
-	addMeshTrianglesToScene(mesh, materialWhite);
+
+    mesh->setDefaultMaterial(materialWhite);
+	mesh->load("cornell_box.obj");
+	g_scene->addMesh(mesh);
 
 	g_scene->objects()->at(4)->setMaterial(materialRed);
 	g_scene->objects()->at(5)->setMaterial(materialRed);
@@ -619,8 +641,10 @@ void makeCornellScene()
 
 	Material* arealight = new LightSource();
     TriangleMesh * lll = new TriangleMesh;
+	lll->setDefaultMaterial(arealight);
     lll->load("square.obj", xform);
-    addMeshTrianglesToScene(lll, arealight);
+	g_scene->addMesh(lll);
+    //addMeshTrianglesToScene(lll, arealight);
 
 	SquareLight * light = new SquareLight;
     light->setColor(Vector3(1, 1, 1));
@@ -630,35 +654,17 @@ void makeCornellScene()
 
 
 	// Ball
-    /*
-	Sphere* sphere3 = new Sphere;
-    sphere3->setCenter(Vector3(3.7, 2.10, -1.5));
-    sphere3->setRadius(0.5);
-	Shiny* material3 = new Shiny(Vector3(1, 1, 1), Medium(1.5f), 1, Vector3(0.0, 0.01, 0.0), 1.0);
-	sphere3->setMaterial(material3);
-    g_scene->addObject(sphere3);
-    */
 
-	
 	Matrix4x4 xformdra;
 	xformdra.setIdentity();
 	xformdra *= translate(1.3,0,-1.5);
     xformdra *= scale(0.15,0.15,0.15);
 	Material* matdragon = new Glass();
     TriangleMesh * dragon2 = new TriangleMesh;
+	dragon2->setDefaultMaterial(matdragon);
     dragon2->load("dragon2.obj", xformdra);
-    addMeshTrianglesToScene(dragon2, matdragon);
-    
-	// Ball 2
+	g_scene->addMesh(dragon2);
 
-	/*Sphere* sphere2 = new Sphere;
-    sphere2->setCenter(Vector3(1.5, 0.8, -0.6));
-    sphere2->setRadius(0.8);
-	Shiny* material2 = new Shiny(Vector3(0, 0, 0), Medium(1.5f), 0, Vector3(0.0, 0.01, 0.0), 0);
-	sphere2->setMaterial(material2);
-    g_scene->addObject(sphere2);*/
-
-    // let objects do pre-calculations if needed
     g_scene->preCalc();
 }
 
@@ -766,19 +772,6 @@ void makeCornellSceneGlass()
 // local helper function definitions
 namespace
 {
-	void addMeshTrianglesToScene(TriangleMesh * mesh, Material * material)
-	{
-
-		for (int i = 0; i < mesh->numTris(); ++i)
-		{
-			Triangle* t = new Triangle;
-			t->setIndex(i);
-			t->setMesh(mesh);
-			t->setMaterial(material);
-			g_scene->addObject(t);
-		}
-	}
-
 	inline Matrix4x4 translate(float x, float y, float z)
 	{
 		Matrix4x4 m;
