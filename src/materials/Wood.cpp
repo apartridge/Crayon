@@ -36,7 +36,7 @@ Vector3 Wood::shadeLight(const Light& light, const Ray& ray, const HitInfo& hit,
 	// Details
 	*/
 
-	float detailFactor = -0.1;
+	float detailFactor = 0.05;
 	
 	float detailScale = 11;
 	float detailsPerlinScale = 3;

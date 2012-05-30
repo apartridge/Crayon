@@ -6,6 +6,7 @@
 #include "materials/Glass.h"
 #include "materials/Wood.h"
 #include "materials/Texture.h"
+#include "materials/LambertTwoColor.h"
 
 // local helper function declarations
 namespace
@@ -39,13 +40,13 @@ void makeFinalScene()
     PointLight * light = new PointLight;
     light->setPosition(Vector3(4, 6, 4));
     light->setColor(Vector3(1, 1, 1));
-    light->setPower(10);
+    light->setPower(35);
     g_scene->addLight(light);
 
 	PointLight * light2 = new PointLight;
     light2->setPosition(Vector3(-7, 6, -7));
     light2->setColor(Vector3(1, 1, 1));
-    light2->setPower(10);
+    light2->setPower(35);
     g_scene->addLight(light2);
 
 
@@ -79,21 +80,21 @@ void makeFinalScene()
 	// Walls
 	*/
 
-	Material* walls = new Lambert(0.99*Vector3(1, 1, 1.0f));
+	Material* ceiling = new Lambert(Vector3(1.0, 1.0, 1.0f));
+	Material* walls = new LambertTwoColor(Vector3(0.99), Vector3(54, 46, 37)/255.0 , 0.4, 5.0  );
 	mesh->connectNameToMaterial("Walls", walls);
-	mesh->connectNameToMaterial("Ceiling", walls);
+	mesh->connectNameToMaterial("Ceiling", ceiling);
 
 	/*
 	// WOODEN TABLE AND CHAIRS
 	*/
 		
-	Vector3 baseColor = Vector3(33, 16, 8)/255.0;
-	baseColor = Vector3(1,0,0);
-	Vector3 highColor = Vector3(120, 82, 49)/255.0;
+	Vector3 baseColor = Vector3(24, 18, 14)/255.0;
+	Vector3 highColor = Vector3(68, 34, 10)/255.0;
 	const float scale = 0.54;
 	float perlinScale = 20;
 	Wood* tableWood = new Wood(baseColor, highColor, scale, perlinScale);
-	tableWood->setGlossiness(500, 0.025, Vector3(1));
+	tableWood->setGlossiness(500, 0.005, Vector3(1));
 	mesh->connectNameToMaterial("TableWood_FW_WD_BB.JPG", tableWood);  // have to remove this .jpg crap
 	mesh->connectNameToMaterial("ChairWood_CHR00401.jpg", tableWood);
 	
@@ -101,9 +102,6 @@ void makeFinalScene()
 	Material* chairFabric = new Lambert(Vector3(0.8, 0, 0));
 	mesh->connectNameToMaterial("ChairFabric_CHR00402.jpg", chairFabric);  // have to remove this .jpg
 
-
-
-	
 
 
 	/*
@@ -123,7 +121,7 @@ void makeFinalScene()
 	Vector3 stairCaseBaseColor = Vector3(170, 85, 34)/255.0;
 	Vector3 stairCaseHighColor = Vector3(218, 133, 34)/255.0;
 	Material* staircaseSides = new Wood(stairCaseBaseColor, stairCaseHighColor, SCALE_FROM_MATERIALS_TO_FINALSCENE*0.53, 12);
-	mesh->connectNameToMaterial("StairCaseSides", staircaseSides);
+	mesh->connectNameToMaterial("StairsSides", staircaseSides);
 
 	// Dark Steps
 
@@ -136,8 +134,8 @@ void makeFinalScene()
 												SCALE_FROM_MATERIALS_TO_FINALSCENE*staircaseDarkStepScale,
 												staircaseDarkStepPerlinScale);
 
-	mesh->connectNameToMaterial("StairCaseSteps", materialStairDarkSteps);
-	mesh->connectNameToMaterial("StairCaseHandGuards", tableWood);
+	mesh->connectNameToMaterial("StairsSteps", materialStairDarkSteps);
+	mesh->connectNameToMaterial("StairsHandguards", materialStairDarkSteps);
 
 	/*
 	// SOFA AND TABLE

@@ -109,6 +109,9 @@
     <ClCompile Include="src\materials\Skydome.cpp">
       <Filter>sources\materials</Filter>
     </ClCompile>
+    <ClCompile Include="src\materials\LambertTwoColor.cpp">
+      <Filter>sources\materials</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\pthread\pthread.h">
@@ -262,6 +265,9 @@
       <Filter>headers\sysutils</Filter>
     </ClInclude>
     <ClInclude Include="headers\materials\Skydome.h">
+      <Filter>headers\materials</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\materials\LambertTwoColor.h">
       <Filter>headers\materials</Filter>
     </ClInclude>
   </ItemGroup>
