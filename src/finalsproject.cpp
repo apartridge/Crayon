@@ -51,15 +51,16 @@ void makeFinalScene()
 
     Material* materialOne = new Lambert(0.5*Vector3(1.0f, 1.0f, 1.0f));
     
-    
-
-	
-	Material* glassWine = new Lambert(0.5*Vector3(1.0f, 1.0f, 0));
-
-	
 	TriangleMesh * mesh = new TriangleMesh;
 	mesh->setDefaultMaterial(materialOne);
 
+    
+
+	// Glass on table
+	Material* glassWine = new Glass();
+	mesh->connectNameToMaterial("GlassWine", glassWine);
+
+	
 
 
 	/*
@@ -110,9 +111,18 @@ void makeFinalScene()
 	// Chess Board
 	*/
 	Material* white = new Lambert(Vector3(1,1,1));
-	Material* black = new Lambert(Vector3(1,1,1));
+	Material* black = new Lambert(Vector3(0.1, 0.1, 0.1));
 	mesh->connectNameToMaterial("ChessBoardWhite", white);
 	mesh->connectNameToMaterial("ChessBoardBlack", black);
+
+    Material* glassChessPieceWhite = new Glass();
+    Material* glassChessPieceBlack = new Glass();
+    mesh->connectNameToMaterial("ChessPiecesOne", glassChessPieceWhite);
+    mesh->connectNameToMaterial("ChessPiecesTwo", glassChessPieceBlack);
+
+	Wood* darkWood = new Wood(Vector3(45, 30, 18)/255.0, Vector3(123, 82, 49)/255.0, 0.3, 10);
+	darkWood->setGlossiness(300, 0.03, Vector3(1));
+    mesh->connectNameToMaterial("ChessBoard", darkWood);
 
 	/*
 	// STAIRS
@@ -142,20 +152,18 @@ void makeFinalScene()
 	/*
 	// SOFA AND TABLE
 	*/
-
 	Material* sofaFabric = new Lambert(Vector3(1,0,0));
 	mesh->connectNameToMaterial("SofaFabric", sofaFabric);
 
 	Material* sofaFeet = new Lambert(Vector3(1,1,0));
 	mesh->connectNameToMaterial("SofaFeet", sofaFeet);
 
+    Material* frostedGlassTable = new FrostedGlass(Vector3(0.2), Vector3(1.0));
+    mesh->connectNameToMaterial("TableTopGlass", frostedGlassTable);
 
 
 
 
-
-
-	mesh->connectNameToMaterial("GlassWine", glassWine);
     mesh->load("world.obj");
 	g_scene->addMesh(mesh);
 
