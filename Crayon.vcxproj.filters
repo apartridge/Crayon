@@ -97,6 +97,9 @@
     <ClCompile Include="src\lights\Light.cpp">
       <Filter>sources\lights</Filter>
     </ClCompile>
+    <ClCompile Include="src\materials\FrostedGlass.cpp">
+      <Filter>sources\materials</Filter>
+    </ClCompile>
     <ClCompile Include="src\materials\Texture.cpp">
       <Filter>sources\materials</Filter>
     </ClCompile>

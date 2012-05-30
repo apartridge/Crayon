@@ -8,6 +8,7 @@ A file to test some materials
 #include "lights/SquareLight.h"
 #include "materials/Glass.h"
 #include "materials/Wood.h"
+#include "geometry/Sphere.h"
 
 void makeWoodScene() 
 {
@@ -108,7 +109,17 @@ void makeWoodScene()
 
 
 
-
+    // Add spheres
+    const float radius = 1;
+    Material *glass[] = {new FrostedGlass(Vector3(0.2), Vector3(1.0)), new Glass()};
+    for (int i = 0; i < 2; ++i)
+    {
+        Sphere* sphere = new Sphere();
+        sphere->setRadius(radius);
+        sphere->setCenter(Vector3(-5/2.0 + 5*i, radius, -5/3.0 + 5/2.0*i));
+        sphere->setMaterial(glass[i]);
+        g_scene->addObject(sphere);
+    }
 
 
 
@@ -118,6 +129,7 @@ void makeWoodScene()
 	
 	TriangleMesh * mesh = new TriangleMesh;
 	mesh->setDefaultMaterial(material0);
+	mesh->connectNameToMaterial("Glass", new FrostedGlass(Vector3(0.2), Vector3(0.9, 0.9, 1.0)));
 	mesh->connectNameToMaterial("MaterialOne", materialWood);
 	mesh->connectNameToMaterial("MaterialTwo", materialWood2);
 	mesh->connectNameToMaterial("MaterialThree", materialWood3);
@@ -127,5 +139,3 @@ void makeWoodScene()
 
     g_scene->preCalc();
 }
-
-
