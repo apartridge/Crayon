@@ -59,11 +59,11 @@ Vector3 Stone::shadeLight(const Light& light, const Ray& ray, const HitInfo& hit
 
     // Calculate shadow ray
     HitInfo shadowHit;
-    Ray shadowRay;
-    shadowRay.d = l.normalized(); 
-    shadowRay.o = hit.P;
+    Ray shadowRay (hit.P, l.normalized());
+    /*shadowRay.d = l.normalized(); 
+    shadowRay.o = hit.P;*/
     bool inShadow = scene.trace(shadowHit, shadowRay, epsilon);
-    bool outside = dot(-ray.d, hit.N) > 0;
+    bool outside = dot(-ray.direction(), hit.N) > 0;
 
     if (outside && !inShadow) 
     {

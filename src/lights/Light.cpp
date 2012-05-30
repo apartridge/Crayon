@@ -11,9 +11,11 @@ float Light::visibility(const Vector3& p, const Scene& scene) const
     const float distance = l.length();
 
     HitInfo shadowHit;
-    Ray shadowRay;
-    shadowRay.d = l.normalized(); 
+    Ray shadowRay (p, l.normalized()) ;
+
+    /*shadowRay.d = l.normalized(); 
     shadowRay.o = p;
+	*/
 
     return scene.trace(shadowHit, shadowRay, epsilon, distance - 5*epsilon) ? 0 : 1;
 }

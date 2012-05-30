@@ -139,20 +139,20 @@ bool Triangle::intersect(HitInfo& result, Ray& r, float tMin, float tMax)
 		this->m_gNormal = cross(B-A, C-A);
 	}
 
-	double detA = -dot(this->m_gNormal, r.d);
+	double detA = -dot(this->m_gNormal, r.direction());
 
 	if(detA == 0)
 	{
 		return false;
 	}
 
-	double t = dot(this->m_gNormal, r.o-C)/detA;
+	double t = dot(this->m_gNormal, r.origin()-C)/detA;
 
 	if(t >= tMin && t <= tMax)
 	{
-		Vector3 roMinA = r.o-A;
-		double alpha = dot(cross(roMinA, C-A), -r.d)/detA;
-		double beta = dot(cross(B-A, roMinA), -r.d)/detA;
+		Vector3 roMinA = r.origin()-A;
+		double alpha = dot(cross(roMinA, C-A), -r.direction())/detA;
+		double beta = dot(cross(B-A, roMinA), -r.direction())/detA;
 
 		if(alpha >= 0 && alpha <= 1 && beta >= 0 && beta <= 1 && alpha + beta <= 1)
 		{
@@ -164,7 +164,7 @@ bool Triangle::intersect(HitInfo& result, Ray& r, float tMin, float tMax)
 
 			result.N = (1-alpha-beta)*N1 + alpha*N2 + beta*N3;
 			result.N.normalize();
-			result.P = r.o + t*r.d;
+			result.P = r.origin() + t*r.direction();
 			result.t = t;
 			result.material = m_material;
 

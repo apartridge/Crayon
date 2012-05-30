@@ -55,9 +55,9 @@ Vector3 Lambert::shadeGlobalIllumination(const Ray& ray, const HitInfo& hit, con
 
 		// Trace randomly generated reflected ray
 		HitInfo pathHit;
-		Ray pathRay;
-		pathRay.d = d; 
-		pathRay.o = hit.P;
+		Ray pathRay (hit.P, d);
+		/*pathRay.d = d; 
+		pathRay.o = hit.P;*/
 		if (scene.trace(pathHit, pathRay, epsilon))
 		{
 			if (pathHit.material != NULL)
