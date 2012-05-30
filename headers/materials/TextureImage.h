@@ -1,9 +1,9 @@
 #pragma once
 #include "sysutils/PFMLoader.h"
 
-static float maxf(float a, float b)
+static int min(int a, int b)
 {
-	if(a > b) return a; else return b;
+	if(a < b) return int(a); else return int(b);
 }
 
 class TextureImage
@@ -28,23 +28,23 @@ public:
 		float ua = u - floor(u);
 		float va = v - floor(v);
 
-		float x = ua*width - 1;
-		int xOne = floor(x);
-		int xTwo = maxf(floor(x) + 1, width-1);
+		float x = ua*width;
+		int xOne = ceil(x) - 1;
+
+		int xTwo = min(xOne + 1, width-1);
 		float xOneFactor = 1 - (x - xOne);
 
-		float y = va*height - 1;
-		int yOne = floor(y);
-		int yTwo = maxf(floor(y) + 1, height-1);
+		float y = va*height;
+		int yOne = ceil(y) - 1;
+		int yTwo = min(yOne + 1, height-1);
 		float yOneFactor = 1 - (y - yOne);
 
+		//return image[xOne*height + yOne];
 
-		return image[xOne*width + yOne];
-
-		return image[xOne*width + yOne]*(xOneFactor)*(yOneFactor) // x1y1
-				+ image[xOne*width + yTwo]*(xOneFactor)*(1-yOneFactor) // x1y2
-				+ image[xTwo*width + yOne]*(1-xOneFactor)*(yOneFactor) // x2y1
-				+ image[xTwo*width + yTwo]*(1-xOneFactor)*(1-yOneFactor); // x2y2
+		return image[xOne*height + yOne]*(xOneFactor)*(yOneFactor) // x1y1
+				+ image[xOne*height + yTwo]*(xOneFactor)*(1-yOneFactor) // x1y2
+				+ image[xTwo*height + yOne]*(1-xOneFactor)*(yOneFactor) // x2y1
+				+ image[xTwo*height + yTwo]*(1-xOneFactor)*(1-yOneFactor); // x2y2
 
 	}
 };

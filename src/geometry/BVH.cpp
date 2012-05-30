@@ -1,4 +1,4 @@
-#include "geometry/BVH.h"
+#include "../../headers/geometry/BVH.h"
 #include "../../headers\sysutils\PerformanceTimer.h"
 #include <cassert>
 
@@ -108,10 +108,10 @@ void BVH::build(Objects* objects, BoundingVolumeNode& root)
 
 	bvh_construct_timer.stop();
 
-	printf("Scene BVH of %d triangles created in %g msecs.\n",
+	printf("Bounding Volume Hierarchy of %d triangles created in %g msecs.\n",
 		triangles, bvh_construct_timer.elapsedMSec() );
-	printf("Nodes: %d. ", root.interior_nodes() + root.leaf_nodes());
-	printf("Leaves: %d.\n", root.leaf_nodes());
+	printf("BVH nodes: %d\n",  root.interior_nodes() + root.leaf_nodes());
+	printf("BVH leaves: %d\n",  root.leaf_nodes());
 }
 
 /*
@@ -161,6 +161,7 @@ void BVH::splitNode(BoundingVolumeNode* rootnode, Objects* objects,
 		float node_cost = sahNode(num_triangles, root_area);
 
 		float best_cost = -100;
+		int best_split;
 		BoundingBox best_left;
 		BoundingBox best_right;
 		Objects::iterator best_right_first;
@@ -192,21 +193,16 @@ void BVH::splitNode(BoundingVolumeNode* rootnode, Objects* objects,
 			int candidate_tris[2] = {0,0};
 			BoundingBox candidate[2];
 
-			// Started on the left box?
-			bool startedLeft = false;
-
 			for(int split = 0; split < SPLITS + 1; split++, c += step)
 			{
 				if(split == SPLITS)
 				{
 					candidate_tris[0] = 0;
-					startedLeft = false;
 				}
 
 				candidate_tris[1] = 0;
 
 				bool rightB = false;
-				
 
 				// Go thru all triangles, they are sorted on split axis
 				// from left to right
@@ -226,12 +222,8 @@ void BVH::splitNode(BoundingVolumeNode* rootnode, Objects* objects,
 
 					int index = rightB ? 1 : 0;
 
-					if(candidate_tris[index] == 0 && (!startedLeft || index == 1 )   )
+					if(candidate_tris[index] == 0 )
 					{
-						if(index == 0)
-						{
-							startedLeft = true;
-						}
 						candidate[index] = currBB;
 					}
 					else
@@ -258,6 +250,7 @@ void BVH::splitNode(BoundingVolumeNode* rootnode, Objects* objects,
 						best_right = candidate[1];
 						best_right_first = begin + candidate_tris[0];
 						best_axis = axis;
+						best_split = split;
 					}
 				}
 
@@ -277,6 +270,23 @@ void BVH::splitNode(BoundingVolumeNode* rootnode, Objects* objects,
 			if(axis != best_axis)
 			{
 				sort(begin, end, sortingFunction(best_axis));
+			}
+
+			// Temp fix is to recalc bounding box
+
+			if(best_split == SPLITS)
+			{
+
+				best_left = (*begin)->getBoundingBox();
+				for(Objects::iterator it = begin + 1; it < best_right_first; it++) 
+				{
+					best_left.expand((*it)->getBoundingBox());
+				}
+				best_right = (*best_right_first)->getBoundingBox();
+				for(Objects::iterator it = best_right_first + 1; it < end; it++) 
+				{
+					best_right.expand((*it)->getBoundingBox());
+				}
 			}
 
 			// Create interior node

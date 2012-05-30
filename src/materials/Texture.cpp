@@ -16,13 +16,14 @@ Vector3 Texture::shadeLight(const Light& light, const Ray& ray,
     // Diffuse shading based on visibility
 
 	Vector3 normal = hit.N; // world space
-	if(m_hasNormalMap)
+	/*if(m_hasNormalMap)
 	{
 		Vector3 objSpaceNormal = m_normalMapTexture->sampleImage(hit.textureU, hit.textureV);
 		Vector3 worldSpaceNormal = m_objectToWorld * objSpaceNormal;
-		normal += worldSpaceNormal;
-	}
+		normal = worldSpaceNormal.normalized();
+	}*/
 
+	//return normal;
 
     float visibility = light.visibility(hit.P, scene);
     float falloff = l.length2();
