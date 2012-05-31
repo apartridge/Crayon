@@ -1,16 +1,16 @@
 #pragma once
 
-#include "Material.h"
+#include "Lambert.h"
 #include "../geometry/Ray.h"
 #include "../geometry/Scene.h"
 #include "Worley.h"
 #include "../geometry/Vector3.h"
 #include "Perlin.h"
 
-class Wood : public Material
+class Wood : public Lambert
 {
 public:
-    Wood(Vector3 baseColor, Vector3 highColor, float scale, float perlinScale);
+	Wood(Vector3 baseColor, Vector3 highColor, float scale, float perlinScale);
     virtual ~Wood();
     virtual void preCalc() {};
     

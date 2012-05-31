@@ -115,6 +115,9 @@
     <ClCompile Include="src\materials\LambertTwoColor.cpp">
       <Filter>sources\materials</Filter>
     </ClCompile>
+    <ClCompile Include="src\materials\Leather.cpp">
+      <Filter>sources\materials</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\pthread\pthread.h">
@@ -271,6 +274,9 @@
       <Filter>headers\materials</Filter>
     </ClInclude>
     <ClInclude Include="headers\materials\LambertTwoColor.h">
+      <Filter>headers\materials</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\materials\Leather.h">
       <Filter>headers\materials</Filter>
     </ClInclude>
   </ItemGroup>

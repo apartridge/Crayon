@@ -7,13 +7,13 @@
 class OpenGLRenderer;
 class Raytracer;
 
-
-
 class Camera
 {
 public:
     Camera();
     virtual ~Camera();
+
+
 
     enum RENDER_MODE
     {
@@ -36,6 +36,7 @@ public:
 
 	void setOpenGLShowTriad(bool b) {show_triad = b;}
 	bool getOpenGLShowTriad() {return show_triad;}
+	
 	
 	void setOpenGLRendererMode(OPENGL_RENDER_MODE mode)
 	{
@@ -60,6 +61,15 @@ public:
     void setBGColor(const Vector3& color);
     void setFOV(float fov) {m_fov = fov;}
 
+	void setFocalLength(float focalLength)
+	{
+		m_focalLength = focalLength;
+	}
+	void setAperture(float aperture)
+	{
+		m_aperture = aperture;
+	}
+
     float fov() const                {return m_fov;}
     const Vector3 & viewDir() const  {return m_viewDir;}
     const Vector3 & lookAt() const   {return m_lookAt;}
@@ -68,6 +78,8 @@ public:
     const Vector3 & bgColor() const  {return m_bgColor;}
 
     Ray eyeRay(float x, float y, int imageWidth, int imageHeight);
+
+	Vector3 pointInFocus() const;
     
 private:
 
@@ -84,6 +96,9 @@ private:
     Vector3 m_lookAt;
     float m_fov;
 	bool show_triad;
+
+	float m_focalLength;
+	float m_aperture;
 
 	// Renderers
 
@@ -136,6 +151,12 @@ inline void Camera::setLookAt(const Vector3& vd)
 {
     setLookAt(vd.x, vd.y, vd.z);
 }
+
+
+
+
+
+
 
 inline void Camera::setBGColor(float x, float y, float z)
 {

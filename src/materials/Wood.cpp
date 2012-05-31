@@ -2,7 +2,7 @@
 
 #include <cassert>
 
-Wood::Wood(Vector3 baseColor, Vector3 highColor, float scale, float perlinScale)
+Wood::Wood(Vector3 baseColor, Vector3 highColor, float scale, float perlinScale) : Lambert(baseColor)
 {
 	m_baseColor = baseColor;
 	m_highColor = highColor;
@@ -71,7 +71,7 @@ Vector3 Wood::shadeLight(const Light& light, const Ray& ray, const HitInfo& hit,
 		
     L += woodenColor * std::max(0.0f, nDotL/falloff * light.power() / PI) * light.color();
 
-	// Phong Specular For Glossiness / "Lakkert" wood
+	// Blinn Phong Specular For Glossiness / "Lakkert" wood
 
 	if(m_glossFactor > 0)
 	{

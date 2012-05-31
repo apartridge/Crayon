@@ -31,7 +31,8 @@ namespace
 
 int show_level = 0;
 int levels[100];
-
+Vector3 pointInFocusLocked;
+bool pointInFocusShow;
 
 
 Window::Window(int * argc, char* argv[]) :
@@ -60,6 +61,8 @@ void Window::mainLoop()
     glutMouseFunc(::mouse);
     glutMotionFunc(::motion);
     glutReshapeFunc(::resize);
+
+	pointInFocusLocked = g_camera->pointInFocus();
     
     // Start the glut main loop, never returns
     glutMainLoop();
@@ -257,6 +260,19 @@ void Window::keyboard(unsigned char key, int x, int y)
 		{
 			show_level--;
 			//printf("Showing level %d\n", show_level);
+			break;
+		}
+
+		// Press L to lock the point in focus so it can be examined in OPENGL preview mode
+		case 'l':
+		{
+			pointInFocusLocked = g_camera->pointInFocus();
+			break;
+		}
+
+		case 'k':
+		{
+			pointInFocusShow = !pointInFocusShow;
 			break;
 		}
 

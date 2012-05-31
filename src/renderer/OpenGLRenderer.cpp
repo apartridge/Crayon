@@ -1,4 +1,6 @@
 #include "renderer/openglrenderer.h"
+extern Vector3 pointInFocusLocked;
+extern bool pointInFocusShow;
 
 OpenGLRenderer::OpenGLRenderer()
 {
@@ -67,6 +69,14 @@ void OpenGLRenderer::drawScene(Scene& scene, Camera& camera, Image* image)
 		scene.lights()->at(i)->renderGL();
 	}
 
+	// Draw A Point In Focus. Press L.
+	if(pointInFocusShow)
+	{
+		glColor4f(1, 0, 0, 1);
+		glTranslatef(pointInFocusLocked.x, pointInFocusLocked.y, pointInFocusLocked.z);
+		glutSolidSphere(0.1, 20, 20);
+		glTranslatef(-pointInFocusLocked.x, -pointInFocusLocked.y, -pointInFocusLocked.z);
+	}
 
 
 	if(camera.openGLRenderMode() == Camera::OPENGL_RENDER_FILL || 

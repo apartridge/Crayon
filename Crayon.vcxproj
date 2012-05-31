@@ -117,6 +117,7 @@
     <ClCompile Include="src\materials\Glass.cpp" />
     <ClCompile Include="src\materials\Lambert.cpp" />
     <ClCompile Include="src\materials\LambertTwoColor.cpp" />
+    <ClCompile Include="src\materials\Leather.cpp" />
     <ClCompile Include="src\materials\LightSource.cpp" />
     <ClCompile Include="src\materials\Material.cpp" />
     <ClCompile Include="src\materials\Perlin.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="headers\materials\Glass.h" />
     <ClInclude Include="headers\materials\Lambert.h" />
     <ClInclude Include="headers\materials\LambertTwoColor.h" />
+    <ClInclude Include="headers\materials\Leather.h" />
     <ClInclude Include="headers\materials\LightSource.h" />
     <ClInclude Include="headers\materials\Material.h" />
     <ClInclude Include="headers\materials\Perlin.h" />

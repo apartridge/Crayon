@@ -16,7 +16,7 @@ int main(int argc, char*argv[])
 	printf("1) Finals Project\n");
 	printf("2) 20 Bunnies\n");
 	printf("3) 2 Bunnies\n");
-	printf("4) Sponza\n");
+	printf("4) Materials: Leather\n");
 	printf("5) Teapot\n");
 	printf("6) Dragon Scene\n");
 	printf("7) Cornell Scene\n");
@@ -42,7 +42,7 @@ int main(int argc, char*argv[])
 		makeDualScene();
 		break;
 	case 4:
-		makeSponzaScene();
+		makeLeatherScene();
 		break;
 	case 5:
 		makeTeapotScene();

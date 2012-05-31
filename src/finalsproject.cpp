@@ -34,6 +34,8 @@ void makeFinalScene()
     g_camera->setLookAt(Vector3(-6, 3, -6));
     g_camera->setUp(Vector3(0, 1, 0));
     g_camera->setFOV(45);
+	g_camera->setFocalLength(6.5);
+	g_camera->setAperture(0.07);
 
     // Create light sources
 
