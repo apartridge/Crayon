@@ -31,7 +31,7 @@ void PhotonTracer::traceLight(const Light& light, int numberOfPhotons)
     int n = 0;
     while (n < numberOfPhotons)
     {
-        Vector3 pos = light.getPosition();
+        /*Vector3 pos = light.getPosition();
         Vector3 dir;
 
         do {
@@ -41,11 +41,11 @@ void PhotonTracer::traceLight(const Light& light, int numberOfPhotons)
         } while (dot(dir, dir) > 1);
 
 		Ray ray (pos, dir.normalized());
-        /*ray.o = pos;
-        ray.d = dir.normalized();*/
-        ray.mediumOfTravel.indexOfRefraction = 1.0;
+        ray.mediumOfTravel.indexOfRefraction = 1.0;*/
 
+        Vector3 dir = light.emitPhoton();
         Vector3 power = light.power() * light.color();
+        Ray ray(light.getPosition(), dir);
 
         if (tracePhoton(ray, power, 0))
 			n++;

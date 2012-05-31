@@ -3,7 +3,12 @@
 #include "lights/SquareLight.h"
 #include "geometry/Ray.h"
 #include "geometry/Scene.h"
+#include "sysutils/Random.h"
 
+
+/*
+ * Point Light
+ */
 
 float Light::visibility(const Vector3& p, const Scene& scene) const
 {
@@ -11,15 +16,20 @@ float Light::visibility(const Vector3& p, const Scene& scene) const
     const float distance = l.length();
 
     HitInfo shadowHit;
-    Ray shadowRay (p, l.normalized()) ;
-
-    /*shadowRay.d = l.normalized(); 
-    shadowRay.o = p;
-	*/
+    Ray shadowRay (p, l.normalized());
 
     return scene.trace(shadowHit, shadowRay, epsilon, distance - 5*epsilon) ? 0 : 1;
 }
 
+Vector3 PointLight::emitPhoton() const
+{
+    return Random::sampleSpere();
+}
+
+
+/*
+ * Area Light
+ */
 
 float SquareLight::visibility(const Vector3& p, const Scene& scene) const
 {
@@ -32,4 +42,11 @@ float SquareLight::visibility(const Vector3& p, const Scene& scene) const
     }
     return percent;
 }
+
+// Sample cosine distribution according to normal
+Vector3 SquareLight::emitPhoton() const
+{
+    return Random::sampleHemisphere(this->_normal);
+}
+
 
