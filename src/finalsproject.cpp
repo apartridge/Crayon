@@ -109,7 +109,7 @@ void makeFinalScene()
 	/*
 	// WOODEN TABLE AND CHAIRS
 	*/
-		
+	
 	Vector3 baseColor = Vector3(24, 18, 14)/255.0;
 	Vector3 highColor = Vector3(68, 34, 10)/255.0;
 	const float scale = 0.54;
@@ -120,10 +120,8 @@ void makeFinalScene()
 	mesh->connectNameToMaterial("ChairWood_CHR00401.jpg", tableWood);
 	
 	
-	Material* chairFabric = new Lambert(Vector3(0.8, 0, 0));
+	Material* chairFabric = new Lambert(Vector3(0.8, 0.1, 0.1));
 	mesh->connectNameToMaterial("ChairFabric_CHR00402.jpg", chairFabric);  // have to remove this .jpg
-
-
 
 	/*
 	// Chess Board
@@ -170,13 +168,13 @@ void makeFinalScene()
 	/*
 	// SOFA AND TABLE
 	*/
-	Material* sofaFabric = new Lambert(Vector3(1,0,0));
+	Material* sofaFabric = new Lambert(Vector3(0.7,0.1,0.1));
 	mesh->connectNameToMaterial("SofaFabric", sofaFabric);
 
-	Material* sofaFeet = new Lambert(Vector3(1,1,0));
+	Material* sofaFeet = new Lambert(Vector3(0.8,0.8,0.1));
 	mesh->connectNameToMaterial("SofaFeet", sofaFeet);
 
-    Material* frostedGlassTable = new FrostedGlass(Vector3(0.2), Vector3(1.0));
+    Material* frostedGlassTable = new FrostedGlass(Vector3(0.2), Vector3(0.9));
     mesh->connectNameToMaterial("TableTopGlass", frostedGlassTable);
 
 
