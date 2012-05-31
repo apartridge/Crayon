@@ -116,7 +116,9 @@ bool PhotonTracer::tracePhoton(const Ray& ray, Vector3 power, int bounce)
     // Absorb
     else
     {
-        //if (dot(ray.direction(), 
+        // Do not store photons hitting from behind, all normals should point outwards
+        if (dot(ray.direction(), hit.N) > 0)
+            return 0;
         _photonMap->store(&power[0], &hit.P[0], &ray.direction()[0]);
         return 1;
     }
