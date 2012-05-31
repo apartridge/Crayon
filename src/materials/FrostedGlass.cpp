@@ -20,8 +20,15 @@ Vector3 FrostedGlass::shadeLight(const Light& light, const Ray& ray, const HitIn
         float costheta = dot(hit.N, l);
         Vector3 wr = reflect(ray, hit);
         L += Rs() * (pow(dot(wr, l), shininess) / costheta) * light.color();
-    }
-    return L;
+    }	
+	
+	if(L.x > 2 || L.y > 2 || L.z > 2)
+	{
+		printf("ShadeLight L is %g, %g, %g", L.x, L.y, L.z);
+		throw 110;
+	}
+    
+	return L;
 }
 
 
@@ -115,5 +122,12 @@ Vector3 FrostedGlass::shadeReflectance(const Ray& ray, const HitInfo& hit, const
         if (scene.trace(reflectHit, reflectRay, epsilon))
             L += Rt() * R * reflectHit.material->shade(reflectRay, reflectHit, scene, depth + 1);
     }
+
+	if(L.x > 2 || L.y > 2 || L.z > 2)
+	{
+		printf("ShadeReflectance L is %g, %g, %g", L.x, L.y, L.z);
+		throw 110;
+	}
+
     return L;
 }

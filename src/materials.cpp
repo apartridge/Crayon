@@ -26,7 +26,7 @@ void makeWoodScene()
     g_camera->setFOV(45);
 
 	g_camera->setFocalLength(15);
-	g_camera->setAperture(0.4);
+	g_camera->setAperture(0.7);
 
     // Create light sources
 

@@ -18,7 +18,7 @@ extern RenderingStats* rendering_statistics;
 
 #define THREADS 8 // Including the main thread
 
-#define PIXEL_SAMPLES 30
+#define PIXEL_SAMPLES 10
 
 Raytracer::Raytracer()
 {
@@ -115,11 +115,16 @@ Draw one line of the screen
 static void drawScanLineY(int scanline, RaytracerScanlinePool* job)
 {
 	Ray ray;
-    HitInfo hitInfo;
-    
+    HitInfo hitInfo;    
+
 	for (int i = 0; i < job->image->width(); ++i)
 	{
-		Vector3 shadeResultAccum(0);
+		Vector3 shadeResultAccum2 (0);
+
+		//std::vector<Vector3> colors; std::vector<Ray> rays;
+		//colors.clear();
+
+		double x = 0, y = 0, z = 0;
 
 		for(int sample = 0; sample < PIXEL_SAMPLES; sample++)
 		{
@@ -135,11 +140,48 @@ static void drawScanLineY(int scanline, RaytracerScanlinePool* job)
 
 			if (job->scene->trace(hitInfo, ray))
 			{
-				shadeResultAccum += hitInfo.material->shade(ray, hitInfo, *job->scene, 0) / float(PIXEL_SAMPLES);
+				Vector3 color = hitInfo.material->shade(ray, hitInfo, *job->scene, 0);
+				/*colors.push_back(color);
+				rays.push_back(ray);
+				x += color.x;
+				y += color.y;
+				z += color.z;
+				*/
+
+				shadeResultAccum2 += color / float(PIXEL_SAMPLES);
 			}
 		}
+		
+		
 
-		job->image->setPixel(i, scanline, shadeResultAccum);
+
+		/*float lim = 169/255.0;
+
+		if(shadeResultAccum2.x > lim && shadeResultAccum2.y > lim  && shadeResultAccum2.z > lim )
+		{
+			double x = 0, y = 0, z = 0;
+			printf("All bright! Color: ");
+			printf("%g %g %g\n------\n", shadeResultAccum2.x, shadeResultAccum2.y, shadeResultAccum2.z);
+
+			for(int i =0; i < colors.size(); i++)
+			{
+				printf("Color: %g %g %g\n", colors.at(i).x, colors.at(i).y, colors.at(i).z);
+				printf("Ray 0: %g %g %g\n", rays.at(i).origin().x, rays.at(i).origin().y, rays.at(i).origin().z);
+				Vector3 retraced = hitInfo.material->shade(rays.at(i), hitInfo, *job->scene, 0);
+				printf("Color Retraced: %g %g %g\n------\n", retraced.x, retraced.y, retraced.z);
+				x += retraced.x;
+				y += retraced.y;
+				z += retraced.z;
+
+			}
+			printf("Avg: %g %g %g\n------\n", x/ double(PIXEL_SAMPLES), y/ double(PIXEL_SAMPLES), z/ double(PIXEL_SAMPLES));
+
+
+			throw 100;
+		}*/
+		
+
+		job->image->setPixel(i, scanline, shadeResultAccum2);
 	}
 }
 
@@ -205,6 +247,11 @@ void Raytracer::drawScene(Scene& scene, Camera& camera, Image* image)
 
 	printf("---------------------------------------------------------------\n");
 
+	if(g_camera->focalLength() > 0)
+	{
+		printf("Using depth-of-field with focallength %g and aperture %g.\n", g_camera->focalLength(), g_camera->aperture());
+	}
+
 	int scanline = -1, prev_scanline_drawn_to_screen = 0;
 	while((scanline = job.nextScanLine(scanline)) != -1)
 	{
@@ -218,7 +265,7 @@ void Raytracer::drawScene(Scene& scene, Camera& camera, Image* image)
 			{
 				QueryPerformanceCounter(&tick_end);
 				elapsedTime = (float) (tick_end.QuadPart - tick_start.QuadPart)  / frequency.QuadPart;
-				printf("Rendering: %.2f%% at %.2f seconds. Guess %.2f seconds.\r",
+				printf("Rendering %d samples: %.2f%% at %.2f seconds. Guess %.2f seconds.\r", PIXEL_SAMPLES,
 						(float)i/image->height()*100, elapsedTime, elapsedTime*float(image->height())/float(i));
 				prev_scanline_drawn_to_screen++;
 				image->drawScanline(i);

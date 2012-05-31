@@ -77,6 +77,10 @@ public:
     const Vector3 & eye() const      {return m_eye;}
     const Vector3 & bgColor() const  {return m_bgColor;}
 
+	float aperture() const {return m_aperture;}
+	float focalLength() const {return m_focalLength;}
+
+
     Ray eyeRay(float x, float y, int imageWidth, int imageHeight);
 
 	Vector3 pointInFocus() const;

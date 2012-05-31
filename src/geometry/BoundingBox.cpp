@@ -93,7 +93,7 @@ bool BoundingBox::intersectedByRay(const Ray& ray, float tMinG, float tMaxG) con
         ray.origin().x > min.x && ray.origin().y > min.y && ray.origin().z > min.z)
         return true;
 
-	float divx = ray.dInverse().x; //  1 / ray.direction().x;
+	float divx = ray.dInverse().x; //
 
 	float tmin = (min.x - ray.origin().x) * divx;
 	float tmax = (max.x - ray.origin().x) * divx;

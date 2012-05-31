@@ -111,7 +111,6 @@ Ray Camera::eyeRay(float x, float y, int imageWidth, int imageHeight)
     const float imPlaneUPos = left   + (right - left)*(((float)x+0.5f)/(float)imageWidth); 
     const float imPlaneVPos = bottom + (top - bottom)*(((float)y+0.5f)/(float)imageHeight); 
 
-
 	Vector3 direction = (imPlaneUPos*uDir + imPlaneVPos*vDir - wDir).normalize();
 	Vector3 origin = m_eye;
 
@@ -120,14 +119,12 @@ Ray Camera::eyeRay(float x, float y, int imageWidth, int imageHeight)
 
 	if(m_focalLength > 0)
 	{
-
 		// Find a point Xf on our focus plane
 		// Xf together with viewDir defines focus plane
 
 		Vector3 Xf = pointInFocus();
-
-		//float t = m_focalLength;
 		float t = (dot(m_viewDir, Xf) - dot(m_viewDir, m_eye) ) / dot(m_viewDir, direction); 
+		// This could be optimized
 
 		// Point on focus plane
 		Vector3 X = m_eye + direction * t; 
@@ -141,7 +138,8 @@ Ray Camera::eyeRay(float x, float y, int imageWidth, int imageHeight)
 		}
 		while (u*u + v*v > 1);
 
-		origin = m_eye + (uDir*u + vDir*v)*m_aperture;
+		origin = m_eye + (uDir*(u*m_aperture) + vDir*(v*m_aperture));
+
 		direction = (X-origin).normalized();
 	}
 
