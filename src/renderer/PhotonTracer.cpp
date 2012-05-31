@@ -31,26 +31,12 @@ void PhotonTracer::traceLight(const Light& light, int numberOfPhotons)
     int n = 0;
     while (n < numberOfPhotons)
     {
-        /*Vector3 pos = light.getPosition();
-        Vector3 dir;
-
-        do {
-            dir.x = 2*Random::uniformRand() - 1;
-            dir.y = 2*Random::uniformRand() - 1;
-            dir.z = 2*Random::uniformRand() - 1;
-        } while (dot(dir, dir) > 1);
-
-		Ray ray (pos, dir.normalized());
-        ray.mediumOfTravel.indexOfRefraction = 1.0;*/
-
         Vector3 dir = light.emitPhoton();
         Vector3 power = light.power() * light.color();
         Ray ray(light.getPosition(), dir);
 
         if (tracePhoton(ray, power, 0))
 			n++;
-
-        
     }
 }
 
@@ -62,7 +48,7 @@ bool PhotonTracer::tracePhoton(const Ray& ray, Vector3 power, int bounce)
 	}
 
     HitInfo hit;
-    Ray mutable_ray (ray.origin(), ray.direction()); // = ray; // Bug: Scene::trace should have const Ray&
+    Ray mutable_ray (ray.origin(), ray.direction()); // Bug: Scene::trace should have const Ray&
     if (!_scene->trace(hit, mutable_ray, epsilon))
 	{
         return false;

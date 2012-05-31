@@ -5,13 +5,14 @@
 class LambertTwoColor : public Lambert
 {
 public:
-	LambertTwoColor(Vector3 firstColor, Vector3 secondColor, float wideness, float scale) : Lambert(Vector3(1,1,1)){
+	LambertTwoColor(Vector3 firstColor, Vector3 secondColor, float wideness, float scale) : Lambert(Vector3(0.8))
+    {
 		m_firstColor = firstColor;
 		m_secondColor = secondColor;
 		m_wideness = wideness;
 		m_scale = scale;
-
 	}
+
 	virtual ~LambertTwoColor() {}
 
     virtual void preCalc() {}

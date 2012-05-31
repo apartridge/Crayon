@@ -690,7 +690,7 @@ void makeCornellSceneGlass()
     if (true)
     {
         const float ld = 4.0;
-        const float yd = epsilon;
+        const float yd = 1; //epsilon;
         Vector3 *vertex = new Vector3[4];
         vertex[0] = Vector3(-w/ld, h - yd, d/ld);
         vertex[1] = Vector3(-w/ld, h - yd, -d/ld);
