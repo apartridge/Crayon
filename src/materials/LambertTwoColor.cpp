@@ -4,29 +4,31 @@
 #include "sysutils/Random.h"
 
 
-Vector3 LambertTwoColor::shadeLight(const Light& light, const Ray& ray, 
-        const HitInfo& hit, const Scene& scene, const int depth) const
+Vector3 LambertTwoColor::proceduralColor(const HitInfo& hit) const
 {
-
-	float sinf = sin((hit.P.x + hit.P.z)*m_scale) + m_wideness;
-	Vector3 L;
+    Vector3 color;
+    float sinf = sin((hit.P.x + hit.P.z)*m_scale) + m_wideness;
 
 	if(sinf > 0)
 	{
-		L = m_firstColor;
+		color = m_firstColor;
 	}
 	else
 	{
-		L = m_secondColor;
+		color = m_secondColor;
 	}
+    return color;
+}
 
-	float visibility = light.visibility(hit.P, scene);
-	Vector3 l = light.getPosition() - hit.P;
-	float falloff = l.length2();
-	l /= sqrt(falloff);
-    float nDotL = dot(hit.N, l);		
-    L *= Rd() * std::max(0.0f, nDotL/falloff * light.power() / PI) * light.color();
+Vector3 LambertTwoColor::shadeLight(const Light& light, const Ray& ray, 
+        const HitInfo& hit, const Scene& scene, const int depth) const
+{
+	Vector3 L = proceduralColor(hit);
+    return L * Lambert::shadeLight(light, ray, hit, scene, depth);
+}
 
-	return L; 
-
+Vector3 LambertTwoColor::shadeGlobalIllumination(const Ray& ray, const HitInfo& hit, const Scene& scene, const int depth) const
+{
+    Vector3 L = proceduralColor(hit);
+    return L * Lambert::shadeGlobalIllumination(ray, hit, scene, depth);
 }

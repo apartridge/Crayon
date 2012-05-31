@@ -25,7 +25,7 @@ Vector3 FrostedGlass::shadeLight(const Light& light, const Ray& ray, const HitIn
 	if(L.x > 2 || L.y > 2 || L.z > 2)
 	{
 		printf("ShadeLight L is %g, %g, %g", L.x, L.y, L.z);
-		throw 110;
+		//throw 110;
 	}
     
 	return L;
@@ -126,7 +126,7 @@ Vector3 FrostedGlass::shadeReflectance(const Ray& ray, const HitInfo& hit, const
 	if(L.x > 2 || L.y > 2 || L.z > 2)
 	{
 		printf("ShadeReflectance L is %g, %g, %g", L.x, L.y, L.z);
-		throw 110;
+		//throw 110;
 	}
 
     return L;

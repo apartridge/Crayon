@@ -116,6 +116,7 @@ bool PhotonTracer::tracePhoton(const Ray& ray, Vector3 power, int bounce)
     // Absorb
     else
     {
+        //if (dot(ray.direction(), 
         _photonMap->store(&power[0], &hit.P[0], &ray.direction()[0]);
         return 1;
     }
