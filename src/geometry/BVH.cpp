@@ -2,7 +2,7 @@
 #include "../../headers\sysutils\PerformanceTimer.h"
 #include <cassert>
 
-#define SPLITS 7
+#define SPLITS 11
 #define SPLIT_ALL_AXES
 
 namespace

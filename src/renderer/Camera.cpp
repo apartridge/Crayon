@@ -126,6 +126,7 @@ Ray Camera::eyeRay(float x, float y, int imageWidth, int imageHeight)
 
 		Vector3 Xf = pointInFocus();
 
+		//float t = m_focalLength;
 		float t = (dot(m_viewDir, Xf) - dot(m_viewDir, m_eye) ) / dot(m_viewDir, direction); 
 
 		// Point on focus plane

@@ -18,7 +18,7 @@ extern RenderingStats* rendering_statistics;
 
 #define THREADS 8 // Including the main thread
 
-#define PIXEL_SAMPLES 4
+#define PIXEL_SAMPLES 30
 
 Raytracer::Raytracer()
 {
@@ -135,11 +135,11 @@ static void drawScanLineY(int scanline, RaytracerScanlinePool* job)
 
 			if (job->scene->trace(hitInfo, ray))
 			{
-				shadeResultAccum += hitInfo.material->shade(ray, hitInfo, *job->scene, 0);
+				shadeResultAccum += hitInfo.material->shade(ray, hitInfo, *job->scene, 0) / float(PIXEL_SAMPLES);
 			}
 		}
 
-		job->image->setPixel(i, scanline, shadeResultAccum / float(PIXEL_SAMPLES));
+		job->image->setPixel(i, scanline, shadeResultAccum);
 	}
 }
 
