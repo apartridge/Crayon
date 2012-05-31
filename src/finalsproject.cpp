@@ -175,7 +175,7 @@ void makeFinalScene()
 	mesh->connectNameToMaterial("SofaFeet", sofaFeet);
 
     Material* frostedGlassTable = new FrostedGlass(Vector3(0.2), Vector3(0.9));
-    mesh->connectNameToMaterial("TableTopGlass", frostedGlassTable);
+    mesh->connectNameToMaterial("TableTopGlass", new Glass());
 
 
 
