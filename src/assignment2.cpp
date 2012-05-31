@@ -1,6 +1,7 @@
 #include "assignment2.h"
 #include "materials/Lambert.h"
 #include "materials/LightSource.h"
+#include "lights/Light.h"
 #include "lights/SquareLight.h"
 
 #include "materials/Glass.h"
@@ -686,20 +687,19 @@ void makeCornellSceneGlass()
     const float w = 3, d = 4, h = 5;
 
     // Create area light source
-    if (false)
+    if (true)
     {
         const float ld = 4.0;
-        const float yd = epsilon;
+        const float yd = 1; //epsilon;
         Vector3 *vertex = new Vector3[4];
         vertex[0] = Vector3(-w/ld, h - yd, d/ld);
         vertex[1] = Vector3(-w/ld, h - yd, -d/ld);
         vertex[2] = Vector3(w/ld, h - yd, -d/ld);
         vertex[3] = Vector3(w/ld, h - yd, d/ld);
 
-	    SquareLight * light = new SquareLight;
+	    SquareLight * light = new SquareLight(Vector3(0, -1, 0), vertex[1], vertex[3]);
         light->setColor(Vector3(1, 1, 1));
         light->setPower(10);
-	    light->setPosition(vertex[1], vertex[3]) ;
 	    g_scene->addLight(light);
 
     }

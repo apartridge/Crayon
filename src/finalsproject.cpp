@@ -36,9 +36,32 @@ void makeFinalScene()
     g_camera->setFOV(45);
 	g_camera->setFocalLength(6.5);
 	g_camera->setAperture(0.07);
+    
+    Material* materialOne = new Lambert(Vector3(0.5));
+    
+	TriangleMesh * mesh = new TriangleMesh;
+	mesh->setDefaultMaterial(materialOne);
 
-    // Create light sources
 
+    // Windows and area lights
+    Material* windowGlass = new Glass();
+    mesh->connectNameToMaterial("BigWindows", windowGlass);
+
+    Material* windowEdge = new Lambert(0.4);
+    mesh->connectNameToMaterial("BigWindowEdge", windowEdge);
+
+    SquareLight* areaLight = new SquareLight(Vector3(-1, 0, 0), // Normal
+                                             Vector3(17.1, 11.0, 3.5), 
+                                             Vector3(17.1, -0.5, 15.15));
+    areaLight->setColor(Vector3(1));
+    areaLight->setPower(1000);
+    g_scene->addLight(areaLight);
+
+
+
+
+    // Point lights
+    /*
     PointLight * light = new PointLight;
     light->setPosition(Vector3(4, 6, 4));
     light->setColor(Vector3(1, 1, 1));
@@ -50,12 +73,7 @@ void makeFinalScene()
     light2->setColor(Vector3(1, 1, 1));
     light2->setPower(35);
     g_scene->addLight(light2);
-
-
-    Material* materialOne = new Lambert(0.5*Vector3(1.0f, 1.0f, 1.0f));
-    
-	TriangleMesh * mesh = new TriangleMesh;
-	mesh->setDefaultMaterial(materialOne);
+    */
 
     
 

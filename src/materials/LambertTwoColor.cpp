@@ -25,7 +25,7 @@ Vector3 LambertTwoColor::shadeLight(const Light& light, const Ray& ray,
 	float falloff = l.length2();
 	l /= sqrt(falloff);
     float nDotL = dot(hit.N, l);		
-    L *= std::max(0.0f, nDotL/falloff * light.power() / PI) * light.color();
+    L *= Rd() * std::max(0.0f, nDotL/falloff * light.power() / PI) * light.color();
 
 	return L; 
 

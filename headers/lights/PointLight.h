@@ -2,18 +2,24 @@
 #define CRAYON_POINTLIGHT_H_INCLUDED
 
 #include <vector>
+
 #include "Light.h"
-#include "../renderer/glut.h"
+#include "renderer/glut.h"
 
 class PointLight : public Light
 {
 public:
-	void setPosition(const Vector3& v)  {m_position = v;}
+	void setPosition(const Vector3& v) 
+    {
+        m_position = v;
+    }
 
 	const Vector3 getPosition() const
 	{
 		return m_position;
 	}
+
+    virtual Vector3 emitPhoton() const;
 
 	void renderGL()
 	{
@@ -23,9 +29,8 @@ public:
 		glTranslatef(-getPosition().x, -getPosition().y, -getPosition().z);
 	}
 
-
 protected:
     Vector3 m_position;
 };
 
-#endif // CRAYON_POINTLIGHT_H_INCLUDED
+#endif

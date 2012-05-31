@@ -9,6 +9,18 @@
 class SquareLight : public Light
 {
 public:
+    SquareLight()
+    {
+    }
+
+    SquareLight(Vector3 n, Vector3 min, Vector3 max)
+    {
+        m_min = min;
+        m_max = max;
+        _normal = n;
+    }
+
+
 	void setPosition(const Vector3& min, const Vector3& max)
 	{
 		m_min = min;
@@ -26,9 +38,10 @@ public:
 
     virtual float visibility(const Vector3& p, const Scene& scene) const;
 
+    virtual Vector3 emitPhoton() const;
+
 	void renderGL()
 	{
-
 		glColor4f(1,1,0, 1);
 
 		glBegin(GL_QUADS);
@@ -69,4 +82,5 @@ public:
 private:
 	Vector3 m_min;
 	Vector3 m_max;
+    Vector3 _normal;
 };
