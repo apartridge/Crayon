@@ -8,7 +8,7 @@
 class Texture : public Lambert
 {
 public:
-    Texture() : Lambert(Vector3(1, 0, 0), Vector3(1, 0, 0))
+    Texture() : Lambert(Vector3(0.5))
 	{
 		m_hasNormalMap = false;
 	}
@@ -30,6 +30,7 @@ public:
 	}
 
     virtual Vector3 shadeLight(const Light& light, const Ray& ray, const HitInfo& hit, const Scene& scene, const int depth) const;
+    virtual Vector3 shadeGlobalIllumination(const Ray& ray, const HitInfo& hit, const Scene& scene, const int depth) const;
 
 protected:
     TextureImage* m_diffuseTexture;

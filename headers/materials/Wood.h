@@ -1,11 +1,11 @@
 #pragma once
 
-#include "Lambert.h"
-#include "../geometry/Ray.h"
-#include "../geometry/Scene.h"
-#include "Worley.h"
-#include "../geometry/Vector3.h"
-#include "Perlin.h"
+#include "geometry/Ray.h"
+#include "geometry/Scene.h"
+#include "geometry/Vector3.h"
+#include "materials/Lambert.h"
+#include "materials/Worley.h"
+#include "materials/Perlin.h"
 
 class Wood : public Lambert
 {
@@ -15,17 +15,20 @@ public:
     virtual void preCalc() {};
     
     virtual Vector3 shadeLight(const Light& light, const Ray& ray, const HitInfo& hit, const Scene& scene, const int depth) const;
+    virtual Vector3 shadeGlobalIllumination(const Ray& ray, const HitInfo& hit, const Scene& scene, const int depth) const;
 
 	void setGlossiness(int power, float factor, Vector3 glossColor = Vector3(1))
 	{
 		m_glossPower = power;
 		m_glossFactor = factor;
 		m_glossColor = glossColor;
-		
 	}// Blinn Phong Specular
 
+protected:
+    Vector3 proceduralColor(const HitInfo& hit) const; 
+
 private:
-    Vector3 WoodTexture(const HitInfo& hit) const;
+    Vector3 WoodTexture(const HitInfo& hit) const; // Where is this? oO
 	Vector3 m_baseColor;
 	Vector3 m_highColor;
 	float m_scale;
@@ -34,5 +37,4 @@ private:
 	float m_glossPower;
 	float m_glossFactor;
 	Vector3 m_glossColor;
-
 };
