@@ -11,7 +11,8 @@ Vector3 Texture::shadeLight(const Light& light, const Ray& ray,
         const HitInfo& hit, const Scene& scene, const int depth) const
 {
     Vector3 L = m_diffuseTexture->sampleImage(hit.textureU, hit.textureV);
-    Vector3 l = light.getPosition() - hit.P;
+    return L * Lambert::shadeLight(light, ray, hit, scene, depth);
+    /*Vector3 l = light.getPosition() - hit.P;
 
     // Diffuse shading based on visibility
 
@@ -24,10 +25,17 @@ Vector3 Texture::shadeLight(const Light& light, const Ray& ray,
 	}*/
 
 	//return normal;
-
+    /*
     float visibility = light.visibility(hit.P, scene);
     float falloff = l.length2();
     l /= sqrt(falloff);
 
-    return L * visibility * std::max(0.0f, dot(normal, l)/falloff * light.power() / PI) * light.color();
+    return L * visibility * std::max(0.0f, dot(normal, l)/falloff * light.power() / PI) * light.color();*/
+}
+
+
+Vector3 Texture::shadeGlobalIllumination(const Ray& ray, const HitInfo& hit, const Scene& scene, const int depth) const
+{
+    Vector3 L = m_diffuseTexture->sampleImage(hit.textureU, hit.textureV);
+    return L * Lambert::shadeGlobalIllumination(ray, hit, scene, depth);
 }
