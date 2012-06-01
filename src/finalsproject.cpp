@@ -114,7 +114,7 @@ void makeFinalScene()
 	Vector3 highColor = Vector3(68, 34, 10)/255.0;
 	const float scale = 0.54;
 	float perlinScale = 20;
-	Wood* tableWood = new Wood(baseColor, highColor, scale, perlinScale, Vector3(0.5,0.5,0), 3);
+	Wood* tableWood = new Wood(baseColor, highColor, scale, perlinScale, Vector3(0.5,0.0,0.5), 2);
 	tableWood->setGlossiness(100, 0.005, Vector3(1));
 	mesh->connectNameToMaterial("TableWood_FW_WD_BB.JPG", tableWood);  // have to remove this .jpg crap
 	mesh->connectNameToMaterial("ChairWood_CHR00401.jpg", tableWood);
@@ -148,7 +148,7 @@ void makeFinalScene()
 
 	Vector3 stairCaseBaseColor = Vector3(170, 85, 34)/255.0;
 	Vector3 stairCaseHighColor = Vector3(218, 133, 34)/255.0;
-	Material* staircaseSides = new Wood(stairCaseBaseColor, stairCaseHighColor, 0.53, 12, Vector3(0,0,1), 1);
+	Material* staircaseSides = new Wood(stairCaseBaseColor, stairCaseHighColor, 0.53, 12, Vector3(0,1,0), 1.36);
 	mesh->connectNameToMaterial("StairsSides", staircaseSides);
 
 	// Dark Steps
