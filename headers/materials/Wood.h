@@ -10,7 +10,7 @@
 class Wood : public Lambert
 {
 public:
-	Wood(Vector3 baseColor, Vector3 highColor, float scale, float perlinScale);
+	Wood(Vector3 baseColor, Vector3 highColor, float scale, float perlinScale, Vector3 stripesDirection = Vector3(1,0,0), float stripesScale = 3);
     virtual ~Wood();
     virtual void preCalc() {};
     
@@ -37,4 +37,9 @@ private:
 	float m_glossPower;
 	float m_glossFactor;
 	Vector3 m_glossColor;
+
+
+	Vector3 m_stripesDirection;
+	float m_stripesScale;
+
 };

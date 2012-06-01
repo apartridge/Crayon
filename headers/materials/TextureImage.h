@@ -39,7 +39,7 @@ public:
 		int yTwo = min(yOne + 1, height-1);
 		float yOneFactor = 1 - (y - yOne);
 
-		//return image[xOne*height + yOne];
+		return image[xOne*height + yOne];
 
 		return image[xOne*height + yOne]*(xOneFactor)*(yOneFactor) // x1y1
 				+ image[xOne*height + yTwo]*(xOneFactor)*(1-yOneFactor) // x1y2

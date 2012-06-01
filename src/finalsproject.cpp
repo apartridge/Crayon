@@ -21,7 +21,7 @@ void makeFinalScene()
 {
 	// This factor adjusts the Noise scale from the Materials.cpp test scenes to
 	// world.obj
-	const float SCALE_FROM_MATERIALS_TO_FINALSCENE = 1.1;
+	//const float SCALE_FROM_MATERIALS_TO_FINALSCENE = 1.1;
 
     g_camera = new Camera;
     g_scene = new Scene;
@@ -114,8 +114,8 @@ void makeFinalScene()
 	Vector3 highColor = Vector3(68, 34, 10)/255.0;
 	const float scale = 0.54;
 	float perlinScale = 20;
-	Wood* tableWood = new Wood(baseColor, highColor, scale, perlinScale);
-	tableWood->setGlossiness(500, 0.005, Vector3(1));
+	Wood* tableWood = new Wood(baseColor, highColor, scale, perlinScale, Vector3(0.5,0.5,0), 3);
+	tableWood->setGlossiness(100, 0.005, Vector3(1));
 	mesh->connectNameToMaterial("TableWood_FW_WD_BB.JPG", tableWood);  // have to remove this .jpg crap
 	mesh->connectNameToMaterial("ChairWood_CHR00401.jpg", tableWood);
 	
@@ -148,7 +148,7 @@ void makeFinalScene()
 
 	Vector3 stairCaseBaseColor = Vector3(170, 85, 34)/255.0;
 	Vector3 stairCaseHighColor = Vector3(218, 133, 34)/255.0;
-	Material* staircaseSides = new Wood(stairCaseBaseColor, stairCaseHighColor, SCALE_FROM_MATERIALS_TO_FINALSCENE*0.53, 12);
+	Material* staircaseSides = new Wood(stairCaseBaseColor, stairCaseHighColor, 0.53, 12, Vector3(0,0,1), 1);
 	mesh->connectNameToMaterial("StairsSides", staircaseSides);
 
 	// Dark Steps
@@ -159,7 +159,7 @@ void makeFinalScene()
 	const float staircaseDarkStepScale = 1.5;
 	float staircaseDarkStepPerlinScale = 10;
 	Material* materialStairDarkSteps = new Wood(staircaseDarkStepBase, staircaseDarkStepHigh,
-												SCALE_FROM_MATERIALS_TO_FINALSCENE*staircaseDarkStepScale,
+												staircaseDarkStepScale,
 												staircaseDarkStepPerlinScale);
 
 	mesh->connectNameToMaterial("StairsSteps", materialStairDarkSteps);
