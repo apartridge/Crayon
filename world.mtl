@@ -1,5 +1,5 @@
-# Blender MTL File: 'World3.blend'
-# Material Count: 13
+# Blender MTL File: 'World4.blend'
+# Material Count: 12
 newmtl BigWindowEdge
 Ns 96.078431
 Ka 0.000000 0.000000 0.000000
@@ -7,16 +7,6 @@ Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
 Ni 1.000000
 d 1.000000
-illum 2
-
-
-newmtl BigWindows
-Ns 96.078431
-Ka 0.000000 0.000000 0.000000
-Kd 0.092136 0.298449 0.640000
-Ks 0.500000 0.500000 0.500000
-Ni 1.000000
-d 0.189542
 illum 2
 
 
