@@ -50,9 +50,10 @@ void makeFinalScene()
     Material* windowEdge = new Lambert(0.4);
     mesh->connectNameToMaterial("BigWindowEdge", windowEdge);
 
+    const float w_dist = 5;
     SquareLight* areaLight = new SquareLight(Vector3(-1, 0, 0), // Normal
-                                             Vector3(17.1, 11.0, 3.5), 
-                                             Vector3(17.1, -0.5, 15.15));
+                                             Vector3(17.1 + w_dist, 11.0, 3.5), 
+                                             Vector3(17.1 + w_dist, -0.5, 15.15));
     areaLight->setColor(Vector3(1));
     areaLight->setPower(1000);
     g_scene->addLight(areaLight);

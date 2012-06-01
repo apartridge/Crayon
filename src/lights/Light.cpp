@@ -43,10 +43,21 @@ float SquareLight::visibility(const Vector3& p, const Scene& scene) const
     return percent;
 }
 
-// Sample cosine distribution according to normal
+// Sample diffuse square light like in slides (cse168_slides_pmap2.pdf)
 Vector3 SquareLight::emitPhoton() const
 {
-    return Random::sampleHemisphere(this->_normal);
+    // Find (u, v) for local coordinate system around n
+    Vector3 n = _normal;
+    Vector3 d;
+    do
+    {
+        const float u = Random::uniformRand();
+        const float v = 2*PI*Random::uniformRand();
+        
+        d = Vector3( cos(v)*sqrt(u), sin(v)*sqrt(u), sqrt(1 - u) ).normalized();
+    }
+    while (dot(n, d) < 0);
+    return d;
 }
 
 

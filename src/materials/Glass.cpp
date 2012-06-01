@@ -8,7 +8,7 @@ Glass::Glass() : Material(Vector3(0), Vector3(0.3), Vector3(0.7))
     Rs = Vector3(0.8);
     Shininess = 500;
     RefractiveIndex = 1.5; // Deprecated
-    indexOfRefraction = 1.5; // Override Material
+    indexOfRefraction = 1.0; // Override Material
 }
 
 Glass::~Glass()
