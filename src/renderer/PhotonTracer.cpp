@@ -35,23 +35,22 @@ void PhotonTracer::traceLight(const Light& light, int numberOfPhotons)
         Vector3 power = light.power() * light.color();
         Ray ray(light.getPosition(), dir);
 
-        if (tracePhoton(ray, power, 0))
-			n++;
+        n += tracePhoton(ray, power, 0);
     }
 }
 
-bool PhotonTracer::tracePhoton(const Ray& ray, Vector3 power, int bounce)
+int PhotonTracer::tracePhoton(const Ray& ray, Vector3 power, int bounce)
 {
     if (bounce > MaxPhotonBounces)
 	{
-        return false;
+        return 0;
 	}
 
     HitInfo hit;
     Ray mutable_ray (ray.origin(), ray.direction()); // Bug: Scene::trace should have const Ray&
     if (!_scene->trace(hit, mutable_ray, epsilon))
 	{
-        return false;
+        return 0;
 	}
 
     const Material* mat = hit.material;
@@ -62,11 +61,23 @@ bool PhotonTracer::tracePhoton(const Ray& ray, Vector3 power, int bounce)
     float rt_avg = (mat->Rt().x + mat->Rt().y + mat->Rt().z) / 3.0;
 
     const float e = Random::uniformRand();
+
+    int stored = 0;
     
+    // Hit a diffuse surface
+    if (rd_avg > epsilon)
+    {
+        // Abort if hitting from behind
+        if (dot(ray.direction(), hit.N) > 0)
+            return 0;
+        _photonMap->store(&power[0], &hit.P[0], &ray.direction()[0]);
+        stored += 1;
+    }
+
     // Diffuse reflection
     if (e < rd_avg)
     {
-        power = (power * mat->Rd()) / rd_avg;
+        power = 0.5*(power * mat->Rd()) / rd_avg;
 
         Vector3 n = hit.N;
 	    Vector3 u = n.perpendicular();
@@ -80,11 +91,9 @@ bool PhotonTracer::tracePhoton(const Ray& ray, Vector3 power, int bounce)
                      cos(theta) * n).normalized();
 
         Ray reflect (hit.P, d);
-        //reflect.d = d;
         reflect.mediumOfTravel.indexOfRefraction = ray.mediumOfTravel.indexOfRefraction;
-       // reflect.o = hit.P;
 
-        return tracePhoton(reflect, power, bounce + 1);
+        stored += tracePhoton(reflect, power, bounce + 1);
     }
 
     // Specular reflection
@@ -93,11 +102,9 @@ bool PhotonTracer::tracePhoton(const Ray& ray, Vector3 power, int bounce)
         power = (power * mat->Rs()) / rs_avg;
 
         Ray reflect (hit.P, Material::reflect(ray, hit));
-        //reflect.o = hit.P;
         reflect.mediumOfTravel.indexOfRefraction = ray.mediumOfTravel.indexOfRefraction;
-        //reflect.d = Material::reflect(ray, hit);
 
-        return tracePhoton(reflect, power, bounce + 1);
+        stored += tracePhoton(reflect, power, bounce + 1);
     }
 
     // Transmission
@@ -108,18 +115,20 @@ bool PhotonTracer::tracePhoton(const Ray& ray, Vector3 power, int bounce)
         Ray refract = mat->refractRay(ray, hit);
 
         if (refract.direction() != Vector3(0.0))
-            return tracePhoton(refract, power, bounce + 1);
-        else
-            return 0;
+            stored += tracePhoton(refract, power, bounce + 1);
     }
 
     // Absorb
     else
     {
-        //if (dot(ray.direction(), 
+        // Do nothing
+        // Do not store photons hitting from behind, all normals should point outwards
+        /*if (dot(ray.direction(), hit.N) > 0)
+            return 0;
         _photonMap->store(&power[0], &hit.P[0], &ray.direction()[0]);
-        return 1;
+        return 1;*/
     }
+    return stored;
 }
 
 PhotonMap* PhotonTracer::getPhotonMap() const

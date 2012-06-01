@@ -26,7 +26,7 @@ private:
     void traceLight(const Light& light, int numberOfPhotons);
 
     // Trace a photon through the scene
-    bool PhotonTracer::tracePhoton(const Ray& ray, Vector3 power, int bounce);
+    int PhotonTracer::tracePhoton(const Ray& ray, Vector3 power, int bounce);
 };
 
 #endif
