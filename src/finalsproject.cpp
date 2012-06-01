@@ -7,6 +7,7 @@
 #include "materials/Wood.h"
 #include "materials/Texture.h"
 #include "materials/LambertTwoColor.h"
+#include "materials/Skydome.h"
 
 // local helper function declarations
 namespace
@@ -36,9 +37,16 @@ void makeFinalScene()
     g_camera->setFOV(45);
 	g_camera->setFocalLength(0); // 6.5
 	g_camera->setAperture(0.07);
+
+    // Add HDR sphere map
+    Sphere *hdrSphere = new Sphere();
+    hdrSphere->setCenter(Vector3(0));
+    hdrSphere->setRadius(30);
+    hdrSphere->setMaterial(new Skydome("rnl_probe.pfm"));
+    g_scene->addObject(hdrSphere);
     
+
     Material* materialOne = new Lambert(Vector3(0.5));
-    
 	TriangleMesh * mesh = new TriangleMesh;
 	mesh->setDefaultMaterial(materialOne);
 
