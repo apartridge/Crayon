@@ -25,8 +25,8 @@ void makeWoodScene()
     g_camera->setUp(Vector3(0, 1, 0));
     g_camera->setFOV(45);
 
-	g_camera->setFocalLength(15);
-	g_camera->setAperture(0.7);
+	g_camera->setFocalLength(0*15);
+	g_camera->setAperture(0*0.7);
 
     // Create light sources
 
@@ -75,8 +75,8 @@ void makeWoodScene()
 	Wood* materialWood = new Wood(baseColor, highColor, scale, perlinScale);
 
 	Vector3 glossColor = Vector3(1);
-	int glossPower = 500;
-	float glossFactor = 0.1;
+	int glossPower = 250;
+	float glossFactor = 0.01;
 	materialWood->setGlossiness(glossPower, glossFactor, glossColor);
 
 
