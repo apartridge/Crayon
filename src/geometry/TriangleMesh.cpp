@@ -77,6 +77,7 @@ void TriangleMesh::createSingleTriangle()
     m_normals = new Vector3[3];
     m_vertices = new Vector3[3];
     m_texCoords = new VectorR2[3];
+	m_materials = new Material*[1];
 
     m_texCoords[0].x = 0.0f;
     m_texCoords[0].y = 0.0f;
@@ -104,6 +105,8 @@ void TriangleMesh::createSingleTriangle()
     m_numTris = 1;
 	m_numVertices = 3;
 	m_hasTextureCoords = false;
+
+	m_materials[0] = m_defaultMaterial;
 }
 
 void TriangleMesh::connectNameToMaterial(const char* name, Material* material)

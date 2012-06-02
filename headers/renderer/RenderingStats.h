@@ -22,6 +22,20 @@ public:
 		pthread_mutex_unlock(&mutex);
 	}
 
+	void increment_box_intsects(int d)
+	{
+		lock();
+		box_intersections += d;
+		unlock();
+	}
+
+	void increment_triangle_intsects(int d)
+	{
+		lock();
+		triangle_intersections += d;
+		unlock();
+	}
+
 	RenderingStats()
 	{
 		rays = 0;

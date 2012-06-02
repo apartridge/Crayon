@@ -43,7 +43,7 @@ Vector3 Lambert::shadeGlobalIllumination(const Ray& ray, const HitInfo& hit, con
 		// Find (u, v) for local coordinate system
 		Vector3 n = hit.N;
 		Vector3 u = n.perpendicular();
-		Vector3 v = cross(n, u).normalized();
+		Vector3 v = cross(n, u);
 
 		// Generate random angles proportional to cos(theta)
 		const float phi = 2*PI*Random::uniformRand();

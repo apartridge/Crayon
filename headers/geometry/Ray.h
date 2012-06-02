@@ -54,7 +54,7 @@ public:
 		m_dInverse = Vector3(1/d.x, 1/d.y, 1/d.z);
     }
 
-	void addRayToStatistics()
+	inline void addRayToStatistics()
 	{
 		
 #if RENDERING_STATS

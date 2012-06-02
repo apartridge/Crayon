@@ -84,16 +84,18 @@ inline void swap(float& a, float& b)
 	b = temp;
 }
 
-bool BoundingBox::intersectedByRay(const Ray& ray, float tMinG, float tMaxG) const
+#if RENDERING_STATS
+extern RenderingStats* rendering_statistics;
+#endif
+
+float BoundingBox::intersectedByRay(const Ray& ray, float tMinG, float tMaxG) const
 {
 
-	// Always hit if origin is inside box
+	#if RENDERING_STATS
+	rendering_statistics->increment_box_intsects(1);
+	#endif
 
-   if (ray.origin().x < max.x && ray.origin().y < max.y && ray.origin().z < max.z && 
-        ray.origin().x > min.x && ray.origin().y > min.y && ray.origin().z > min.z)
-        return true;
-
-	float divx = ray.dInverse().x; //
+	float divx = ray.dInverse().x;
 
 	float tmin = (min.x - ray.origin().x) * divx;
 	float tmax = (max.x - ray.origin().x) * divx;
@@ -105,10 +107,10 @@ bool BoundingBox::intersectedByRay(const Ray& ray, float tMinG, float tMaxG) con
 
 	if(tmax < 0)
 	{
-		return false;
+		return 1E+37;
 	}
 
-	float divy = ray.dInverse().y; // 1 / ray.direction().y;
+	float divy = ray.dInverse().y;
 	float tminy = (min.y - ray.origin().y) * divy;
 	float tmaxy = (max.y - ray.origin().y) * divy;
 
@@ -119,7 +121,7 @@ bool BoundingBox::intersectedByRay(const Ray& ray, float tMinG, float tMaxG) con
 
 	if(tmin > tmaxy || tmax < tminy)
 	{
-		return false;
+		return 1E+37;
 	}
 
 	if(tminy > tmin)
@@ -134,10 +136,10 @@ bool BoundingBox::intersectedByRay(const Ray& ray, float tMinG, float tMaxG) con
 
 	if(tmax < 0)
 	{
-		return false;
+		return 1E+37;
 	}
 
-	float divz = ray.dInverse().z; // 1 / ray.direction().z;
+	float divz = ray.dInverse().z;
 	float tminz = (min.z - ray.origin().z) * divz;
 	float tmaxz = (max.z - ray.origin().z) * divz;
 
@@ -148,9 +150,9 @@ bool BoundingBox::intersectedByRay(const Ray& ray, float tMinG, float tMaxG) con
 
 	if(tmin > tmaxz || tmax < tminz)
 	{
-		return false;
+		return 1E+37;
 	}
-
+	
 	if(tminz > tmin)
 	{
 		tmin = tminz;
@@ -161,6 +163,12 @@ bool BoundingBox::intersectedByRay(const Ray& ray, float tMinG, float tMaxG) con
 		tmax = tmaxz;
 	}
 
-	return tmax >= tMinG && tmin <= tMaxG;
-
+	if(tmax >= tMinG && tmin <= tMaxG)
+	{
+		return tmin;
+	}
+	else
+	{
+		return 1E+37;
+	}
 }

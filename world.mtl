@@ -1,5 +1,5 @@
 # Blender MTL File: 'World4.blend'
-# Material Count: 12
+# Material Count: 14
 newmtl BigWindowEdge
 Ns 96.078431
 Ka 0.000000 0.000000 0.000000
@@ -7,6 +7,16 @@ Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
 Ni 1.000000
 d 1.000000
+illum 2
+
+
+newmtl BigWindows
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.092136 0.298449 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 0.189542
 illum 2
 
 
@@ -52,6 +62,16 @@ d 1.000000
 illum 1
 map_Kd C:\\Users\\Stian\\Documents\\Blender\\CSE168Project\\Textures\\floor.jpg
 map_Bump C:\\Users\\Stian\\Documents\\Blender\\CSE168Project\\Textures\\floorNM.jpg
+
+
+newmtl FloorTrim
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.137533 0.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
 
 
 newmtl GlassWine

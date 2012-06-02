@@ -128,6 +128,12 @@ void Triangle::renderGL()
 
 bool Triangle::intersect(HitInfo& result, Ray& r, float tMin, float tMax)
 {
+	#if RENDERING_STATS
+	rendering_statistics->increment_triangle_intsects(1);
+	#endif
+
+
+
 	TriangleMesh::TupleI3 ti3 = m_mesh->vIndices()[m_index];
     const Vector3& A = m_mesh->vertices()[ti3.x];
     const Vector3& B = m_mesh->vertices()[ti3.y];
@@ -164,6 +170,7 @@ bool Triangle::intersect(HitInfo& result, Ray& r, float tMin, float tMax)
 
 			result.N = (1-alpha-beta)*N1 + alpha*N2 + beta*N3;
 			result.N.normalize();
+
 			result.P = r.origin() + t*r.direction();
 			result.t = t;
 			result.material = m_material;

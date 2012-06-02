@@ -215,7 +215,7 @@ public:
     }
 
 
-	#define ISZERO(x) (x < 0.00000001 && x > -0.00000001)
+	#define ISZERO(x) (x < 0.000001 && x > -0.000001)
 
 	/*
 	// Returns a normalized vector perpendicular to this
@@ -236,24 +236,15 @@ public:
 		}
 		if(!iszeroy && !iszeroz)
 		{
-			return Vector3(0, -this->z, this->x).normalized();
+			return Vector3(0, -this->z, this->y).normalized();
 		}
 		if(iszerox)
 		{
 			return Vector3(1,0,0);
 		}
 
-		if(iszeroy)
-		{
-			return Vector3(0,1,0);
-		}
-
-		if(iszeroz)
-		{
-			return Vector3(0,1,0);
-		}
-
-		return Vector3(0,0,0);
+		return Vector3(0,1,0);
+	
 	}
 
 };
