@@ -1,8 +1,13 @@
 #pragma once
 
-#include "BoundingBox.h"
-#include "Ray.h"
-#include "Triangle.h"
+#include "geometry/BoundingBox.h"
+#include "geometry/Ray.h"
+#include "geometry/Triangle.h"
+
+static inline int maxmm(int a, int b)
+{
+	if(a < b ) return b; else return a;
+}
 
 class BoundingVolumeNode
 {
@@ -43,6 +48,18 @@ public:
 			return 0;
 		}
 		else return (1 + children[0].interior_nodes()  + children[1].interior_nodes());
+	}
+
+	int height()
+	{
+		if(num_leaves > 0)
+		{
+			return 1;
+		}
+		else
+		{
+			return 1 + maxmm(children[0].height(), children[1].height());
+		}
 	}
 
 };

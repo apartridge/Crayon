@@ -2,8 +2,10 @@
 
 #include "Vector3.h"
 #include "Ray.h"
+#include "renderer/RenderingStats.h"
 
 #define BOUNDINGBOX_PADDING_DELTA 0.0001
+#define FLOAT_MIN 1E-37
 
 class BoundingBox
 {
@@ -25,7 +27,7 @@ public:
 
 	bool contains(Vector3&) const;
 	bool contains(BoundingBox&) const;
-	bool intersectedByRay(const Ray& ray, float tMinG, float tMaxG) const;
+	float intersectedByRay(const Ray& ray, float tMinG, float tMaxG) const;
 
 	float surfaceArea() const;
 

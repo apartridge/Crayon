@@ -291,7 +291,7 @@ void Raytracer::drawScene(Scene& scene, Camera& camera, Image* image)
 	QueryPerformanceCounter(&tick_end);
     elapsedTime = (float) (tick_end.QuadPart - tick_start.QuadPart) / frequency.QuadPart;
 
-	printf("Rendering: 100.00%% at %.2f seconds using %d threads and %d SPP.\n", elapsedTime, THREADS, PIXEL_SAMPLES);
+	printf("Rendering: 100.00%% at %.2f seconds using %d threads and %d SPP.    \n", elapsedTime, THREADS, PIXEL_SAMPLES);
 
 #if RENDERING_STATS
 	printf("Rays: %Lu\n", rendering_statistics->rays);

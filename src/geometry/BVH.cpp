@@ -2,7 +2,7 @@
 #include "../../headers\sysutils\PerformanceTimer.h"
 #include <cassert>
 
-#define SPLITS 11
+#define SPLITS 13
 #define SPLIT_ALL_AXES
 
 namespace
@@ -110,8 +110,8 @@ void BVH::build(Objects* objects, BoundingVolumeNode& root)
 
 	printf("Bounding Volume Hierarchy of %d triangles created in %g msecs.\n",
 		triangles, bvh_construct_timer.elapsedMSec() );
-	printf("BVH nodes: %d\n",  root.interior_nodes() + root.leaf_nodes());
-	printf("BVH leaves: %d\n",  root.leaf_nodes());
+	printf("BVH nodes: %d. ",  root.interior_nodes() + root.leaf_nodes());
+	printf("Leaves: %d Height: %d.\n",  root.leaf_nodes(), root.height());
 }
 
 /*
@@ -341,5 +341,9 @@ float BVH::sahNode(int N, float area)
 bool BVH::intersect(HitInfo& minHit, Ray& ray, float tMin, float tMax) const
 {
 	minHit.t = tMax;
-	return m_rootNode->intersect(ray, minHit, tMin, tMax, 0);
+	if(m_rootNode->box.intersectedByRay(ray, tMin, minHit.t) < 1E35)
+	{
+		return m_rootNode->intersect(ray, minHit, tMin, tMax, 0);
+	}
+	return false;
 }

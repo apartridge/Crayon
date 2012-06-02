@@ -543,6 +543,7 @@ void makeBunny20Scene()
 
     // create the floor triangle
     mesh = new TriangleMesh;
+	mesh->setDefaultMaterial(material); 
     mesh->createSingleTriangle();
     mesh->setV1(Vector3(-100, 0, -100));
     mesh->setV2(Vector3(   0, 0,  100));
@@ -550,13 +551,13 @@ void makeBunny20Scene()
     mesh->setN1(Vector3(0, 1, 0));
     mesh->setN2(Vector3(0, 1, 0));
     mesh->setN3(Vector3(0, 1, 0));
+	g_scene->addMesh(mesh);
     
-    Triangle* t = new Triangle;
+    /*Triangle* t = new Triangle;
     t->setIndex(0);
     t->setMesh(mesh);
-    t->setMaterial(material); 
-    //g_scene->addObject(t);
-	//g_scene->addMesh(mesh);
+    t->setMaterial(material); */
+	
     
     // let objects do pre-calculations if needed
     g_scene->preCalc();
@@ -586,7 +587,9 @@ void makeSponzaScene()
 
     Material* material = new Lambert(Vector3(1.0f));
     TriangleMesh * mesh = new TriangleMesh;
+	mesh->setDefaultMaterial(material);
     mesh->load("sponza.obj");
+	g_scene->addMesh(mesh);
     
     
     // let objects do pre-calculations if needed

@@ -1,24 +1,8 @@
 ﻿#include "geometry/BoundingVolumeNode.h"
-#include "renderer/RenderingStats.h"
-
-#if RENDERING_STATS
-extern RenderingStats* rendering_statistics;
-#endif
 
 bool BoundingVolumeNode::intersect(Ray& ray, HitInfo& minhit, float tMin, 
 									float tMax, int level)
 {
-
-#if RENDERING_STATS
-	rendering_statistics->lock();
-	rendering_statistics->box_intersections += 1;
-	rendering_statistics->unlock();
-#endif
-
-	if(!box.intersectedByRay(ray, tMin, minhit.t))
-	{
-		return false;
-	}
 
 	if(this->num_leaves > 0)
 	{
@@ -30,11 +14,8 @@ bool BoundingVolumeNode::intersect(Ray& ray, HitInfo& minhit, float tMin,
 
 		for(int i = 0; i < num_leaves; i++)
 		{
-			if( num_leaves <= 2 || ++boxIntersections && leaves[i]->getBoundingBox().intersectedByRay( ray, tMin, minhit.t)   )
+			if( num_leaves <= 2 || (leaves[i]->getBoundingBox().intersectedByRay( ray, tMin, minhit.t) < 1E35 )  )
 			{
-#if RENDERING_STATS
-				triangleIntersections++;
-#endif
 				if ( leaves[i]->intersect(tempMinHit, ray, tMin, minhit.t)  )
 				{
 					if (tempMinHit.t < minhit.t)
@@ -45,21 +26,35 @@ bool BoundingVolumeNode::intersect(Ray& ray, HitInfo& minhit, float tMin,
 				}
 			}
 		}
-
-#if RENDERING_STATS
-		rendering_statistics->lock();
-		rendering_statistics->triangle_intersections += triangleIntersections;
-		rendering_statistics->box_intersections += boxIntersections;
-		rendering_statistics->unlock();
-#endif
-
 		return hit;
 	}
 	
-	bool left = this->children[0].intersect(ray, minhit, tMin, minhit.t, level+1);
-	bool right = this->children[1].intersect(ray, minhit, tMin, minhit.t, level+1);
+	bool box_closest = false, box_farthest = false;
+	float leftResult = this->children[0].box.intersectedByRay(ray, tMin, minhit.t);
+	float rightResult = this->children[1].box.intersectedByRay(ray, tMin, minhit.t);
+
+	if(leftResult < 1E35 && leftResult < rightResult)
+	{
+		if(minhit.t > leftResult) 
+		{
+			box_closest = this->children[0].intersect(ray, minhit, tMin, minhit.t, level+1);
+			if( rightResult < 1E35 && minhit.t > rightResult)
+			{
+				box_farthest = this->children[1].intersect(ray, minhit, tMin, minhit.t, level+1);
+			}
+		}
+	}
+	else if(rightResult < 1E35 && minhit.t > rightResult)
+	{
+		box_closest = this->children[1].intersect(ray, minhit, tMin, minhit.t, level+1);
+		if(minhit.t > leftResult)
+		{
+			box_farthest = this->children[0].intersect(ray, minhit, tMin, minhit.t, level+1);
+		}
+	}
 	
-	return left || right;
+	return box_closest || box_farthest;
+	
 }
 
 void BoundingVolumeNode::renderGL()
