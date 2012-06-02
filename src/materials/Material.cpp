@@ -28,7 +28,7 @@ Vector3 Material::shade(const Ray& ray, const HitInfo& hit, const Scene& scene, 
     {
         Light* pLight = *lightIter;
 
-        L += shadeLight(*pLight, ray, hit, scene, depth);
+        //L += shadeLight(*pLight, ray, hit, scene, depth);
     }
 
     L += shadeGlobalIllumination(ray, hit, scene, depth);

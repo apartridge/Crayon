@@ -38,7 +38,7 @@ public:
 
     virtual float visibility(const Vector3& p, const Scene& scene) const;
 
-    virtual Vector3 emitPhoton() const;
+    virtual PhotonRay emitPhoton() const;
 
 	void renderGL()
 	{

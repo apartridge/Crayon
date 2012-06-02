@@ -34,7 +34,7 @@ Vector3 Lambert::shadeGlobalIllumination(const Ray& ray, const HitInfo& hit, con
     if (true)
     {
         Vector3 irradiance;
-        scene.photonMap()->irradiance_estimate(&irradiance[0], &hit.P[0], &hit.N[0], 1, 100);
+        scene.photonMap()->irradiance_estimate(&irradiance[0], &hit.P[0], &hit.N[0], 0.4, 60);
 
         L += Rd() * irradiance; // ??
     }

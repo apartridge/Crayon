@@ -18,7 +18,6 @@ void PhotonTracer::traceScene(const Scene& scene, int numberOfPhotons)
         const Light* l = *it;
         const int numEmittedPhotons = numberOfPhotons / numberOfLights;
         traceLight(*l, numEmittedPhotons);
-        _photonMap->scale_photon_power(1 / (float)numEmittedPhotons); 
     }
 
     _photonMap->balance();
@@ -31,12 +30,16 @@ void PhotonTracer::traceLight(const Light& light, int numberOfPhotons)
     int n = 0;
     while (n < numberOfPhotons)
     {
-        Vector3 dir = light.emitPhoton();
-        Vector3 power = light.power() * light.color();
-        Ray ray(light.getPosition(), dir);
+        //Vector3 dir = light.emitPhoton();
+        //Vector3 power = light.power() * light.color();
+        //Ray ray(light.getPosition(), dir);
 
-        n += tracePhoton(ray, power, 0);
+        PhotonRay photon = light.emitPhoton();
+        Ray ray(photon.origin, photon.direction);
+
+        n += tracePhoton(ray, photon.power, 0);
     }
+    _photonMap->scale_photon_power(1 / (float)numberOfPhotons); 
 }
 
 int PhotonTracer::tracePhoton(const Ray& ray, Vector3 power, int bounce)
@@ -60,6 +63,8 @@ int PhotonTracer::tracePhoton(const Ray& ray, Vector3 power, int bounce)
     float rs_avg = (mat->Rs().x + mat->Rs().y + mat->Rs().z) / 3.0;
     float rt_avg = (mat->Rt().x + mat->Rt().y + mat->Rt().z) / 3.0;
 
+    assert(rd_avg + rs_avg + rt_avg <= 1.0 + epsilon);
+
     const float e = Random::uniformRand();
 
     int stored = 0;
@@ -70,14 +75,19 @@ int PhotonTracer::tracePhoton(const Ray& ray, Vector3 power, int bounce)
         // Abort if hitting from behind
         if (dot(ray.direction(), hit.N) > 0)
             return 0;
-        _photonMap->store(&power[0], &hit.P[0], &ray.direction()[0]);
-        stored += 1;
+        
+        // Don't store the first bounce (only want indirect illumination)
+        //if (bounce > 0)
+        {
+            _photonMap->store(&power[0], &hit.P[0], &ray.direction()[0]);
+            stored += 1;
+        }
     }
 
     // Diffuse reflection
     if (e < rd_avg)
     {
-        power = 0.5*(power * mat->Rd()) / rd_avg;
+        power = 0.5*(power * mat->Rd()) / rd_avg; // Arbitrary constant 0.5 = wft?
 
         Vector3 n = hit.N;
 	    Vector3 u = n.perpendicular();
@@ -121,13 +131,9 @@ int PhotonTracer::tracePhoton(const Ray& ray, Vector3 power, int bounce)
     // Absorb
     else
     {
-        // Do nothing
-        // Do not store photons hitting from behind, all normals should point outwards
-        /*if (dot(ray.direction(), hit.N) > 0)
-            return 0;
-        _photonMap->store(&power[0], &hit.P[0], &ray.direction()[0]);
-        return 1;*/
+        // Do nothing, photon is reduceed to heat :(
     }
+
     return stored;
 }
 

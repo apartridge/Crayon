@@ -39,11 +39,11 @@ void makeFinalScene()
 	g_camera->setAperture(0.07);
 
     // Add HDR sphere map
-    Sphere *hdrSphere = new Sphere();
+    /*Sphere *hdrSphere = new Sphere();
     hdrSphere->setCenter(Vector3(0));
     hdrSphere->setRadius(30);
     hdrSphere->setMaterial(new Skydome("rnl_probe.pfm"));
-    g_scene->addObject(hdrSphere);
+    g_scene->addObject(hdrSphere);*/
     
 
     Material* materialOne = new Lambert(Vector3(0.5));
@@ -58,32 +58,38 @@ void makeFinalScene()
     Material* windowEdge = new Lambert(0.4);
     mesh->connectNameToMaterial("BigWindowEdge", windowEdge);
 
-    const float w_dist = 5;
-    SquareLight* areaLight = new SquareLight(Vector3(-1, 0, 0), // Normal
-                                             Vector3(17.1 + w_dist, 11.0, 3.5), 
-                                             Vector3(17.1 + w_dist, -0.5, 22.15));
-    areaLight->setColor(Vector3(1));
-    areaLight->setPower(1000);
-    g_scene->addLight(areaLight);
+    // Area light
+    if (false)
+    {
+        const float w_dist = 5;
+        SquareLight* areaLight = new SquareLight(Vector3(-1, 0, 0), // Normal
+                                                 Vector3(17.1 + w_dist, 11.0, 3.5), 
+                                                 Vector3(17.1 + w_dist, -0.5, 22.15));
+        areaLight->setColor(Vector3(1));
+        areaLight->setPower(1000);
+        g_scene->addLight(areaLight);
 
+    }
+    // Point light
+    else
+    {
+        // Visual target
+        /*Sphere *trg = new Sphere();
+        trg->setCenter(Vector3(15.81, 5.40, 9.3));
+        trg->setRadius(8);
+        g_scene->addObject(trg);*/
 
+        PointLight * light = new PointLight;
+        light->setPosition(Vector3(30, 15, 10));
+        light->setColor(Vector3(1, 1, 1));
+        light->setPower(500);
 
+        // Set target at windows, to not waste photons
+        LightTarget* target = new LightTarget(Vector3(15.81, 5.40, 9.3), 8);
+        light->setTarget(target);
 
-    // Point lights
-    /*
-    PointLight * light = new PointLight;
-    light->setPosition(Vector3(4, 6, 4));
-    light->setColor(Vector3(1, 1, 1));
-    light->setPower(35);
-    g_scene->addLight(light);
-
-	PointLight * light2 = new PointLight;
-    light2->setPosition(Vector3(-7, 6, -7));
-    light2->setColor(Vector3(1, 1, 1));
-    light2->setPower(35);
-    g_scene->addLight(light2);
-    */
-
+        g_scene->addLight(light);
+    }
     
 
 	// Glass on table

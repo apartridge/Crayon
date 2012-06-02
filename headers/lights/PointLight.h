@@ -19,7 +19,7 @@ public:
 		return m_position;
 	}
 
-    virtual Vector3 emitPhoton() const;
+    virtual PhotonRay emitPhoton() const;
 
 	void renderGL()
 	{

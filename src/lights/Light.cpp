@@ -21,9 +21,28 @@ float Light::visibility(const Vector3& p, const Scene& scene) const
     return scene.trace(shadowHit, shadowRay, epsilon, distance - 5*epsilon) ? 0 : 1;
 }
 
-Vector3 PointLight::emitPhoton() const
+PhotonRay PointLight::emitPhoton() const
 {
-    return Random::sampleSpere();
+    const Vector3& o = getPosition();
+
+    PhotonRay res;
+    res.origin = o;
+
+    if (_target != NULL)
+    {
+        Vector3 p = _target->samplePoint(o);
+        const float r_2 = (_target->r) * (_target->r);
+        const float d_2 = (_target->p - o).length2();
+        res.direction = (_target->samplePoint(o) - o).normalized();
+        res.power = (r_2 / float(4*d_2)) * power() * color();
+    }
+    else
+    {
+        res.direction = Random::sampleSpere();
+        res.power = power();
+    }
+
+    return res;
 }
 
 
@@ -44,8 +63,11 @@ float SquareLight::visibility(const Vector3& p, const Scene& scene) const
 }
 
 // Sample diffuse square light like in slides (cse168_slides_pmap2.pdf)
-Vector3 SquareLight::emitPhoton() const
+PhotonRay SquareLight::emitPhoton() const
 {
+    PhotonRay res;
+    res.origin = getPosition();
+
     // Find (u, v) for local coordinate system around n
     Vector3 n = _normal;
     Vector3 d;
@@ -57,7 +79,11 @@ Vector3 SquareLight::emitPhoton() const
         d = Vector3( cos(v)*sqrt(u), sin(v)*sqrt(u), sqrt(1 - u) ).normalized();
     }
     while (dot(n, d) < 0);
-    return d;
+
+    res.direction = d;
+    res.power = power();
+
+    return res;
 }
 
 
