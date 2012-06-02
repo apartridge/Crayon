@@ -91,7 +91,7 @@ public:
         }
         while (dot(dir, dir) > 1);
 
-        return p + dir;
+        return p + dir*r;
     }
 
     Vector3 p;
