@@ -15,8 +15,6 @@ Material::~Material()
 
 Vector3 Material::shade(const Ray& ray, const HitInfo& hit, const Scene& scene, const int depth) const
 {
-    const float GAIN = 1.0f;
-
     Vector3 L(0);
     if (depth > Material::RecursionLimit)
         return L;
@@ -35,12 +33,7 @@ Vector3 Material::shade(const Ray& ray, const HitInfo& hit, const Scene& scene, 
 
     L += shadeReflectance(ray, hit, scene, depth);
 
-    if (depth == 0)
-        return Vector3(pow(L[0], (1/2.2f)),
-                       pow(L[1], (1/2.2f)),
-                       pow(L[2], (1/2.2f)));
-    else
-        return L;
+    return L;
 }
 
 Vector3 Material::reflect(const Ray& ray, const HitInfo& hit)

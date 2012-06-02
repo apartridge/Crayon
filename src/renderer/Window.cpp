@@ -249,6 +249,17 @@ void Window::keyboard(unsigned char key, int x, int y)
             break;
         }
 
+        case 'm':
+        case 'M':
+        {
+            printf("Performing tone mapping ...");
+            g_image->doToneMapping(0.3);
+            g_image->draw();
+            glutSwapBuffers(); // Make this display somehow ...
+            printf("Done tone mapping\n");
+            break;
+        }
+
 		case 'p':
 		{
 			show_level++;

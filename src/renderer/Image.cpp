@@ -91,7 +91,7 @@ void Image::doToneMapping(float alpha)
         return;
 
     const int n = m_width*m_height;
-    float avg;
+    float avg = 0;
 
     for (int i = 0; i < n; ++i)
     {
@@ -100,17 +100,29 @@ void Image::doToneMapping(float alpha)
     }
     avg = exp( (1/float(n)) * avg );
 
-    // Update pixel values
     for (int i = 0; i < n; ++i)
     {
         const float luminance = 683 * (0.21*m_light[i].x, 0.72*m_light[i].y, 0.07*m_light[i].z);
         const float scaled = (alpha / avg) * luminance;
         const float compressed = scaled / (1 + scaled);
 
-        Vector3 color = m_light[i];
-        //m_pixels[i].r = Map(
-    }
+        // Tone mapping back to RGB from luminance scaling
+        Vector3 color( 
+            (m_light[i].x/luminance) * compressed,
+            (m_light[i].y/luminance) * compressed,
+            (m_light[i].z/luminance) * compressed
+        );
 
+        // Gamma correction
+        color.x = pow(color.x, (1/2.2f));
+        color.y = pow(color.y, (1/2.2f));
+        color.z = pow(color.z, (1/2.2f));
+
+        // Update pixel values
+        m_pixels[i].r = Map( color.x );
+        m_pixels[i].g = Map( color.y );
+        m_pixels[i].b = Map( color.z );
+    }
 }
 
 void Image::drawScanline(int y)
