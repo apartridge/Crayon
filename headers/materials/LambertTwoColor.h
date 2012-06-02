@@ -5,7 +5,7 @@
 class LambertTwoColor : public Lambert
 {
 public:
-	LambertTwoColor(Vector3 firstColor, Vector3 secondColor, float wideness, float scale) : Lambert(Vector3(0.5))
+	LambertTwoColor(Vector3 firstColor, Vector3 secondColor, float wideness, float scale) : Lambert(firstColor)
     {
 		m_firstColor = firstColor;
 		m_secondColor = secondColor;
