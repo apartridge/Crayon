@@ -21,6 +21,9 @@ public:
     void setPixel(int x, int y, const Vector3& p);
     void setPixel(int x, int y, const Pixel& p);
 
+    // Convert raw light data to pixels
+    void doToneMapping(float alpha);
+
     void draw();
     void drawScanline(int y);
     void clear(const Vector3& c);
@@ -33,10 +36,11 @@ public:
 
 private:
     Pixel* m_pixels;
+    Vector3* m_light;
     int m_width;
     int m_height;
 };
 
 extern Image * g_image;
 
-#endif // CRAYON_IMAGE_H_INCLUDED
+#endif

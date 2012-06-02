@@ -16,6 +16,7 @@ Image * g_image = 0;
 Image::Image()
 {
     m_pixels = 0;
+    m_light = 0;
     m_width = 1;
     m_height = 1;
 }
@@ -24,15 +25,23 @@ Image::~Image()
 {
     if (m_pixels)
         delete [] m_pixels;
+    if (m_light)
+        delete [] m_light;
 }
 
 void Image::resize(int width, int height)
 {
     if (m_pixels)
         delete [] m_pixels;
+    if (m_light)
+        delete [] m_light;
+    
     m_pixels = 0;
     m_pixels = new Pixel[width*height];
     memset(m_pixels, 0, width*height*sizeof(Pixel));
+    
+    m_light = new Vector3[width*height];
+    
     m_width = width;
     m_height = height;
 }
@@ -62,6 +71,9 @@ void Image::setPixel(int x, int y, const Vector3& p)
         m_pixels[y*m_width+x].g = Map(p.y);
         m_pixels[y*m_width+x].b = Map(p.z);
     }
+
+    // Store straight up light as well
+    m_light[y*m_width+x] = p;
 }
 
 void Image::setPixel(int x, int y, const Pixel& p)
@@ -71,6 +83,34 @@ void Image::setPixel(int x, int y, const Pixel& p)
     {
         m_pixels[y*m_width+x]= p;
     }
+}
+
+void Image::doToneMapping(float alpha)
+{
+    if (m_light == 0 || m_pixels == 0)
+        return;
+
+    const int n = m_width*m_height;
+    float avg;
+
+    for (int i = 0; i < n; ++i)
+    {
+        const float luminance = 683 * (0.21*m_light[i].x, 0.72*m_light[i].y, 0.07*m_light[i].z);
+        avg += log(epsilon + luminance);
+    }
+    avg = exp( (1/float(n)) * avg );
+
+    // Update pixel values
+    for (int i = 0; i < n; ++i)
+    {
+        const float luminance = 683 * (0.21*m_light[i].x, 0.72*m_light[i].y, 0.07*m_light[i].z);
+        const float scaled = (alpha / avg) * luminance;
+        const float compressed = scaled / (1 + scaled);
+
+        Vector3 color = m_light[i];
+        //m_pixels[i].r = Map(
+    }
+
 }
 
 void Image::drawScanline(int y)
