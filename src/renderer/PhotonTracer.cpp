@@ -59,11 +59,11 @@ int PhotonTracer::tracePhoton(const Ray& ray, Vector3 power, int bounce)
     const Material* mat = hit.material;
 
     // Russian roulette on what to do with photon
-    float rd_avg = (mat->Rd().x + mat->Rd().y + mat->Rd().z) / 3.0;
+    float rd_avg = (mat->diffuseColor(hit).x + mat->diffuseColor(hit).y + mat->diffuseColor(hit).z) / 3.0; // (mat->Rd().x + mat->Rd().y + mat->Rd().z) / 3.0; // 
     float rs_avg = (mat->Rs().x + mat->Rs().y + mat->Rs().z) / 3.0;
     float rt_avg = (mat->Rt().x + mat->Rt().y + mat->Rt().z) / 3.0;
 
-    assert(rd_avg + rs_avg + rt_avg <= 1.0 + epsilon);
+    //assert(rd_avg + rs_avg + rt_avg <= 1.0 + epsilon);
 
     const float e = Random::uniformRand();
 
@@ -77,7 +77,7 @@ int PhotonTracer::tracePhoton(const Ray& ray, Vector3 power, int bounce)
             return 0;
         
         // Don't store the first bounce (only want indirect illumination)
-        //if (bounce > 0)
+        if (bounce > 0)
         {
             _photonMap->store(&power[0], &hit.P[0], &ray.direction()[0]);
             stored += 1;
@@ -87,7 +87,7 @@ int PhotonTracer::tracePhoton(const Ray& ray, Vector3 power, int bounce)
     // Diffuse reflection
     if (e < rd_avg)
     {
-        power = 0.5*(power * mat->Rd()) / rd_avg; // Arbitrary constant 0.5 = wft?
+        power = 0.75*(power * mat->diffuseColor(hit)) / rd_avg; // Arbitrary constant 0.5 = wft?
 
         Vector3 n = hit.N;
 	    Vector3 u = n.perpendicular();

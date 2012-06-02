@@ -17,10 +17,10 @@ public:
 
     virtual void preCalc() {}
 
-    virtual Vector3 shadeLight(const Light& light, const Ray& ray, const HitInfo& hit, const Scene& scene, const int depth) const;
-    virtual Vector3 shadeGlobalIllumination(const Ray& ray, const HitInfo& hit, const Scene& scene, const int depth) const;
+    //virtual Vector3 shadeLight(const Light& light, const Ray& ray, const HitInfo& hit, const Scene& scene, const int depth) const;
+    //virtual Vector3 shadeGlobalIllumination(const Ray& ray, const HitInfo& hit, const Scene& scene, const int depth) const;
     
-    Vector3 proceduralColor(const HitInfo& hit) const; 
+    virtual Vector3 diffuseColor (const HitInfo& hit) const; 
 
 protected:
     Vector3 m_firstColor;

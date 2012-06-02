@@ -55,8 +55,10 @@ void makeFinalScene()
     Material* windowGlass = new Glass();
     mesh->connectNameToMaterial("BigWindows", windowGlass);
 
-    Material* windowEdge = new Lambert(0.4);
+    Material* windowEdge = new Lambert(Vector3(0,0,1));
     mesh->connectNameToMaterial("BigWindowEdge", windowEdge);
+	Material* windowOutside = new Lambert(Vector3(1,0,0));
+	mesh->connectNameToMaterial("WindowOutside", windowOutside);
 
     // Area light
     if (false)
@@ -80,12 +82,12 @@ void makeFinalScene()
         g_scene->addObject(trg);*/
 
         PointLight * light = new PointLight;
-        light->setPosition(Vector3(30, 15, 10));
+        light->setPosition(Vector3(30, 11, 10));
         light->setColor(Vector3(1, 1, 1));
-        light->setPower(5000);
+        light->setPower(7000);
 
         // Set target at windows, to not waste photons
-        LightTarget* target = new LightTarget(Vector3(15.81, 5.40, 9.3), 8);
+        LightTarget* target = new LightTarget(Vector3(15.81, 5.40, 9.3), 15);
         light->setTarget(target);
 
         g_scene->addLight(light);
@@ -117,7 +119,7 @@ void makeFinalScene()
 	*/
 
 	Material* ceiling = new Lambert(Vector3(1.0, 1.0, 1.0f));
-	Material* walls = new LambertTwoColor(Vector3(0.99), Vector3(54, 46, 37)/255.0 , 0.4, 5.0  );
+	Material* walls = new LambertTwoColor(Vector3(0.99), Vector3(54, 46, 37)*2/255.0 , 0.4, 5.0  );
 	mesh->connectNameToMaterial("Walls", walls);
 	mesh->connectNameToMaterial("Ceiling", ceiling);
 
@@ -189,7 +191,7 @@ void makeFinalScene()
 	Material* sofaFeet = new Lambert(Vector3(0.8,0.8,0.1));
 	mesh->connectNameToMaterial("SofaFeet", sofaFeet);
 
-    Material* frostedGlassTable = new FrostedGlass(Vector3(0.2), Vector3(0.9));
+	//Material* frostedGlassTable = new FrostedGlass(Vector3(0.2), Vector3(0.9));
     mesh->connectNameToMaterial("TableTopGlass", new Glass());
 
 

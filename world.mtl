@@ -1,5 +1,14 @@
-# Blender MTL File: 'World4.blend'
-# Material Count: 14
+# Blender MTL File: 'World5.blend'
+# Material Count: 9
+newmtl 
+Ns 0
+Ka 0.000000 0.000000 0.000000
+Kd 0.8 0.8 0.8
+Ks 0.8 0.8 0.8
+d 1
+illum 2
+
+
 newmtl BigWindowEdge
 Ns 96.078431
 Ka 0.000000 0.000000 0.000000
@@ -30,28 +39,6 @@ d 1.000000
 illum 2
 
 
-newmtl ChairFabric_CHR00402.jpg
-Ns 96.078431
-Ka 0.000000 0.000000 0.000000
-Kd 0.640000 0.640000 0.640000
-Ks 0.500000 0.500000 0.500000
-Ni 1.000000
-d 1.000000
-illum 2
-map_Kd C:\Users\Stian\Documents\Blender\CSE168Project\ObjectsFromNet\Chair2\CHR00402.jpg
-
-
-newmtl ChairWood_CHR00401.jpg
-Ns 96.078431
-Ka 0.000000 0.000000 0.000000
-Kd 0.640000 0.640000 0.640000
-Ks 0.500000 0.500000 0.500000
-Ni 1.000000
-d 1.000000
-illum 2
-map_Kd C:\Users\Stian\Documents\Blender\CSE168Project\ObjectsFromNet\Chair2\CHR00401.jpg
-
-
 newmtl Floor
 Ns 96.078431
 Ka 0.000000 0.000000 0.000000
@@ -74,57 +61,6 @@ d 1.000000
 illum 2
 
 
-newmtl GlassWine
-Ns 96.078431
-Ka 0.000000 0.000000 0.000000
-Kd 0.800000 0.800000 0.800000
-Ks 0.655080 0.655080 0.655080
-Ni 1.000000
-d 0.262032
-illum 2
-
-
-newmtl StairsHandguards
-Ns 96.078431
-Ka 0.000000 0.000000 0.000000
-Kd 0.070558 0.000000 0.640000
-Ks 0.500000 0.500000 0.500000
-Ni 1.000000
-d 1.000000
-illum 2
-
-
-newmtl StairsSides
-Ns 96.078431
-Ka 0.000000 0.000000 0.000000
-Kd 0.287066 0.232936 0.070547
-Ks 0.500000 0.500000 0.500000
-Ni 1.000000
-d 1.000000
-illum 2
-
-
-newmtl StairsSteps
-Ns 96.078431
-Ka 0.000000 0.000000 0.000000
-Kd 0.033620 0.019811 0.032296
-Ks 0.500000 0.500000 0.500000
-Ni 1.000000
-d 1.000000
-illum 2
-
-
-newmtl TableWood_FW_WD_BB.JPG
-Ns 96.078431
-Ka 0.000000 0.000000 0.000000
-Kd 0.640000 0.640000 0.640000
-Ks 0.500000 0.500000 0.500000
-Ni 1.000000
-d 1.000000
-illum 2
-map_Kd C:\Users\Stian\Documents\Blender\CSE168Project\ObjectsFromNet\Table\FW_WD_BB.JPG
-
-
 newmtl Walls
 Ns 96.078431
 Ka 0.000000 0.000000 0.000000
@@ -139,6 +75,16 @@ newmtl WallsSndFloor
 Ns 96.078431
 Ka 0.000000 0.000000 0.000000
 Kd 0.640000 0.572879 0.000000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+
+
+newmtl WindowOutside
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.015468 0.006981 0.017582
 Ks 0.500000 0.500000 0.500000
 Ni 1.000000
 d 1.000000

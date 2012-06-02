@@ -17,8 +17,8 @@ public:
 
     int Shininess;
     float RefractiveIndex;
-    Vector3 Rs;
-    Vector3 Rd;
+   // Vector3 Rs;
+   // Vector3 Rd;
 };
 
 class FrostedGlass : public Material

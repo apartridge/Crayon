@@ -16,8 +16,7 @@ Vector3 Mirror::shadeLight(const Light& light, const Ray& ray, const HitInfo& hi
     
     HitInfo shadowHit;
     Ray shadowRay (hit.P, l);
-    /*shadowRay.d = l; 
-    shadowRay.o = hit.P;*/
+
     bool inShadow = scene.trace(shadowHit, shadowRay, epsilon);
 
     // Specular highlight (Phong)

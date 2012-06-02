@@ -2,10 +2,10 @@
 #include "geometry/Ray.h"
 #include "geometry/Scene.h"
 
-Glass::Glass() : Material(Vector3(0), Vector3(0.3), Vector3(0.7))
+Glass::Glass() : Material(Vector3(0.00), Vector3(0.01), Vector3(0.99))
 {
-    Rd = Vector3(0);
-    Rs = Vector3(0.8);
+   // Rd = Vector3(0);
+    //Rs = Vector3(0.8);
     Shininess = 500;
     RefractiveIndex = 1.5; // Deprecated
     indexOfRefraction = 1.5; // Override Material
@@ -18,14 +18,14 @@ Glass::~Glass()
 Vector3 Glass::shadeLight(const Light& light, const Ray& ray, const HitInfo& hit, const Scene& scene, const int depth) const
 {
     Vector3 L(0);
-    Vector3 l = light.getPosition() - hit.P;
+   /* Vector3 l = light.getPosition() - hit.P;
     float r2 = l.length2();
     l /= sqrt(r2);
     
     HitInfo shadowHit;
     Ray shadowRay (hit.P, l);
-    /*shadowRay.d = l; 
-    shadowRay.o = hit.P;*/
+    //shadowRay.d = l; 
+    //shadowRay.o = hit.P;
     bool inShadow = scene.trace(shadowHit, shadowRay, epsilon);
     bool outside = dot(-ray.direction(), hit.N) > 0;
 
@@ -39,7 +39,17 @@ Vector3 Glass::shadeLight(const Light& light, const Ray& ray, const HitInfo& hit
         // Missed something here last, tme, what was that??
         Vector3 wr = reflect(ray, hit);
         L += Rs * (pow(dot(wr, l), Shininess) / costheta) * light.color();
-    }
+    }*/
+
+	Vector3 visibility = Material::lightDiffuseVisiblity(light, hit, scene);
+
+	Vector3 l = (light.getPosition() - hit.P).normalized();
+
+	L = diffuseColor(hit)*visibility;
+	float costheta = dot(hit.N, l);
+	Vector3 wr = reflect(ray, hit);
+    L += visibility * Rs() * (pow(dot(wr, l), Shininess) / costheta);
+
 
     return L;
 }

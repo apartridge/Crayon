@@ -15,8 +15,8 @@ public:
     virtual void preCalc() {};
     
     virtual Vector3 shadeLight(const Light& light, const Ray& ray, const HitInfo& hit, const Scene& scene, const int depth) const;
-    virtual Vector3 shadeGlobalIllumination(const Ray& ray, const HitInfo& hit, const Scene& scene, const int depth) const;
-
+    //virtual Vector3 shadeGlobalIllumination(const Ray& ray, const HitInfo& hit, const Scene& scene, const int depth) const;
+	virtual Vector3 diffuseColor(const HitInfo& hit) const;
 	void setGlossiness(int power, float factor, Vector3 glossColor = Vector3(1))
 	{
 		m_glossPower = power;
@@ -25,7 +25,7 @@ public:
 	}// Blinn Phong Specular
 
 protected:
-    Vector3 proceduralColor(const HitInfo& hit) const; 
+    //Vector3 proceduralColor(const HitInfo& hit) const; 
 
 private:
     Vector3 WoodTexture(const HitInfo& hit) const; // Where is this? oO

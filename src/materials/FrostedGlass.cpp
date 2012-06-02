@@ -3,7 +3,7 @@
 #include "geometry/Scene.h"
 #include "sysutils/Random.h"
 
-
+/*
 FrostedGlass::FrostedGlass(Vector3 s, Vector3 t) : Material(Vector3(0), s, t)
 {
     this->shininess = 500;
@@ -30,13 +30,13 @@ Vector3 FrostedGlass::shadeLight(const Light& light, const Ray& ray, const HitIn
     
 	return L;
 }
-
+*/
 
 /*
  * Microfacet reflectance, holy crap :S
  * http://www.cs.cornell.edu/~srm/publications/EGSR07-btdf.pdf
  * Use hax solution instead
- */
+ *//*
 Vector3 FrostedGlass::shadeReflectance(const Ray& ray, const HitInfo& hit, const Scene& scene, const int depth) const
 {
     Vector3 L(0, 0, 0);
@@ -131,3 +131,4 @@ Vector3 FrostedGlass::shadeReflectance(const Ray& ray, const HitInfo& hit, const
 
     return L;
 }
+*/

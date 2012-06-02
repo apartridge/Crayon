@@ -15,8 +15,8 @@ public:
     // Return photon map generated from traceScene
     PhotonMap* getPhotonMap() const;
 
-    const static int MaxPhotonBounces = 5;
-	const static int DefaultNumberOfPhotons = 100000;
+    const static int MaxPhotonBounces = 7;
+	const static int DefaultNumberOfPhotons = 10000000; // ;
 
 private:
     const Scene* _scene;

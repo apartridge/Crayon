@@ -8,8 +8,8 @@ A file to test some materials
 #include "lights/SquareLight.h"
 #include "materials/Glass.h"
 #include "materials/Wood.h"
-#include "materials/Leather.h"
 #include "geometry/Sphere.h"
+#include "materials/Metal.h"
 
 void makeWoodScene() 
 {
@@ -25,8 +25,8 @@ void makeWoodScene()
     g_camera->setUp(Vector3(0, 1, 0));
     g_camera->setFOV(45);
 
-	g_camera->setFocalLength(0*15);
-	g_camera->setAperture(0*0.7);
+	g_camera->setFocalLength(15);
+	g_camera->setAperture(0.7);
 
     // Create light sources
 
@@ -34,29 +34,21 @@ void makeWoodScene()
     light->setPosition(Vector3(10, 8, 10));
 
     light->setColor(Vector3(1, 1, 1));
-    light->setPower(25);
+    light->setPower(80);
     g_scene->addLight(light);
 
 	PointLight * light2 = new PointLight;
     light2->setPosition(Vector3(10, 8, -10));
 
     light2->setColor(Vector3(1, 1, 1));
-    light2->setPower(25);
+    light2->setPower(80);
     g_scene->addLight(light2);
-
-
-	PointLight * light3 = new PointLight;
-    light3->setPosition(Vector3(3, -4, 9));
-
-    light3->setColor(Vector3(1, 1,1 ));
-    light3->setPower(25);
-    g_scene->addLight(light3);
 
 	PointLight * light4 = new PointLight;
     light4->setPosition(Vector3(0, 3, 0));
 
     light4->setColor(Vector3(1, 1, 1));
-    light4->setPower(10);
+    light4->setPower(80);
     g_scene->addLight(light4);
 
 	Material* material0 = new Lambert(0.2*Vector3(1.0f, 1.0f, 1.0f));
@@ -115,7 +107,7 @@ void makeWoodScene()
 
     // Add spheres
     const float radius = 1;
-    Material *glass[] = {new FrostedGlass(Vector3(0.2), Vector3(1.0)), new Glass()};
+    Material *glass[] = {new Glass(), new Glass()};
     for (int i = 0; i < 2; ++i)
     {
         Sphere* sphere = new Sphere();
@@ -127,7 +119,7 @@ void makeWoodScene()
 	
 	TriangleMesh * mesh = new TriangleMesh;
 	mesh->setDefaultMaterial(material0);
-	mesh->connectNameToMaterial("Glass", new FrostedGlass(Vector3(0.2), Vector3(0.9, 0.9, 1.0)));
+	mesh->connectNameToMaterial("Glass", new Glass()); // Vector3(0.2), Vector3(0.9, 0.9, 1.0)
 	mesh->connectNameToMaterial("MaterialOne", materialWood);
 	mesh->connectNameToMaterial("MaterialTwo", materialWood2);
 	mesh->connectNameToMaterial("MaterialThree", materialWood3);
@@ -161,14 +153,14 @@ void makeLeatherScene()
     light->setPosition(Vector3(10, 8, 10));
 
     light->setColor(Vector3(1, 1, 1));
-    light->setPower(25);
+    light->setPower(55);
     g_scene->addLight(light);
 
 	PointLight * light2 = new PointLight;
     light2->setPosition(Vector3(10, 8, -10));
 
     light2->setColor(Vector3(1, 1, 1));
-    light2->setPower(25);
+    light2->setPower(55);
     g_scene->addLight(light2);
 
 
@@ -176,29 +168,34 @@ void makeLeatherScene()
     light3->setPosition(Vector3(3, -4, 9));
 
     light3->setColor(Vector3(1, 1,1 ));
-    light3->setPower(25);
+    light3->setPower(55);
     g_scene->addLight(light3);
 
 	PointLight * light4 = new PointLight;
     light4->setPosition(Vector3(0, 3, 0));
 
     light4->setColor(Vector3(1, 1, 1));
-    light4->setPower(10);
+    light4->setPower(30);
     g_scene->addLight(light4);
 
-	Material* material1 = new Leather();
-    Material* material0 = new Lambert(0.9*Vector3(1.0f, 1.0f, 1.0f));
+	Material* material1 =  new Lambert(Vector3(1.0, 0.0f, 0));
+
+
+    Material* material0 = new Lambert(Vector3(0, 0.0f, 1));
+	Material* materialMetal = new Metal(Vector3(198.0/255.0), Vector3(225.0/255.0), 0.1 );
+
+
     Material* material2 = new Lambert(Vector3(0, 1.0f, 0));
     
 	
 
 	TriangleMesh * mesh = new TriangleMesh;
 	mesh->setDefaultMaterial(material0);
-	mesh->connectNameToMaterial("Glass", new FrostedGlass(Vector3(0.2), Vector3(0.9, 0.9, 1.0)));
+	//mesh->connectNameToMaterial("Glass", new FrostedGlass(Vector3(0.2), Vector3(0.9, 0.9, 1.0)));
 
 
 	mesh->connectNameToMaterial("MaterialOne", material0);
-	mesh->connectNameToMaterial("MaterialTwo", material1);
+	mesh->connectNameToMaterial("MaterialTwo", materialMetal);
 	mesh->connectNameToMaterial("MaterialThree", material1);
     mesh->load("monkey.obj");
 	g_scene->addMesh(mesh);

@@ -4,8 +4,9 @@
 #include "sysutils/Random.h"
 
 
-Vector3 LambertTwoColor::proceduralColor(const HitInfo& hit) const
+Vector3 LambertTwoColor::diffuseColor(const HitInfo& hit) const
 {
+	//return m_firstColor;
     Vector3 color;
     float sinf = sin((hit.P.x + hit.P.z)*m_scale) + m_wideness;
 
@@ -19,16 +20,15 @@ Vector3 LambertTwoColor::proceduralColor(const HitInfo& hit) const
 	}
     return color;
 }
-
+/*
 Vector3 LambertTwoColor::shadeLight(const Light& light, const Ray& ray, 
         const HitInfo& hit, const Scene& scene, const int depth) const
 {
-	Vector3 L = proceduralColor(hit);
-    return L * Lambert::shadeLight(light, ray, hit, scene, depth);
-}
-
+    return diffuseColor(hit) * Material::lightDiffuseVisiblity(light, hit, scene);
+}*/
+/*
 Vector3 LambertTwoColor::shadeGlobalIllumination(const Ray& ray, const HitInfo& hit, const Scene& scene, const int depth) const
 {
-    Vector3 L = proceduralColor(hit);
-    return L * Lambert::shadeGlobalIllumination(ray, hit, scene, depth);
+    return Lambert::shadeGlobalIllumination(ray, hit, scene, depth);
 }
+*/

@@ -247,6 +247,18 @@ public:
 	
 	}
 
+	Vector3 saturated()
+	{
+		Vector3 res = *this;
+		if(res.x > 1) res.x = 1;
+		if(res.y > 1) res.y = 1;
+		if(res.z > 1) res.z = 1;
+		if(res.x < 0) res.x = 0;
+		if(res.y < 0) res.y = 0;
+		if(res.z < 0) res.z = 0;
+		return res;
+	}
+
 };
 
 

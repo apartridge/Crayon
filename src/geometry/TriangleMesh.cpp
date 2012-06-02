@@ -98,9 +98,9 @@ void TriangleMesh::createSingleTriangle()
     m_normalIndices[0].y = 1;
     m_normalIndices[0].z = 2;
 
-    m_texCoordIndices[0].x = 0;
-    m_texCoordIndices[0].y = 1;
-    m_texCoordIndices[0].z = 2;
+    m_texCoordIndices[0].x = -1;
+    m_texCoordIndices[0].y = -1;
+    m_texCoordIndices[0].z = -1;
 
     m_numTris = 1;
 	m_numVertices = 3;
@@ -201,8 +201,8 @@ void TriangleMesh::loadObj(FILE* fp, const Matrix4x4& ctm)
 	Material* currentMaterial = m_defaultMaterial;
 	m_hasTextureCoords = false;
 
-    if (nt > 0)
-    {   // got texture coordinates
+    if (nt > 0) // Got texture coords data
+	{
         m_texCoords = new VectorR2[nt];
         m_texCoordIndices = new TupleI3[nf];
 		m_hasTextureCoords = true;
@@ -263,18 +263,25 @@ void TriangleMesh::loadObj(FILE* fp, const Matrix4x4& ctm)
                 m_normalIndices[m_numTris].x = n-1;
             if (t)
                 m_texCoordIndices[m_numTris].x = t-1;
+			else if (nt > 0)
+				m_texCoordIndices[m_numTris].x = -1;
+
             getIndices(s2, &v, &t, &n);
             m_vertexIndices[m_numTris].y = v-1;
             if (n)
                 m_normalIndices[m_numTris].y = n-1;
             if (t)
                 m_texCoordIndices[m_numTris].y = t-1;
+			else if (nt > 0)
+				m_texCoordIndices[m_numTris].y = -1;
             getIndices(s3, &v, &t, &n);
             m_vertexIndices[m_numTris].z = v-1;
             if (n)
                 m_normalIndices[m_numTris].z = n-1;
             if (t)
                 m_texCoordIndices[m_numTris].z = t-1;
+			else if (nt > 0)
+				m_texCoordIndices[m_numTris].z = -1;
 
             if (!n)
             {   // if no normal was supplied
