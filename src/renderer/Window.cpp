@@ -252,10 +252,21 @@ void Window::keyboard(unsigned char key, int x, int y)
         case 'm':
         case 'M':
         {
+			glClearColor(0.f, 0.f, 0.f, 1);
+			glMatrixMode(GL_PROJECTION);
+			glLoadIdentity();
+			glMatrixMode(GL_MODELVIEW);
+			glLoadIdentity();
+			glDrawBuffer(GL_BACK);
+			
+
             printf("Performing tone mapping ...");
             g_image->doToneMapping(0.3);
             g_image->draw();
+
             glutSwapBuffers(); // Make this display somehow ...
+			glFinish();
+
             printf("Done tone mapping\n");
             break;
         }
