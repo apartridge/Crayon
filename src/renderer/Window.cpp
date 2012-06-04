@@ -255,7 +255,8 @@ void Window::keyboard(unsigned char key, int x, int y)
             printf("Performing tone mapping ...");
             g_image->doToneMapping(0.3);
             g_image->draw();
-            glutSwapBuffers(); // Make this display somehow ...
+            //glutSwapBuffers(); // Make this display somehow ...
+            glFinish();
             printf("Done tone mapping\n");
             break;
         }
