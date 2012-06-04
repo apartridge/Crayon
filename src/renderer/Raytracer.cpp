@@ -236,7 +236,7 @@ void Raytracer::drawScene(Scene& scene, Camera& camera, Image* image)
 		if(returnCode)
 		{
 			printf("Error; return code from pthread_create() is %d\n", returnCode);
-			exit(-1);
+			exit(3);
 		}
 	}
 

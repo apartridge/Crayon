@@ -21,7 +21,7 @@ public:
 
 	Medium mediumOfTravel;
 
-	const Vector3& origin() const
+	inline const Vector3& origin() const
 	{
 		return m_origin;
 	}
@@ -31,7 +31,7 @@ public:
 		return m_direction;
 	}
 
-	const Vector3& dInverse() const
+	inline const Vector3& dInverse() const
 	{
 		return m_dInverse;
 	}

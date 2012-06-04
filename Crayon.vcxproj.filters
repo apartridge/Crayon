@@ -118,7 +118,9 @@
     <ClCompile Include="src\materials\Metal.cpp">
       <Filter>sources\materials</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\Program Files\gevorkyan.org\MicroProfiler\x86\micro-profiler.initializer.cpp" />
+    <ClCompile Include="src\materials\Fabric.cpp">
+      <Filter>sources\materials</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\pthread\pthread.h">
@@ -278,6 +280,9 @@
       <Filter>headers\materials</Filter>
     </ClInclude>
     <ClInclude Include="headers\materials\Metal.h">
+      <Filter>headers\materials</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\materials\Fabric.h">
       <Filter>headers\materials</Filter>
     </ClInclude>
   </ItemGroup>

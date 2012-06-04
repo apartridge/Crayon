@@ -86,6 +86,19 @@ void makeFinalScene()
     }
     
 
+
+	/*
+	Debug Light for working on wood
+	*/
+
+	/*PointLight * lightInRoom = new PointLight;
+    lightInRoom->setPosition(Vector3(-3, 11, -3));
+    lightInRoom->setColor(Vector3(1, 1, 1));
+    lightInRoom->setPower(100);
+    g_scene->addLight(lightInRoom);*/
+
+	
+
 	// Glass on table
 	Material* glassWine = new Glass();
 	mesh->connectNameToMaterial("GlassWine", glassWine);
@@ -106,10 +119,10 @@ void makeFinalScene()
 
 	// Porch
 
-	Wood* porchWoodenTop = new Wood(Vector3(97, 14, 14)/255.0, Vector3(158, 33, 33)/255.0, 0.3, 10);
+	Wood* porchWoodenTop = new Wood(Vector3(0, 0, 0)/255.0, Vector3(10, 10, 10)/255.0, 0.6);
 	mesh->connectNameToMaterial("PorchTop", porchWoodenTop);
 
-	Wood* porchWood = new Wood(Vector3(70, 40, 12)/255.0, Vector3(112, 60, 9)/255.0, 0.3, 10);
+	Wood* porchWood = new Wood(Vector3(46, 29, 7)/255.0, Vector3(58, 37, 9)/255.0, 0.7, Vector3(1,0,1).normalized(), 0.3);
 	mesh->connectNameToMaterial("PorchWood", porchWood);
 
 
@@ -125,9 +138,9 @@ void makeFinalScene()
 	objWorld.setIdentity();
 	floor->setNormalMap(normal, objWorld, 1);
 
-	Vector3 floorTrimBase = Vector3(170, 85, 34)/255.0;
-	Vector3 floorTrimHigh = Vector3(218, 133, 34)/255.0;
-	Material* floorTrimMat = new Wood(floorTrimBase, floorTrimHigh, 2, 12, Vector3(1,1,0), 0.6);
+	Vector3 floorTrimBase = Vector3(78, 48, 8)/255.0;
+	Vector3 floorTrimHigh = Vector3(91, 56, 10)/255.0;
+	Material* floorTrimMat = new Wood(floorTrimBase, floorTrimHigh, 2, Vector3(1,0,1), 0.6);
 
 	mesh->connectNameToMaterial("Floor", floor);
 	mesh->connectNameToMaterial("FloorTrim", floorTrimMat);
@@ -145,18 +158,18 @@ void makeFinalScene()
 	// WOODEN TABLE AND CHAIRS
 	*/
 	
-	Vector3 baseColor = Vector3(24, 18, 14)/255.0;
-	Vector3 highColor = Vector3(68, 34, 10)/255.0;
-	const float scale = 0.54;
-	float perlinScale = 20;
-	Wood* tableWood = new Wood(baseColor, highColor, scale, perlinScale, Vector3(0.5,0.0,0.5), 2);
+	Vector3 baseColor = Vector3(31, 22, 9)/255.0;
+	Vector3 highColor = Vector3(40, 29, 13)/255.0;
+	const float scale = 0.1;
+	Wood* tableWood = new Wood(baseColor, highColor, scale, Vector3(0.8,0.0,1).normalized(), 4.5);
 	tableWood->setGlossiness(100, 0.005, Vector3(1));
-	mesh->connectNameToMaterial("TableWood_FW_WD_BB.JPG", tableWood);  // have to remove this .jpg crap
+	mesh->connectNameToMaterial("TableWood_FW_WD_BB.JPG", tableWood);
+
 	mesh->connectNameToMaterial("ChairWood_CHR00401.jpg", tableWood);
 	
 	
 	Material* chairFabric = new Lambert(Vector3(0.8, 0.1, 0.1));
-	mesh->connectNameToMaterial("ChairFabric_CHR00402.jpg", chairFabric);  // have to remove this .jpg
+	mesh->connectNameToMaterial("ChairFabric_CHR00402.jpg", chairFabric);
 
 	/*
 	// Chess Board
@@ -171,7 +184,7 @@ void makeFinalScene()
     mesh->connectNameToMaterial("ChessPiecesOne", glassChessPieceWhite);
     mesh->connectNameToMaterial("ChessPiecesTwo", glassChessPieceBlack);
 
-	Wood* darkWood = new Wood(Vector3(45, 30, 18)/255.0, Vector3(123, 82, 49)/255.0, 0.3, 10);
+	Wood* darkWood = new Wood(Vector3(45, 30, 18)/255.0, Vector3(123, 82, 49)/255.0, 0.3);
 	darkWood->setGlossiness(300, 0.03, Vector3(1));
     mesh->connectNameToMaterial("ChessBoard", darkWood);
 
@@ -183,7 +196,7 @@ void makeFinalScene()
 
 	Vector3 stairCaseBaseColor = Vector3(170, 85, 34)/255.0;
 	Vector3 stairCaseHighColor = Vector3(218, 133, 34)/255.0;
-	Material* staircaseSides = new Wood(stairCaseBaseColor, stairCaseHighColor, 0.53, 12, Vector3(0,1,0), 1.36);
+	Material* staircaseSides = new Wood(stairCaseBaseColor, stairCaseHighColor, 0.53, Vector3(0,1,0), 1.36);
 	mesh->connectNameToMaterial("StairsSides", staircaseSides);
 
 	// Dark Steps
