@@ -1,5 +1,5 @@
 # Blender MTL File: 'World7.blend'
-# Material Count: 13
+# Material Count: 15
 newmtl 
 Ns 0
 Ka 0.000000 0.000000 0.000000
@@ -47,6 +47,28 @@ Ks 0.500000 0.500000 0.500000
 Ni 1.000000
 d 1.000000
 illum 2
+
+
+newmtl ChairFabric_CHR00402.jpg
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\Stian\Documents\Blender\CSE168Project\ObjectsFromNet\Chair2\CHR00402.jpg
+
+
+newmtl ChairWood_CHR00401.jpg
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\Stian\Documents\Blender\CSE168Project\ObjectsFromNet\Chair2\CHR00401.jpg
 
 
 newmtl Floor

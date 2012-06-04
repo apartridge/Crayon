@@ -28,7 +28,9 @@ Camera::Camera() :
     m_lookAt(FLT_MAX, FLT_MAX, FLT_MAX),
     m_fov((45.)*(PI/180.)),
 	m_focalLength(0),
-	m_aperture(0.0)
+	m_aperture(0.0),
+	m_eyeDefaultSet(false),
+	m_lookAtDefaultSet(false)
 {
     calcLookAt();
 	m_openGLRenderer = new OpenGLRenderer();
@@ -38,6 +40,12 @@ Camera::Camera() :
 Camera::~Camera()
 {
 
+}
+
+void Camera::resetPosition()
+{
+	setEye(m_eyeDefault);
+	setLookAt(m_lookAtDefault);
 }
 
 void Camera::display(Scene* pScene, Image* pImage)

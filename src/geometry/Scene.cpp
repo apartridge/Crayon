@@ -27,7 +27,7 @@ void Scene::preCalc()
 
 	m_bvh.build(&m_objects, entireScene);
 
-    printf("Tracing %d photons\n", PhotonTracer::DefaultNumberOfPhotons);
+    printf("Tracing %d photons.\n", PhotonTracer::DefaultNumberOfPhotons);
     PerformanceTimer timer;
     timer.start();
 
@@ -36,7 +36,7 @@ void Scene::preCalc()
     this->m_phmap = phTracer->getPhotonMap();
 
     timer.stop();
-    printf("Photon tracing done in %f seconds\n", timer.elapsedSec());
+    printf("Photon tracing of %d photons done in %f seconds.\n",  PhotonTracer::DefaultNumberOfPhotons, timer.elapsedSec());
 }
 
 void Scene::addMesh(TriangleMesh* mesh)

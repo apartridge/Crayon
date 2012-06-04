@@ -71,7 +71,7 @@ void Window::mainLoop()
 
 void Window::display()
 {
-    printf("Window::display()\n");
+    //printf("Window::display()\n");
     g_camera->display(g_scene, g_image); // take a snapshot of the scene
     glFinish(); // flush the openGL pipeline
 }
@@ -240,6 +240,19 @@ void Window::keyboard(unsigned char key, int x, int y)
             g_camera->setEye(g_camera->eye() - m_scaleFact*vRight);
             break;
         }
+
+		case 'y':
+        case 'Y':
+            g_camera->resetPosition();
+        break;
+
+		case 'x':
+		case 'X':
+		{
+			printf("Eye coordinates is %.3f, %.3f, %.3f\n", g_camera->eye().x,  g_camera->eye().y,  g_camera->eye().z);
+			printf("Lookat coordinates is %.3f, %.3f, %.3f\n", g_camera->lookAt().x,  g_camera->lookAt().y,  g_camera->lookAt().z);
+			break;
+		}
 
         case 'd':
         case 'D':

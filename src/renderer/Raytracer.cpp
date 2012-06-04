@@ -18,7 +18,7 @@ extern RenderingStats* rendering_statistics;
 
 #define THREADS 8 // Including the main thread
 
-#define PIXEL_SAMPLES 4
+#define PIXEL_SAMPLES 1
 
 Raytracer::Raytracer()
 {
@@ -259,8 +259,8 @@ void Raytracer::drawScene(Scene& scene, Camera& camera, Image* image)
 			{
 				QueryPerformanceCounter(&tick_end);
 				elapsedTime = (float) (tick_end.QuadPart - tick_start.QuadPart)  / frequency.QuadPart;
-				printf("Rendering %d samples: %.2f%% at %.2f seconds. Guess %.2f seconds.\r", PIXEL_SAMPLES,
-						(float)i/image->height()*100, elapsedTime, elapsedTime*float(image->height())/float(i));
+				printf("Rendering %d samples: %.2f%% at %.2f seconds. Remaining %.2f seconds.\r", PIXEL_SAMPLES,
+						(float)i/image->height()*100, elapsedTime, elapsedTime*(float(image->height())/float(i) - 1));
 				prev_scanline_drawn_to_screen++;
 				image->drawScanline(i);
 				glFinish();
@@ -286,6 +286,12 @@ void Raytracer::drawScene(Scene& scene, Camera& camera, Image* image)
     elapsedTime = (float) (tick_end.QuadPart - tick_start.QuadPart) / frequency.QuadPart;
 
 	printf("Rendering: 100.00%% at %.2f seconds using %d threads and %d SPP.    \n", elapsedTime, THREADS, PIXEL_SAMPLES);
+
+	char name[100];
+	sprintf(name, "renderResult_%d.ppm", time(0));
+	image->writePPM(name);
+
+	printf("Wrote result to file %s.", name);
 
 #if RENDERING_STATS
 	printf("Rays: %Lu\n", rendering_statistics->rays);
