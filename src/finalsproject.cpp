@@ -77,7 +77,7 @@ void makeFinalScene()
         PointLight * light = new PointLight;
         light->setPosition(Vector3(30, 11, 10)*3);
         light->setColor(Vector3(1, 1, 1));
-        light->setPower(400000); // 4000
+        light->setPower(300000); // 4000
 
         // Set target at windows, to not waste photons
         LightTarget* target = new LightTarget(Vector3(15.81, 5.40, 9.3), 15);
@@ -125,7 +125,7 @@ void makeFinalScene()
 	Material* porchWoodenTop = new Wood(Vector3(0, 0, 0)/255.0, Vector3(10, 10, 10)/255.0, 0.6);
 	mesh->connectNameToMaterial("PorchTop", porchWoodenTop);
 
-	Wood* porchWood =  new Wood(Vector3(20, 8, 5)/255.0, Vector3(22, 10, 11)/255.0, 3, Vector3(1,0,1).normalized(), 0.3);
+	Wood* porchWood =  new Wood(Vector3(20, 8, 5)/255.0, Vector3(22, 10, 11)/255.0, 1, Vector3(1,0,1).normalized(), 0.3);
 	mesh->connectNameToMaterial("PorchWood", porchWood);
 
 	Lambert* sunbedFrabric = new Fabric(Vector3(1,1,1));
@@ -165,11 +165,30 @@ void makeFinalScene()
 	// WOODEN TABLE AND CHAIRS
 	*/
 	
-	Vector3 baseColor = Vector3(31, 22, 9)/255.0;
+	/*Vector3 baseColor = Vector3(31, 22, 9)/255.0;
 	Vector3 highColor = Vector3(40, 29, 13)/255.0;
 	const float scale = 0.1;
 	Wood* tableWood = new Wood(baseColor, highColor, scale, Vector3(0.8,0.0,1).normalized(), 4.5);
 	tableWood->setGlossiness(100, 0.005, Vector3(1));
+	*/
+
+
+	Vector3 baseColor = Vector3(33, 16, 8)/255.0;
+	Vector3 highColor = Vector3(132, 82, 49)/255.0;
+	const float scale = 0.54;
+	Wood* tableWood = new Wood(baseColor, highColor, scale);
+
+	Vector3 glossColor = Vector3(1);
+	int glossPower = 250;
+	float glossFactor = 0.01;
+	tableWood->setGlossiness(glossPower, glossFactor, glossColor);
+
+
+
+
+
+
+
 	mesh->connectNameToMaterial("TableWood_FW_WD_BB.JPG", tableWood);
 
 	mesh->connectNameToMaterial("ChairWood_CHR00401.jpg", tableWood);
