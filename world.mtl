@@ -1,5 +1,5 @@
-# Blender MTL File: 'World5.blend'
-# Material Count: 9
+# Blender MTL File: 'World6.blend'
+# Material Count: 12
 newmtl 
 Ns 0
 Ka 0.000000 0.000000 0.000000
@@ -59,6 +59,37 @@ Ks 0.500000 0.500000 0.500000
 Ni 1.000000
 d 1.000000
 illum 2
+
+
+newmtl PorchTop
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+
+
+newmtl PorchWood
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+
+
+newmtl TableWood_FW_WD_BB.JPG
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.640000 0.640000 0.640000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd C:\Users\Stian\Documents\Blender\CSE168Project\ObjectsFromNet\Table\FW_WD_BB.JPG
 
 
 newmtl Walls

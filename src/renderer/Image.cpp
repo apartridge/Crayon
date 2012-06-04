@@ -119,9 +119,9 @@ void Image::doToneMapping(float alpha)
         color.z = pow(color.z, (1/2.2f));
 
         // Update pixel values
-        m_pixels[i].r = Map( color.x );
-        m_pixels[i].g = Map( color.y );
-        m_pixels[i].b = Map( color.z );
+        m_pixels[i].r = 255; // Map( color.x );
+        m_pixels[i].g = 0; // Map( color.y );
+        m_pixels[i].b = 0; // Map( color.z );
     }
 }
 
@@ -135,6 +135,7 @@ void Image::draw()
 {
     for (int i = 0; i < m_height; i++)
         drawScanline(i);
+	glFlush();
 }
 
 void Image::writePPM(char* pcFile)

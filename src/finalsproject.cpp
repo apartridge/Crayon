@@ -51,14 +51,6 @@ void makeFinalScene()
 	mesh->setDefaultMaterial(materialOne);
 
 
-    // Windows and area lights
-    Material* windowGlass = new Glass();
-    mesh->connectNameToMaterial("BigWindows", windowGlass);
-
-    Material* windowEdge = new Lambert(Vector3(0,0,1));
-    mesh->connectNameToMaterial("BigWindowEdge", windowEdge);
-	Material* windowOutside = new Lambert(Vector3(1,0,0));
-	mesh->connectNameToMaterial("WindowOutside", windowOutside);
 
     // Area light
     if (false)
@@ -84,7 +76,7 @@ void makeFinalScene()
         PointLight * light = new PointLight;
         light->setPosition(Vector3(30, 11, 10));
         light->setColor(Vector3(1, 1, 1));
-        light->setPower(7000);
+        light->setPower(4000);
 
         // Set target at windows, to not waste photons
         LightTarget* target = new LightTarget(Vector3(15.81, 5.40, 9.3), 15);
@@ -99,6 +91,26 @@ void makeFinalScene()
 	mesh->connectNameToMaterial("GlassWine", glassWine);
 
 	
+	/*
+	// Outside
+	*/
+	
+    // Windows and area lights
+    Material* windowGlass = new Glass();
+    mesh->connectNameToMaterial("BigWindows", windowGlass);
+
+    Material* windowEdge = new Lambert(Vector3(0.3,0.3,0.3));
+    mesh->connectNameToMaterial("BigWindowEdge", windowEdge);
+	Material* windowOutside = new Lambert(Vector3(0,0,0));
+	mesh->connectNameToMaterial("WindowOutside", windowOutside);
+
+	// Porch
+
+	Wood* porchWoodenTop = new Wood(Vector3(97, 14, 14)/255.0, Vector3(158, 33, 33)/255.0, 0.3, 10);
+	mesh->connectNameToMaterial("PorchTop", porchWoodenTop);
+
+	Wood* porchWood = new Wood(Vector3(70, 40, 12)/255.0, Vector3(112, 60, 9)/255.0, 0.3, 10);
+	mesh->connectNameToMaterial("PorchWood", porchWood);
 
 
 	/*
@@ -112,7 +124,13 @@ void makeFinalScene()
 	Matrix4x4 objWorld;
 	objWorld.setIdentity();
 	floor->setNormalMap(normal, objWorld, 1);
+
+	Vector3 floorTrimBase = Vector3(170, 85, 34)/255.0;
+	Vector3 floorTrimHigh = Vector3(218, 133, 34)/255.0;
+	Material* floorTrimMat = new Wood(floorTrimBase, floorTrimHigh, 2, 12, Vector3(1,1,0), 0.6);
+
 	mesh->connectNameToMaterial("Floor", floor);
+	mesh->connectNameToMaterial("FloorTrim", floorTrimMat);
 
 	/*
 	// Walls

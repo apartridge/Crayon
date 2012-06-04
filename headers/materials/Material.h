@@ -18,7 +18,7 @@ public:
     
     /* Implement shading model by calling shadeLight for each light and 
      * adding to ambient, reflected and refracted light */
-    Vector3 shade(const Ray& ray, const HitInfo& hit, const Scene& scene, const int depth) const;
+    virtual Vector3 shade(const Ray& ray, const HitInfo& hit, const Scene& scene, const int depth) const;
 
     virtual Vector3 shadeLight(const Light& light, const Ray& ray, 
         const HitInfo& hit, const Scene& scene, const int depth) const { return Vector3(0); };
@@ -29,7 +29,7 @@ public:
     virtual Vector3 shadeReflectance(const Ray& ray, 
         const HitInfo& hit, const Scene& scene, const int depth) const { return Vector3(0); };
 
-    const Vector3& Rd() const { return rd; }
+    //const Vector3& Rd() const { return rd; }
     const Vector3& Rs() const { return rs; }
     const Vector3& Rt() const { return rt; }
 	

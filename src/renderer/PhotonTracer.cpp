@@ -87,7 +87,7 @@ int PhotonTracer::tracePhoton(const Ray& ray, Vector3 power, int bounce)
     // Diffuse reflection
     if (e < rd_avg)
     {
-        power = 0.75*(power * mat->diffuseColor(hit)) / rd_avg; // Arbitrary constant 0.5 = wft?
+        power = (power * mat->diffuseColor(hit)) / rd_avg; // Arbitrary constant 0.5 = wft?
 
         Vector3 n = hit.N;
 	    Vector3 u = n.perpendicular();
