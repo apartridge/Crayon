@@ -105,7 +105,6 @@ private:
 		m_numScanlinesFinished++;
 		m_scanlinesFinished[scanline] = true;
 	}
-
 };
 
 /*
@@ -152,9 +151,6 @@ static void drawScanLineY(int scanline, RaytracerScanlinePool* job)
 			}
 		}
 		
-		
-
-
 		/*float lim = 169/255.0;
 
 		if(shadeResultAccum2.x > lim && shadeResultAccum2.y > lim  && shadeResultAccum2.z > lim )
@@ -180,7 +176,6 @@ static void drawScanLineY(int scanline, RaytracerScanlinePool* job)
 			throw 100;
 		}*/
 		
-
 		job->image->setPixel(i, scanline, shadeResultAccum2);
 	}
 }
@@ -228,12 +223,11 @@ void Raytracer::drawScene(Scene& scene, Camera& camera, Image* image)
 	pthread_attr_init(&attr);
 
 	// Start all threads
-
-	for(int thread = 0; thread < THREADS-1; thread++)
+	for (int thread = 0; thread < THREADS-1; thread++)
 	{
 		int returnCode = pthread_create(&threads[thread], &attr, (void*(*)(void*))&drawNextScanlines, (void *)&job);
 
-		if(returnCode)
+		if (returnCode)
 		{
 			printf("Error; return code from pthread_create() is %d\n", returnCode);
 			exit(3);
@@ -247,21 +241,21 @@ void Raytracer::drawScene(Scene& scene, Camera& camera, Image* image)
 
 	printf("---------------------------------------------------------------\n");
 
-	if(g_camera->focalLength() > 0)
+	if (g_camera->focalLength() > 0)
 	{
 		printf("Using depth-of-field with focallength %g and aperture %g.\n", g_camera->focalLength(), g_camera->aperture());
 	}
 
 	int scanline = -1, prev_scanline_drawn_to_screen = 0;
-	while((scanline = job.nextScanLine(scanline)) != -1)
+	while ((scanline = job.nextScanLine(scanline)) != -1)
 	{
 		drawScanLineY(scanline, &job);
 
 		// Check for new scanlines to draw to screen
 
-		for(int i = prev_scanline_drawn_to_screen; i < image->height(); i++)
+		for (int i = prev_scanline_drawn_to_screen; i < image->height(); i++)
 		{
-			if(job.isScanlineFinished(i))
+			if (job.isScanlineFinished(i))
 			{
 				QueryPerformanceCounter(&tick_end);
 				elapsedTime = (float) (tick_end.QuadPart - tick_start.QuadPart)  / frequency.QuadPart;
@@ -282,7 +276,7 @@ void Raytracer::drawScene(Scene& scene, Camera& camera, Image* image)
 	// Join all the threads again, blocking main thread
 	
 #if THREADS > 1
-	for(int thread = 0; thread < THREADS-1; thread++)
+	for (int thread = 0; thread < THREADS-1; thread++)
 	{
 		pthread_join(threads[thread], NULL);
 	}

@@ -13,8 +13,6 @@ public:
     Camera();
     virtual ~Camera();
 
-
-
     enum RENDER_MODE
     {
         RENDER_OPENGL   = 0,
@@ -48,7 +46,6 @@ public:
 		return m_openGlRenderMode;
 	}
 
-
     void setEye(float x, float y, float z);
     void setEye(const Vector3& eye);
     void setUp(float x, float y, float z);
@@ -80,7 +77,6 @@ public:
 	float aperture() const {return m_aperture;}
 	float focalLength() const {return m_focalLength;}
 
-
     Ray eyeRay(float x, float y, int imageWidth, int imageHeight);
 
 	Vector3 pointInFocus() const;
@@ -105,7 +101,6 @@ private:
 	float m_aperture;
 
 	// Renderers
-
 	OpenGLRenderer* m_openGLRenderer;
 	Raytracer* m_raytracer;
 

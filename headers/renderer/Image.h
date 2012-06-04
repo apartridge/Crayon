@@ -34,11 +34,11 @@ public:
     int width() const               {return m_width;}
     int height() const              {return m_height;}
 
+    int m_height;
 private:
     Pixel* m_pixels;
     Vector3* m_light;
     int m_width;
-    int m_height;
 };
 
 extern Image * g_image;

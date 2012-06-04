@@ -35,7 +35,6 @@ Camera::Camera() :
 	m_raytracer = new Raytracer();
 }
 
-
 Camera::~Camera()
 {
 
@@ -44,6 +43,7 @@ Camera::~Camera()
 void Camera::display(Scene* pScene, Image* pImage)
 {
     calcLookAt();
+
 #if RENDERING_STATS
 	rendering_statistics = new RenderingStats;
 #endif
@@ -59,13 +59,22 @@ void Camera::display(Scene* pScene, Image* pImage)
     {
         if (firstRayTrace)
         {
-			m_raytracer->onChangeTo();
-			m_raytracer->drawScene(*pScene, *this, g_image);
+		    m_raytracer->onChangeTo();
+			m_raytracer->drawScene(*pScene, *this, pImage); // pImage == g_image (redundant function argument)
             firstRayTrace = false;
+            g_image->draw();
         }
+        else
         
-        g_image->draw();
+        {
+            //glDrawBuffer(GL_BACK);
+            printf("Camera::draw()\n");
+            g_image->draw();
+            //glutSwapBuffers();
+            glFinish();
+        }
     }
+
 #if RENDERING_STATS
 	delete rendering_statistics;
 #endif

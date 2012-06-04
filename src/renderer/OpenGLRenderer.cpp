@@ -22,12 +22,9 @@ void glutPrint(float x, float y, void* font, char* text, float r, float g, float
     if(!blending) glDisable(GL_BLEND); 
 }  
 
-
-
 void OpenGLRenderer::drawScene(Scene& scene, Camera& camera, Image* image)
 {
-
-	glClearColor(camera.bgColor().x, camera.bgColor().y, camera.bgColor().z, 1);
+    glClearColor(camera.bgColor().x, camera.bgColor().y, camera.bgColor().z, 1);
 	glClear(0);
     glDrawBuffer(GL_BACK);
 
@@ -40,20 +37,21 @@ void OpenGLRenderer::drawScene(Scene& scene, Camera& camera, Image* image)
 	//glutPrint(1.0f, 1.0f, GLUT_BITMAP_HELVETICA_12, "Hello World!", 1.0f, 0.0f, 0.0f, 0.5f);
 
     gluPerspective(camera.fov(), g_image->width()/(float)g_image->height(),
-                   0.01, 10000);
+                    0.01, 10000);
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     Vector3 vCenter = camera.eye() + camera.viewDir();
     gluLookAt(camera.eye().x, camera.eye().y, camera.eye().z,
-              vCenter.x, vCenter.y, vCenter.z,
-              camera.up().x, camera.up().y, camera.up().z);
+                vCenter.x, vCenter.y, vCenter.z,
+                camera.up().x, camera.up().y, camera.up().z);
 
-	if(camera.getOpenGLShowTriad()){
+	if (camera.getOpenGLShowTriad())
+    {
 		triad3D();
 	}
 
-	if(camera.openGLRenderMode() == Camera::OPENGL_RENDER_FILL)
+	if (camera.openGLRenderMode() == Camera::OPENGL_RENDER_FILL)
 	{
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}
@@ -62,15 +60,14 @@ void OpenGLRenderer::drawScene(Scene& scene, Camera& camera, Image* image)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	}
 
-	// draw lights
-
-	for(int i = 0; i < scene.lights()->size(); i++)
+	// Draw lights
+	for (int i = 0; i < scene.lights()->size(); i++)
 	{
 		scene.lights()->at(i)->renderGL();
 	}
 
 	// Draw A Point In Focus. Press L.
-	if(pointInFocusShow)
+	if (pointInFocusShow)
 	{
 		glColor4f(1, 0, 0, 1);
 		glTranslatef(pointInFocusLocked.x, pointInFocusLocked.y, pointInFocusLocked.z);
@@ -78,18 +75,17 @@ void OpenGLRenderer::drawScene(Scene& scene, Camera& camera, Image* image)
 		glTranslatef(-pointInFocusLocked.x, -pointInFocusLocked.y, -pointInFocusLocked.z);
 	}
 
-
-	if(camera.openGLRenderMode() == Camera::OPENGL_RENDER_FILL || 
-	   camera.openGLRenderMode() == Camera::OPENGL_RENDER_WIRE )
+    // Draw objects
+    if (camera.openGLRenderMode() == Camera::OPENGL_RENDER_FILL || 
+	    camera.openGLRenderMode() == Camera::OPENGL_RENDER_WIRE)
 	{
-		// draw objects
 		for (size_t i = 0; i < scene.objects()->size(); ++i)
 		{
 			scene.objects()->at(i)->renderGL();
 		}
 
 	}
-	else if(camera.openGLRenderMode() == Camera::OPENGL_RENDER_BOUNDINGBOX)
+	else if (camera.openGLRenderMode() == Camera::OPENGL_RENDER_BOUNDINGBOX)
 	{
 		glColor3f(1,0,0);
 		drawVolumeNode(scene.entireScene, 0);
@@ -99,7 +95,6 @@ void OpenGLRenderer::drawScene(Scene& scene, Camera& camera, Image* image)
     scene.photonMap()->renderGL();
 
     glutSwapBuffers();
-
 }
 
 extern int show_level;
@@ -168,11 +163,6 @@ void OpenGLRenderer::onChangeFrom()
 
 }
 
-
-
-
-
-
 void OpenGLRenderer::cube(BoundingBox& box)
 {
 
@@ -222,8 +212,6 @@ void OpenGLRenderer::cube(BoundingBox& box)
 	glEnd();
 
 }
-
-
 
 void OpenGLRenderer::axis3D ()
 {
