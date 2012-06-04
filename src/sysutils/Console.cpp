@@ -122,7 +122,7 @@ void fatal(const char *fmt,...)
 
   cprintf(TEXT_RED"fatal error: "TEXT_NORMAL);
   cprintf(__internal_console_buffer__);
-  exit(-1);
+  exit(4);
 }
 
 /*

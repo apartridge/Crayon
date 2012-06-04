@@ -32,7 +32,7 @@ PhotonMap :: PhotonMap( const int max_phot )
 
   if (photons == NULL) {
     fprintf(stderr,"Out of memory initializing photon map\n");
-    exit(-1);
+    exit(2);
   }
 
   bbox_min[0] = bbox_min[1] = bbox_min[2] = 1e8f;

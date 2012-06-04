@@ -2,12 +2,12 @@
 
 #include <cassert>
 
-Wood::Wood(Vector3 baseColor, Vector3 highColor, float scale, float perlinScale, Vector3 stripesDirection, float stripesScale) : Lambert()
+Wood::Wood(Vector3 baseColor, Vector3 highColor, float scale, Vector3 stripesDirection, float stripesScale) : Lambert()
 {
 	m_baseColor = baseColor;
 	m_highColor = highColor;
 	m_scale = scale;
-	m_perlinScale = perlinScale;
+	//m_perlinScale = perlinScale;
 	m_glossFactor = 0;
 	m_stripesDirection = stripesDirection;
 	m_stripesScale = stripesScale;
@@ -33,6 +33,7 @@ Vector3 Wood::diffuseColor(const HitInfo& hit) const
 {
 	float stripesFactor = sin(dot(m_stripesDirection, hit.P*m_stripesScale));
 	bool stripe = stripesFactor > 0;
+	const float m_perlinScale = 10;
 
     Vector3 normal = hit.N;
     float woodDetail;

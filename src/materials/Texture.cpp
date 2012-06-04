@@ -9,7 +9,7 @@ Texture::~Texture()
 
 Vector3 Texture::diffuseColor(const HitInfo& hit) const
 {
-	return (m_diffuseTexture->sampleImage(hit.textureU, hit.textureV));
+	return (m_diffuseTexture->sampleImage(hit.textureU, hit.textureV)).saturated();
 }
 
 /*
