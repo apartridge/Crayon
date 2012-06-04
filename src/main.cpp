@@ -25,7 +25,7 @@ int main(int argc, char*argv[])
 	printf("0) Materials: Glass\n");
 
 
-	int option = 8;
+	int option = 0;
 
 	if(option == 0)
 		std::cin >> option;
