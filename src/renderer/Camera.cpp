@@ -65,13 +65,9 @@ void Camera::display(Scene* pScene, Image* pImage)
             g_image->draw();
         }
         else
-        
         {
-            //glDrawBuffer(GL_BACK);
             printf("Camera::draw()\n");
             g_image->draw();
-            //glutSwapBuffers();
-            glFinish();
         }
     }
 

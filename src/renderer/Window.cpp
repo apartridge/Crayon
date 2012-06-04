@@ -253,7 +253,14 @@ void Window::keyboard(unsigned char key, int x, int y)
         case 'M':
         {
             printf("Performing tone mapping ...\n");
-            g_image->doToneMapping(0.3);
+            float alpha = 0;
+            do
+            {
+                printf("Enter factor [0, 1]: ");
+                std::cin >> alpha;
+            }
+            while (alpha < 0 || alpha > 1);
+            g_image->doToneMapping(alpha);
             printf("Done tone mapping\n");
 			this->setWindowTitle("Crayon - Tonemap Mode");
             break;

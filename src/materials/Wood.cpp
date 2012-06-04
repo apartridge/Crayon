@@ -94,23 +94,13 @@ Vector3 Wood::diffuseColor(const HitInfo& hit) const
 	Vector3 high;
 	Vector3 details;
 
-	if(stripe)
 	{
 		base = m_baseColor;
 		high = m_highColor;
 		details = detailsColor;
 	}
-	else
-	{
-		base = m_baseColor + (m_highColor-m_baseColor) / 5;
-		high = m_highColor*0.95;
-		details = detailsColor*1.01;
-	}
 
-	//return stripe ? Vector3(1,0,0) :  Vector3(0,0,1);
-
-
-    return (base + 0.75*g*high - gFine*detailsColor);
+    return (base*g + 0.50*gFine*(high-base));
 }
 
 
