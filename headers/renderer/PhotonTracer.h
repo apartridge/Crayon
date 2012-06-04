@@ -16,7 +16,7 @@ public:
     PhotonMap* getPhotonMap() const;
 
     const static int MaxPhotonBounces = 7;
-	const static int DefaultNumberOfPhotons = 0; // ;
+	const static int DefaultNumberOfPhotons = 10000000; 
 
 private:
     const Scene* _scene;

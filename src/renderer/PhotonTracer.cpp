@@ -27,8 +27,9 @@ void PhotonTracer::traceScene(const Scene& scene, int numberOfPhotons)
 // in "Realistic Image Synthesis using Photon Mapping" page 57.
 void PhotonTracer::traceLight(const Light& light, int numberOfPhotons)
 {
-    int n = 0;
-    while (n < numberOfPhotons)
+    int n = 0, c = 0;
+    
+	while (n < numberOfPhotons)
     {
         //Vector3 dir = light.emitPhoton();
         //Vector3 power = light.power() * light.color();
@@ -37,9 +38,18 @@ void PhotonTracer::traceLight(const Light& light, int numberOfPhotons)
         PhotonRay photon = light.emitPhoton();
         Ray ray(photon.origin, photon.direction);
 
-        n += tracePhoton(ray, photon.power, 0);
+        int photons = tracePhoton(ray, photon.power, 0);
+		n += photons;
+		c += photons;
+
+		if(c > numberOfPhotons/100)
+		{
+			c = 0;
+			printf("Emitted photons %d/%d. %.2f %% done.\r", n, numberOfPhotons, (n/float(numberOfPhotons))*100.f);
+		}
+
     }
-    _photonMap->scale_photon_power(1 / (float)numberOfPhotons); 
+    _photonMap->scale_photon_power(1 / (float)numberOfPhotons); // Maybe it should be 'n' here?
 }
 
 int PhotonTracer::tracePhoton(const Ray& ray, Vector3 power, int bounce)
