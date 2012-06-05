@@ -22,7 +22,11 @@ public:
     void setPixel(int x, int y, const Pixel& p);
 
     // Convert raw light data to pixels
-    void doToneMapping(float alpha);
+    void doToneMapping(float alpha, float saturation);
+    void doLinearToneMapping();
+    void doGammaCorrection();
+
+    inline static float luminance(float r, float g, float b);
 
     void draw();
     void drawScanline(int y);

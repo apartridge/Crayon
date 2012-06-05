@@ -44,7 +44,7 @@ void makeFinalScene()
     hdrSphere->setCenter(Vector3(0));
     hdrSphere->setRadius(200);
     hdrSphere->setMaterial(new Skydome("materials/outside.pfm"));
-    g_scene->addObject(hdrSphere);
+    //g_scene->addObject(hdrSphere);
     
 
     Material* materialDefault = new Lambert(Vector3(1,0,0));
@@ -78,7 +78,6 @@ void makeFinalScene()
         light->setPosition(Vector3(88, 32, 0)); // Vector3(89.2, 11, 10)*3
         light->setColor(Vector3(1, 1, 1));
         light->setPower(50000); // 4000
-
         // Set target at windows, to not waste photons
         LightTarget* target = new LightTarget(Vector3(15.81, 5.40, 9.3), 15);
         light->setTarget(target);
@@ -91,12 +90,12 @@ void makeFinalScene()
 	/*
 	Debug Light for working on wood
 	*/
-
+    
 	PointLight * lightInRoom = new PointLight;
     lightInRoom->setPosition(Vector3(-3, 11, -3));
     lightInRoom->setColor(Vector3(1, 1, 1));
     lightInRoom->setPower(200);
-    g_scene->addLight(lightInRoom);
+    //g_scene->addLight(lightInRoom);
 
 	
 

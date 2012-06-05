@@ -266,16 +266,35 @@ void Window::keyboard(unsigned char key, int x, int y)
         case 'M':
         {
             printf("Performing tone mapping ...\n");
-            float alpha = 0;
+            float alpha = 0, saturation = 0;
             do
             {
-                printf("Enter factor [0, 1]: ");
+                printf("Enter {alpha} {saturation}: ");
                 std::cin >> alpha;
+                std::cin >> saturation;
             }
-            while (alpha < 0 || alpha > 1);
-            g_image->doToneMapping(alpha);
+            while (false);
+            g_image->doToneMapping(alpha, saturation);
             printf("Done tone mapping\n");
 			this->setWindowTitle("Crayon - Tonemap Mode");
+            break;
+        }
+
+        case 'n':
+        case 'N':
+        {
+            printf("Performing linear tone mapping ...\n");
+            g_image->doLinearToneMapping();
+			this->setWindowTitle("Crayon - Linear Tonemap Mode");
+            break;
+        }
+        
+        case 'j':
+        case 'J':
+        {
+            printf("Performing gamma correction ...\n");
+            g_image->doGammaCorrection();
+			this->setWindowTitle("Crayon - Gamma corrected");
             break;
         }
 
