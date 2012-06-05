@@ -2,6 +2,7 @@
 
 #include "sysutils/Random.h"
 #include "renderer/glut.h"
+#include "sysutils/PerformanceTimer.h"
 
 void PhotonTracer::traceScene(const Scene& scene, int numberOfPhotons)
 {
@@ -28,6 +29,9 @@ void PhotonTracer::traceScene(const Scene& scene, int numberOfPhotons)
 void PhotonTracer::traceLight(const Light& light, int numberOfPhotons)
 {
     int n = 0, c = 0;
+
+	PerformanceTimer pt;
+	pt.start();
     
 	while (n < numberOfPhotons)
     {
@@ -42,10 +46,14 @@ void PhotonTracer::traceLight(const Light& light, int numberOfPhotons)
 		n += photons;
 		c += photons;
 
-		if(c > numberOfPhotons/100)
+		if(c > numberOfPhotons/50)
 		{
 			c = 0;
-			printf("Emitted photons %d/%d. %.2f %% done.\r", n, numberOfPhotons, (n/float(numberOfPhotons))*100.f);
+			pt.stop();
+			printf("%.2f seconds. %.2f %% done. Remaining: %.2f sec.\r",
+				pt.elapsedSec(),
+				(n/float(numberOfPhotons))*100.f, pt.elapsedSec()*(float(numberOfPhotons)/float(n) - 1));
+			pt.start();
 		}
 
     }

@@ -67,6 +67,8 @@ public:
 		m_aperture = aperture;
 	}
 
+	void resetPosition();
+
     float fov() const                {return m_fov;}
     const Vector3 & viewDir() const  {return m_viewDir;}
     const Vector3 & lookAt() const   {return m_lookAt;}
@@ -88,6 +90,11 @@ private:
     Vector3 m_bgColor;
     RENDER_MODE m_renderer;
 	OPENGL_RENDER_MODE m_openGlRenderMode;
+
+	Vector3 m_eyeDefault;
+	bool m_eyeDefaultSet;
+	Vector3 m_lookAtDefault;
+	bool m_lookAtDefaultSet;
 
     // main screen params
     Vector3 m_eye;
@@ -111,6 +118,11 @@ extern Camera * g_camera;
 inline void Camera::setEye(float x, float y, float z)
 {
     m_eye.set(x, y, z);
+	if(!m_eyeDefaultSet)
+	{
+		m_eyeDefault.set(x,y,z);
+		m_eyeDefaultSet = true;
+	}
 }
 
 inline void Camera::setEye(const Vector3& eye)
@@ -144,6 +156,11 @@ inline void Camera::setLookAt(float x, float y, float z)
 {
     Vector3 dir = Vector3(x, y, z) - m_eye;
     setViewDir(dir);
+	if(!m_lookAtDefaultSet)
+	{
+		m_lookAtDefault.set(x,y,z);
+		m_lookAtDefaultSet = true;
+	}
 }
 
 inline void Camera::setLookAt(const Vector3& vd)

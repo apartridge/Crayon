@@ -25,11 +25,33 @@ Vector3 TextureImage::sampleImage(float u, float v)
 	int yTwo = min(yOne + 1, height-1);
 	float yOneFactor = 1 - (y - yOne);
 
-	return image[xOne*height + yOne];
+	if(xOne > width - 1)
+	{
+		printf("TextureImage X Overflow!\n");
+		xOne = width-1;
+	}
+	if(yOne > height - 1)
+	{
+		printf("TextureImage Y Overflow!\n");
+		yOne = height-1;
+	}
+	
+	if(xOne < 0)
+	{
+		printf("TextureImage X Underflow!\n");
+		xOne = 0;
+	}
+	if(yOne < 0)
+	{
+		printf("TextureImage Y Underflow!\n");
+		yOne = 0;
+	}
 
-	/*return image[xOne*height + yOne]*(xOneFactor)*(yOneFactor) // x1y1
+	//return image[xOne*height + yOne];
+
+	return image[xOne*height + yOne]*(xOneFactor)*(yOneFactor) // x1y1
 			+ image[xOne*height + yTwo]*(xOneFactor)*(1-yOneFactor) // x1y2
 			+ image[xTwo*height + yOne]*(1-xOneFactor)*(yOneFactor) // x2y1
-			+ image[xTwo*height + yTwo]*(1-xOneFactor)*(1-yOneFactor); // x2y2*/
+			+ image[xTwo*height + yTwo]*(1-xOneFactor)*(1-yOneFactor); // x2y2
 
 }
