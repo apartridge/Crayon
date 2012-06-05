@@ -29,6 +29,7 @@ void PhotonTracer::traceScene(const Scene& scene, int numberOfPhotons)
 void PhotonTracer::traceLight(const Light& light, int numberOfPhotons)
 {
     int n = 0, c = 0;
+	int c2 = numberOfPhotons/50;
 
 	PerformanceTimer pt;
 	pt.start();
@@ -46,7 +47,7 @@ void PhotonTracer::traceLight(const Light& light, int numberOfPhotons)
 		n += photons;
 		c += photons;
 
-		if(c > numberOfPhotons/50)
+		if(c > c2)
 		{
 			c = 0;
 			pt.stop();

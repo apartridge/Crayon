@@ -32,18 +32,18 @@ void makeFinalScene()
     
     // set up the camera
     g_camera->setBGColor(Vector3(0.0f, 0.0f, 0.2f));
-    g_camera->setEye(Vector3(-5.55, 5.00, -8.10));
-    g_camera->setLookAt(Vector3(-3.284, 3.888, -5.333));
+    g_camera->setEye(Vector3(-5.166, 5.292, -7.929));
+    g_camera->setLookAt(Vector3(-4.029, 4.765, -6.345));
     g_camera->setUp(Vector3(0, 1, 0));
     g_camera->setFOV(45);
-	g_camera->setFocalLength(0*3.5);
-	g_camera->setAperture(0.12);
+	g_camera->setFocalLength(3.5);
+	g_camera->setAperture(0.02);
 
     // Add HDR sphere map
     Sphere *hdrSphere = new Sphere();
     hdrSphere->setCenter(Vector3(0));
     hdrSphere->setRadius(200);
-    hdrSphere->setMaterial(new Skydome("noting"));
+    hdrSphere->setMaterial(new Skydome("materials/outside.pfm"));
     g_scene->addObject(hdrSphere);
     
 
@@ -75,13 +75,12 @@ void makeFinalScene()
         g_scene->addObject(trg);*/
 
         PointLight * light = new PointLight;
-        light->setPosition(Vector3(88, 32, 0)); // Vector3(89.2, 11, 10)*3
+        light->setPosition(Vector3(88, 32, 21)); // Vector3(89.2, 11, 10)*3
         light->setColor(Vector3(1, 1, 1));
         light->setPower(10000); // 4000
         // Set target at windows, to not waste photons
         LightTarget* target = new LightTarget(Vector3(15.81, 5.40, 9.3), 15);
         light->setTarget(target);
-
         g_scene->addLight(light);
     }
     
@@ -210,8 +209,8 @@ void makeFinalScene()
 	mesh->connectNameToMaterial("ChessWhite", white);
 	mesh->connectNameToMaterial("ChessBlack", black);
 
-    Material* glassChessPieceWhite = new Glass(1.4, Vector3(1, 1, 1));
-    Material* glassChessPieceBlack = new Glass(1.4, Vector3(0.7, 1, 0.7));
+    Material* glassChessPieceWhite = new Glass(1.5, Vector3(1, 1, 1));
+    Material* glassChessPieceBlack = new Glass(1.5, Vector3(0.6, 1, 0.6));
     mesh->connectNameToMaterial("ChessPiecesOne", glassChessPieceWhite);
     mesh->connectNameToMaterial("ChessPiecesTwo", glassChessPieceBlack);
 

@@ -2,8 +2,9 @@
 #include "geometry/Ray.h"
 #include "geometry/Scene.h"
 
+#define USE_PHOTON_MAP 1
 
-Material::Material(const Vector3& d, const Vector3& s, const Vector3& t) : /* ambient(d),*/ rd(d), rs(s), rt(t)
+Material::Material(const Vector3& d, const Vector3& s, const Vector3& t) : rd(d), rs(s), rt(t)
 {
     indexOfRefraction = 1.0;
     shininess = 0.0;
@@ -36,63 +37,46 @@ Vector3 Material::shade(const Ray& ray, const HitInfo& hit, const Scene& scene, 
     return L;
 }
 
-
-/*
-Global Illumination
-*/
-
 Vector3 Material::shadeGlobalIllumination(const Ray& ray, const HitInfo& hit, const Scene& scene, const int depth) const
 {
     Vector3 L(0);
 
-    if (true)
-    {
-        Vector3 irradiance;
-        scene.photonMap()->irradiance_estimate(&irradiance[0], &hit.P[0], &hit.N[0], 0.5, 80);
+#if USE_PHOTON_MAP
 
-        L += diffuseColor(hit) * irradiance; // ??
-    }
-    else
-    {
-		// Find (u, v) for local coordinate system
-		Vector3 n = hit.N;
-		Vector3 u = n.perpendicular();
-		Vector3 v = cross(n, u);
+    Vector3 irradiance;
+    scene.photonMap()->irradiance_estimate(&irradiance[0], &hit.P[0], &hit.N[0], 0.2, 80);
 
-		// Generate random angles proportional to cos(theta)
-		const float phi = 2*PI*Random::uniformRand();
-		const float theta = asin(sqrt(Random::uniformRand()));
+    L += (1/PI) * diffuseColor(hit) * irradiance;
 
-		Vector3 d = (cos(phi) * sin(theta) * u + 
-					 sin(phi) * sin(theta) * v +
-					 cos(theta) * n).normalized();
+#else
 
-		// Trace randomly generated reflected ray
-		HitInfo pathHit;
-		Ray pathRay (hit.P, d);
+	// Find (u, v) for local coordinate system
+	Vector3 n = hit.N;
+	Vector3 u = n.perpendicular();
+	Vector3 v = cross(n, u);
 
-		if (scene.trace(pathHit, pathRay, epsilon))
-		{
-			if (pathHit.material != NULL)
-				L += diffuseColor(hit) * (1/PI) * pathHit.material->shade(pathRay, pathHit, scene, depth + 1);
-		}
-    }
+	// Generate random angles proportional to cos(theta)
+	const float phi = 2*PI*Random::uniformRand();
+	const float theta = asin(sqrt(Random::uniformRand()));
 
+	Vector3 d = (cos(phi) * sin(theta) * u + 
+					sin(phi) * sin(theta) * v +
+					cos(theta) * n).normalized();
+
+	// Trace randomly generated reflected ray
+	HitInfo pathHit;
+	Ray pathRay (hit.P, d);
+
+	if (scene.trace(pathHit, pathRay, epsilon))
+	{
+		if (pathHit.material != NULL)
+			L += diffuseColor(hit) * (1/PI) * pathHit.material->shade(pathRay, pathHit, scene, depth + 1);
+	}
+
+#endif
 
     return L;
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 Vector3 Material::lightDiffuseVisiblity(const Light& light, const HitInfo& hit, const Scene& scene)
 {
@@ -128,13 +112,8 @@ Ray Material::refractRay(const Ray& ray, const HitInfo& hit) const
     else
         direction = (n1n2*ray.direction() + (n1n2*cosi - sqrt(1.0 - sin2t))*n).normalized();
 
-
-
-
-	Ray refractRay (hit.P, direction) ;
-    /*refractRay.o = hit.P;
-    refractRay.mediumOfTravel = n2;*/
-
+	Ray refractRay (hit.P, direction);
+    refractRay.mediumOfTravel.indexOfRefraction = n2;
 
     return refractRay;
 }

@@ -26,8 +26,8 @@ void makeWoodScene()
     g_camera->setUp(Vector3(0, 1, 0));
     g_camera->setFOV(45);
 
-	g_camera->setFocalLength(0*15);
-	g_camera->setAperture(0*0.7);
+	g_camera->setFocalLength(15);
+	g_camera->setAperture(0.7);
 
     // Create light sources
 
@@ -123,7 +123,7 @@ void makeWoodScene()
 
 	mesh->connectNameToMaterial("MaterialTwo", materialWood2);
 	mesh->connectNameToMaterial("MaterialThree", materialWood3);
-    mesh->load("table.obj");
+    mesh->load("monkey.obj");
 	g_scene->addMesh(mesh);
 
 
