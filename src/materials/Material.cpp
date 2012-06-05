@@ -48,7 +48,7 @@ Vector3 Material::shadeGlobalIllumination(const Ray& ray, const HitInfo& hit, co
     if (true)
     {
         Vector3 irradiance;
-        scene.photonMap()->irradiance_estimate(&irradiance[0], &hit.P[0], &hit.N[0], 0.2, 80);
+        scene.photonMap()->irradiance_estimate(&irradiance[0], &hit.P[0], &hit.N[0], 0.3, 80);
 
         L += diffuseColor(hit) * irradiance; // ??
     }
