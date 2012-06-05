@@ -32,19 +32,19 @@ void makeFinalScene()
     
     // set up the camera
     g_camera->setBGColor(Vector3(0.0f, 0.0f, 0.2f));
-    g_camera->setEye(Vector3(-5.55, 5.00, -8.10));
-    g_camera->setLookAt(Vector3(-3.284, 3.888, -5.333));
+    g_camera->setEye(Vector3(-5.116, 5.292, -7.929));
+    g_camera->setLookAt(Vector3(-3.404, 3.685, -5.224));
     g_camera->setUp(Vector3(0, 1, 0));
     g_camera->setFOV(45);
 	g_camera->setFocalLength(0*3.5);
-	g_camera->setAperture(0.12);
+	g_camera->setAperture(0.05);
 
     // Add HDR sphere map
     Sphere *hdrSphere = new Sphere();
     hdrSphere->setCenter(Vector3(0));
     hdrSphere->setRadius(200);
     hdrSphere->setMaterial(new Skydome("materials/outside.pfm"));
-    //g_scene->addObject(hdrSphere);
+    g_scene->addObject(hdrSphere);
     
 
     Material* materialDefault = new Lambert(Vector3(1,0,0));
@@ -77,7 +77,7 @@ void makeFinalScene()
         PointLight * light = new PointLight;
         light->setPosition(Vector3(88, 32, 0)); // Vector3(89.2, 11, 10)*3
         light->setColor(Vector3(1, 1, 1));
-        light->setPower(50000); // 4000
+        light->setPower(50000);
         // Set target at windows, to not waste photons
         LightTarget* target = new LightTarget(Vector3(15.81, 5.40, 9.3), 15);
         light->setTarget(target);

@@ -151,12 +151,12 @@ Ray Camera::eyeRay(float x, float y, int imageWidth, int imageHeight)
 
 		float u, v;
 		do {
-			u = Random::uniformRand();
-			v = Random::uniformRand();
+			u = m_aperture*(Random::uniformRand()*2-1);
+			v = m_aperture*(Random::uniformRand()*2-1);
 		}
-		while (u*u + v*v > 1);
+		while (u*u + v*v > m_aperture*m_aperture);
 
-		origin = m_eye + (uDir*(u*m_aperture) + vDir*(v*m_aperture));
+		origin = m_eye + (uDir*u + vDir*v);
 
 		direction = (X-origin).normalized();
 	}

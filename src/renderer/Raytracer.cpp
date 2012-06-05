@@ -18,7 +18,7 @@ extern RenderingStats* rendering_statistics;
 
 #define THREADS 8 // Including the main thread
 
-#define PIXEL_SAMPLES 8
+#define PIXEL_SAMPLES 1
 
 Raytracer::Raytracer()
 {
@@ -125,7 +125,7 @@ static void drawScanLineY(int scanline, RaytracerScanlinePool* job)
 
 		double x = 0, y = 0, z = 0;
 
-		for(int sample = 0; sample < PIXEL_SAMPLES; sample++)
+		for(int sample = 1; sample <= PIXEL_SAMPLES; sample++)
 		{
 			float dx = Random::uniformRand() - 0.5;
 			float dy = Random::uniformRand() - 0.5;
@@ -147,7 +147,7 @@ static void drawScanLineY(int scanline, RaytracerScanlinePool* job)
 				z += color.z;
 				*/
 
-				shadeResultAccum2 += color / float(PIXEL_SAMPLES);
+				shadeResultAccum2 += (color-shadeResultAccum2)/float(sample); // float(PIXEL_SAMPLES);
 			}
 		}
 		
