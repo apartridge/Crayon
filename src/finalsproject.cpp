@@ -44,7 +44,7 @@ void makeFinalScene()
     hdrSphere->setCenter(Vector3(0));
     hdrSphere->setRadius(200);
     hdrSphere->setMaterial(new Skydome("rnl_probe.pfm"));
-    g_scene->addObject(hdrSphere);
+    //g_scene->addObject(hdrSphere);
     
 
     Material* materialOne = new Lambert(Vector3(0.5));
