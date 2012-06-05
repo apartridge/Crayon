@@ -32,11 +32,11 @@ void makeFinalScene()
     
     // set up the camera
     g_camera->setBGColor(Vector3(0.0f, 0.0f, 0.2f));
-    g_camera->setEye(Vector3(-5.166, 5.292, -7.929));
-    g_camera->setLookAt(Vector3(-4.029, 4.765, -6.345));
+    g_camera->setEye(Vector3(-5.422, 5.444, -8.215));
+    g_camera->setLookAt(Vector3(-3.283, 4.077, -5.123));
     g_camera->setUp(Vector3(0, 1, 0));
     g_camera->setFOV(45);
-	g_camera->setFocalLength(3.5);
+	g_camera->setFocalLength(3.9);
 	g_camera->setAperture(0.02);
 
     // Add HDR sphere map
@@ -229,20 +229,6 @@ void makeFinalScene()
 	Material* staircaseSides = new Wood(stairCaseBaseColor, stairCaseHighColor, 0.53, Vector3(0,1,0), 1.36);
 	mesh->connectNameToMaterial("StairsSides", staircaseSides);
 
-	// Dark Steps
-
-	Vector3 staircaseDarkStepBase = Vector3(45, 30, 18)/255.0;
-	Vector3 staircaseDarkStepHigh = Vector3(123, 82, 49)/255.0;
-
-	const float staircaseDarkStepScale = 1.5;
-	float staircaseDarkStepPerlinScale = 10;
-	Material* materialStairDarkSteps = new Wood(staircaseDarkStepBase, staircaseDarkStepHigh,
-												staircaseDarkStepScale,
-												staircaseDarkStepPerlinScale);
-
-	mesh->connectNameToMaterial("StairsSteps", materialStairDarkSteps);
-	mesh->connectNameToMaterial("StairsHandguards", materialStairDarkSteps);
-
 	/*
 	// SOFA AND TABLE
 	*/
@@ -255,8 +241,9 @@ void makeFinalScene()
 	//Material* frostedGlassTable = new FrostedGlass(Vector3(0.2), Vector3(0.9));
     mesh->connectNameToMaterial("TableTopGlass", new Glass());
 
+	mesh->connectNameToMaterial("TableSides", new Lambert(Vector3(0.3, 0.3, 0.3)));
 
-
+	mesh->connectNameToMaterial("TableMetalChrome", new Lambert(Vector3(0.3, 0.3, 0.3)));
 
     mesh->load("world.obj");
 	g_scene->addMesh(mesh);
