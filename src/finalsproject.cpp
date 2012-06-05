@@ -28,16 +28,16 @@ void makeFinalScene()
     g_camera = new Camera;
     g_scene = new Scene;
     g_image = new Image;
-    g_image->resize(512, 512);
+    g_image->resize(1024, 576);
     
     // set up the camera
     g_camera->setBGColor(Vector3(0.0f, 0.0f, 0.2f));
-    g_camera->setEye(Vector3(-9, 5, -9));
-    g_camera->setLookAt(Vector3(-6, 3, -6));
+    g_camera->setEye(Vector3(-5.55, 5.00, -8.10));
+    g_camera->setLookAt(Vector3(-3.284, 3.888, -5.333));
     g_camera->setUp(Vector3(0, 1, 0));
     g_camera->setFOV(45);
-	g_camera->setFocalLength(0); // 6.5
-	g_camera->setAperture(0.07);
+	g_camera->setFocalLength(3.5);
+	g_camera->setAperture(0.12);
 
     // Add HDR sphere map
     Sphere *hdrSphere = new Sphere();
