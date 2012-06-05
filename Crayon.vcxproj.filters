@@ -34,9 +34,6 @@
     <ClCompile Include="src\geometry\TriangleMesh.cpp">
       <Filter>sources\geometry</Filter>
     </ClCompile>
-    <ClCompile Include="src\renderer\Camera.cpp">
-      <Filter>sources\renderer</Filter>
-    </ClCompile>
     <ClCompile Include="src\renderer\Image.cpp">
       <Filter>sources\renderer</Filter>
     </ClCompile>
@@ -120,6 +117,9 @@
     </ClCompile>
     <ClCompile Include="src\materials\Fabric.cpp">
       <Filter>sources\materials</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\Camera.cpp">
+      <Filter>sources\renderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
