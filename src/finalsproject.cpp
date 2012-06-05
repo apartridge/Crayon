@@ -77,7 +77,7 @@ void makeFinalScene()
         PointLight * light = new PointLight;
         light->setPosition(Vector3(88, 32, 0)); // Vector3(89.2, 11, 10)*3
         light->setColor(Vector3(1, 1, 1));
-        light->setPower(200000); // 4000
+        light->setPower(100000); // 4000
 
         // Set target at windows, to not waste photons
         LightTarget* target = new LightTarget(Vector3(15.81, 5.40, 9.3), 15);
@@ -91,12 +91,12 @@ void makeFinalScene()
 	/*
 	Debug Light for working on wood
 	*/
-
+    
 	PointLight * lightInRoom = new PointLight;
     lightInRoom->setPosition(Vector3(-3, 11, -3));
     lightInRoom->setColor(Vector3(1, 1, 1));
     lightInRoom->setPower(200);
-    g_scene->addLight(lightInRoom);
+    //g_scene->addLight(lightInRoom);
 
 	
 
