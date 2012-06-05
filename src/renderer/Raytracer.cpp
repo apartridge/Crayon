@@ -18,7 +18,7 @@ extern RenderingStats* rendering_statistics;
 
 #define THREADS 8 // Including the main thread
 
-#define PIXEL_SAMPLES 1
+#define PIXEL_SAMPLES 15
 
 Raytracer::Raytracer()
 {
