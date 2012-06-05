@@ -27,5 +27,5 @@ Vector3 Skydome::shade(const Ray& ray, const HitInfo& hit, const Scene& scene, c
 	int uvCoordinatesNormalized[2];
 	sphereCoordinates(ray.direction(), uvCoordinatesNormalized);
 
-	return 10 * image[uvCoordinatesNormalized[0]*width + uvCoordinatesNormalized[1]];
+	return (3 * image[uvCoordinatesNormalized[0]*width + uvCoordinatesNormalized[1]]).saturated();
 }

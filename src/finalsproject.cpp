@@ -36,7 +36,7 @@ void makeFinalScene()
     g_camera->setLookAt(Vector3(-3.284, 3.888, -5.333));
     g_camera->setUp(Vector3(0, 1, 0));
     g_camera->setFOV(45);
-	g_camera->setFocalLength(3.5);
+	g_camera->setFocalLength(0*3.5);
 	g_camera->setAperture(0.12);
 
     // Add HDR sphere map
@@ -75,9 +75,9 @@ void makeFinalScene()
         g_scene->addObject(trg);*/
 
         PointLight * light = new PointLight;
-        light->setPosition(Vector3(30, 11, 10)*3);
+        light->setPosition(Vector3(88, 32, 0)); // Vector3(89.2, 11, 10)*3
         light->setColor(Vector3(1, 1, 1));
-        light->setPower(300000); // 4000
+        light->setPower(200000); // 4000
 
         // Set target at windows, to not waste photons
         LightTarget* target = new LightTarget(Vector3(15.81, 5.40, 9.3), 15);
@@ -92,11 +92,11 @@ void makeFinalScene()
 	Debug Light for working on wood
 	*/
 
-	/*PointLight * lightInRoom = new PointLight;
+	PointLight * lightInRoom = new PointLight;
     lightInRoom->setPosition(Vector3(-3, 11, -3));
     lightInRoom->setColor(Vector3(1, 1, 1));
-    lightInRoom->setPower(100);
-    g_scene->addLight(lightInRoom);*/
+    lightInRoom->setPower(200);
+    g_scene->addLight(lightInRoom);
 
 	
 
@@ -108,8 +108,8 @@ void makeFinalScene()
 	/*
 	// Outside
 	*/
-	
-    // Windows and area lights
+
+	// Windows and area lights
     Material* windowGlass = new Glass();
     mesh->connectNameToMaterial("BigWindows", windowGlass);
 
@@ -173,29 +173,31 @@ void makeFinalScene()
 	*/
 
 
-	Vector3 baseColor = Vector3(33, 16, 8)/255.0;
-	Vector3 highColor = Vector3(132, 82, 49)/255.0;
-	const float scale = 0.54;
-	Wood* tableWood = new Wood(baseColor, highColor, scale);
+	Vector3 tableWoodBaseColor = Vector3(69, 22, 1)/255.0;
+	Vector3 tableWoodHighColor = Vector3(74, 23, 2)/255.0;
+	const float scale = 0.70;
+	Wood* tableWood = new Wood(tableWoodBaseColor, tableWoodHighColor, scale, Vector3(1,0,0), 3.0f);
 
 	Vector3 glossColor = Vector3(1);
-	int glossPower = 250;
+	int glossPower = 300;
 	float glossFactor = 0.01;
 	tableWood->setGlossiness(glossPower, glossFactor, glossColor);
+	mesh->connectNameToMaterial("TableWood", tableWood);
 
 
 
-
-
-
-
-	mesh->connectNameToMaterial("TableWood_FW_WD_BB.JPG", tableWood);
-
-	mesh->connectNameToMaterial("ChairWood_CHR00401.jpg", tableWood);
-	
-	
-	Material* chairFabric = new Lambert(Vector3(0.8, 0.1, 0.1));
+	Material* chairFabric = new Fabric(Vector3(0.8, 0.1, 0.1));
 	mesh->connectNameToMaterial("ChairFabric_CHR00402.jpg", chairFabric);
+
+
+
+	/*Texture* tableTexture = new Texture();
+	TextureImage* tableDiffuse = TextureImage::loadFromPFM("materials/table.pfm");
+	tableTexture->setDiffuse(tableDiffuse);*/
+	
+	mesh->connectNameToMaterial("ChairWood_CHR00401.jpg", tableWood);
+
+
 
 	/*
 	// Chess Board
@@ -210,7 +212,7 @@ void makeFinalScene()
     mesh->connectNameToMaterial("ChessPiecesOne", glassChessPieceWhite);
     mesh->connectNameToMaterial("ChessPiecesTwo", glassChessPieceBlack);
 
-	Wood* darkWood = new Wood(Vector3(45, 30, 18)/255.0, Vector3(123, 82, 49)/255.0, 0.3);
+	Wood* darkWood = new Wood(Vector3(45, 30, 18)/255.0, Vector3(49, 34, 22)/255.0, 0.3);
 	darkWood->setGlossiness(300, 0.03, Vector3(1));
     mesh->connectNameToMaterial("ChessBoard", darkWood);
 

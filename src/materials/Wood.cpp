@@ -5,9 +5,8 @@
 Wood::Wood(Vector3 baseColor, Vector3 highColor, float scale, Vector3 stripesDirection, float stripesScale) : Lambert()
 {
 	m_baseColor = baseColor;
-	m_highColor = highColor;
+	m_highColor = baseColor*1.1 + Vector3(5.0/255.0,5.0/255.0,0);
 	m_scale = scale;
-	//m_perlinScale = perlinScale;
 	m_glossFactor = 0;
 	m_stripesDirection = stripesDirection;
 	m_stripesScale = stripesScale;
@@ -31,76 +30,93 @@ void normalize(float& x)
 
 Vector3 Wood::diffuseColor(const HitInfo& hit) const
 {
-	float stripesFactor = sin(dot(m_stripesDirection, hit.P*m_stripesScale));
-	bool stripe = stripesFactor > 0;
+	Vector3 m_stretchDirection = m_stripesDirection;
+	float sinFactor = sin(dot(m_stretchDirection, hit.P*m_stripesScale));
+	bool stripe = sinFactor > 0;
+	bool subStripe = sin(2*dot(m_stretchDirection, hit.P*m_stripesScale)) > 0;
 	const float m_perlinScale = 10;
-
-    Vector3 normal = hit.N;
-    float woodDetail;
+	
+	Vector3 perlinBaseCoord;
 	if(stripe)
 	{
-		woodDetail = m_perlinScale*PerlinNoise::noise(hit.P.x*m_scale, hit.P.y*m_scale, hit.P.z*m_scale);
+		perlinBaseCoord = hit.P * m_scale;
 	}
 	else
 	{
-		woodDetail = m_perlinScale*PerlinNoise::noise((hit.P.y+10)*m_scale, (hit.P.z+7)*m_scale, (hit.P.x+1)*m_scale);
+		perlinBaseCoord = (hit.P+Vector3(20,-7,10)) * m_scale;
 	}
+
+	// Stretch out
+
+	perlinBaseCoord = perlinBaseCoord * (m_stretchDirection*1.5 + Vector3(1,1,1));
 	
-	
+	float woodDetail = m_perlinScale*PerlinNoise::noise(perlinBaseCoord.x, perlinBaseCoord.y, perlinBaseCoord.z);
 	if(woodDetail < 0)
 	{
 		woodDetail = -woodDetail;
 	}
 
-	/*if(stripe)
-	{
-		woodDetail += hit.P.y*hit.P.z;
-		normalize(woodDetail);
-	}*/
-
 	float g = woodDetail - int(woodDetail);
+	g = 0.30 + 0.70*(1 - powf(1-g, 1.3)); // higher is more bright/flat color
 
-	float detailFactor = 0.1;
-	float detailScale = 15;
+	/*
+	Details
+	*/
+
+	float detailFactor = 0.3;
+	float detailScale = m_scale*2;
 	Vector3 detailsColor = Vector3(0, 0, 0)/255.0;
 
-
-
-	float woodDetailFine;
+	Vector3 perlinDetailCoord;
 	if(stripe)
 	{
-		woodDetailFine = detailFactor*PerlinNoise::noise(hit.P.x*detailScale, hit.P.y*detailScale, hit.P.z*detailScale);
+		perlinDetailCoord = hit.P*detailScale;
 	}
 	else
 	{
-		woodDetailFine = detailFactor*PerlinNoise::noise((hit.P.y+hit.P.z)/2*detailScale, (hit.P.x+hit.P.z)/2*detailScale, (hit.P.x+hit.P.y)/2*detailScale);
+		perlinDetailCoord = (hit.P+Vector3(-11,12,20))*detailScale;
 	}
 	
+	// Stretch
+	perlinDetailCoord = perlinDetailCoord * (m_stretchDirection*7 + Vector3(1,1,1));
 
+	float woodDetailFine = detailFactor*PerlinNoise::noise(perlinDetailCoord.x, perlinDetailCoord.y, perlinDetailCoord.z);
 	if(woodDetailFine < 0)
 	{
 		woodDetailFine = -woodDetailFine;
 	}
-
-	/*if(stripe)
-	{
-		woodDetailFine += hit.P.x;
-		normalize(woodDetailFine);
-	}*/
-
 	float gFine = woodDetailFine - int(woodDetailFine);
 
-	Vector3 base;
-	Vector3 high;
-	Vector3 details;
+	/*
+	Stripes
+	*/
 
+	Vector3 perlinStripesCoord = hit.P * (m_stretchDirection*100 + Vector3(1,1,1));
+	float woodStripes = PerlinNoise::noise(perlinStripesCoord.x, perlinStripesCoord.y, perlinStripesCoord.z);
+	if(woodStripes < 0)
 	{
-		base = m_baseColor;
-		high = m_highColor;
-		details = detailsColor;
+		woodStripes = -woodStripes;
 	}
+	float gStripes = woodStripes - int(woodStripes);
+	gStripes = 0.7 + gStripes*0.3;
+	//gStripes = 1- ( 1 - pow(gStripes,14));
 
-    return (base*g + 0.50*gFine*(high-base));
+	Vector3 color;
+	//Vector3 high;
+	//Vector3 details;
+
+	float zeroToOne = powf((sinFactor+1)/2,1.35); // Steepness of gradient
+
+	if(stripe)
+	{
+		float baseFac = subStripe ? 1.2 : 0.9;
+		color = m_baseColor*baseFac + (m_highColor-m_baseColor)*(1-zeroToOne);
+	}
+	else
+	{
+		color = m_baseColor + (m_highColor-m_baseColor)*zeroToOne;
+	}
+    return color*gStripes*g;
 }
 
 
