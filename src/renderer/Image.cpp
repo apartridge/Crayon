@@ -100,9 +100,9 @@ void Image::doGammaCorrection()
     for (int i = 0; i < n; ++i)
     {
         Vector3 color = m_light[i];
-        color.x = pow(color.x, (1/float(2.2)));
-        color.y = pow(color.y, (1/float(2.2)));
-        color.z = pow(color.z, (1/float(2.2)));
+        color.x = pow(color.x, (1/2.2f));
+        color.y = pow(color.y, (1/2.2f));
+        color.z = pow(color.z, (1/2.2f));
 
         m_pixels[i].r = Map( color.x );
         m_pixels[i].g = Map( color.y );
