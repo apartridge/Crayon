@@ -2,7 +2,7 @@
 #include "geometry/Ray.h"
 #include "geometry/Scene.h"
 
-Glass::Glass(float refractiveIndex) : Material(Vector3(0.00), Vector3(0.00), Vector3(1))
+Glass::Glass(float refractiveIndex, Vector3 color) : Material(Vector3(0,0,0), Vector3(0.00), color)
 {
 	shininess = 500;
     indexOfRefraction = refractiveIndex; // Override Material
@@ -63,13 +63,12 @@ Vector3 Glass::shadeReflectance(const Ray& ray, const HitInfo& hit, const Scene&
     HitInfo refObjHit;
 	Vector3 direction = reflect(ray, hit);
     Ray refRay (hit.P, direction);
-    /*refRay.o = hit.P;
-    refRay.d = */
 
     if (outside && scene.trace(refObjHit, refRay, epsilon)) 
     {
         Vector3 reflectedColor = refObjHit.material->shade(refRay, refObjHit, scene, depth + 1);
         L += R * reflectedColor;
     }
-    return L;
+
+    return Rt() * L;
 }

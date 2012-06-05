@@ -28,7 +28,7 @@ void makeFinalScene()
     g_camera = new Camera;
     g_scene = new Scene;
     g_image = new Image;
-    g_image->resize(1024, 576);
+    g_image->resize(1280, 720);
     
     // set up the camera
     g_camera->setBGColor(Vector3(0.0f, 0.0f, 0.2f));
@@ -43,13 +43,13 @@ void makeFinalScene()
     Sphere *hdrSphere = new Sphere();
     hdrSphere->setCenter(Vector3(0));
     hdrSphere->setRadius(200);
-    hdrSphere->setMaterial(new Skydome("rnl_probe.pfm"));
+    hdrSphere->setMaterial(new Skydome("materials/outside.pfm"));
     g_scene->addObject(hdrSphere);
     
 
-    Material* materialOne = new Lambert(Vector3(0.5));
+    Material* materialDefault = new Lambert(Vector3(1,0,0));
 	TriangleMesh * mesh = new TriangleMesh;
-	mesh->setDefaultMaterial(materialOne);
+	mesh->setDefaultMaterial(materialDefault);
 
 
 
@@ -77,7 +77,7 @@ void makeFinalScene()
         PointLight * light = new PointLight;
         light->setPosition(Vector3(88, 32, 0)); // Vector3(89.2, 11, 10)*3
         light->setColor(Vector3(1, 1, 1));
-        light->setPower(200000); // 4000
+        light->setPower(50000); // 4000
 
         // Set target at windows, to not waste photons
         LightTarget* target = new LightTarget(Vector3(15.81, 5.40, 9.3), 15);
@@ -110,14 +110,14 @@ void makeFinalScene()
 	*/
 
 	// Windows and area lights
-    Material* windowGlass = new Glass();
+    Material* windowGlass = new Glass(1.5, Vector3(1,1,1));
     mesh->connectNameToMaterial("BigWindows", windowGlass);
 
     Material* windowEdge = new Lambert(Vector3(0.3,0.3,0.3));
     mesh->connectNameToMaterial("BigWindowEdge", windowEdge);
-	Material* windowEdgeInside = new Lambert(Vector3(0.0,0.0,0.0));
+	Material* windowEdgeInside = new Lambert(Vector3(0.1,0.1,0.1));
     mesh->connectNameToMaterial("BigWindowEdgeInside", windowEdgeInside);
-	Material* windowOutside = new Lambert(Vector3(0,0,0));
+	Material* windowOutside = new Lambert(Vector3(40,31,1)/255.0/4);
 	mesh->connectNameToMaterial("WindowOutside", windowOutside);
 
 	// Porch
@@ -146,11 +146,15 @@ void makeFinalScene()
 	floor->setNormalMap(normal, objWorld, 1);
 
 	Vector3 floorTrimBase = Vector3(78, 48, 8)/255.0;
-	Vector3 floorTrimHigh = Vector3(91, 56, 10)/255.0;
-	Material* floorTrimMat = new Wood(floorTrimBase, floorTrimHigh, 2, Vector3(1,0,1), 0.6);
+	Vector3 floorTrimHigh = floorTrimBase;
+
+	Material* floorTrimMatX = new Wood(floorTrimBase, floorTrimHigh, 0.1, Vector3(0,0,1), 0.00001);
+	Material* floorTrimMatY = new Wood(floorTrimBase, floorTrimHigh, 0.1, Vector3(0,0,1), 0.00001);
+	// XY in blender  space
 
 	mesh->connectNameToMaterial("Floor", floor);
-	mesh->connectNameToMaterial("FloorTrim", floorTrimMat);
+	mesh->connectNameToMaterial("FloorTrimX", floorTrimMatX);
+	mesh->connectNameToMaterial("FloorTrimY", floorTrimMatY);
 
 	/*
 	// Walls
@@ -174,7 +178,7 @@ void makeFinalScene()
 
 
 	Vector3 tableWoodBaseColor = Vector3(69, 22, 1)/255.0;
-	Vector3 tableWoodHighColor = Vector3(74, 23, 2)/255.0;
+	Vector3 tableWoodHighColor = tableWoodBaseColor*1.1 + Vector3(5,5,0)/255.0;
 	const float scale = 0.70;
 	Wood* tableWood = new Wood(tableWoodBaseColor, tableWoodHighColor, scale, Vector3(1,0,0), 3.0f);
 
@@ -186,7 +190,7 @@ void makeFinalScene()
 
 
 
-	Material* chairFabric = new Fabric(Vector3(0.8, 0.1, 0.1));
+	Material* chairFabric = new Fabric(Vector3(0.7, 0.1, 0.1));
 	mesh->connectNameToMaterial("ChairFabric_CHR00402.jpg", chairFabric);
 
 
@@ -202,13 +206,13 @@ void makeFinalScene()
 	/*
 	// Chess Board
 	*/
-	Material* white = new Lambert(Vector3(1));
-	Material* black = new Lambert(Vector3(0));
+	Material* white = new Lambert(Vector3(0.7));
+	Material* black = new Lambert(Vector3(0.1));
 	mesh->connectNameToMaterial("ChessWhite", white);
 	mesh->connectNameToMaterial("ChessBlack", black);
 
-    Material* glassChessPieceWhite = new Glass();
-    Material* glassChessPieceBlack = new Glass();
+    Material* glassChessPieceWhite = new Glass(1.4, Vector3(1, 1, 1));
+    Material* glassChessPieceBlack = new Glass(1.4, Vector3(0.7, 1, 0.7));
     mesh->connectNameToMaterial("ChessPiecesOne", glassChessPieceWhite);
     mesh->connectNameToMaterial("ChessPiecesTwo", glassChessPieceBlack);
 

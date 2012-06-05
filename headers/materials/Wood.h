@@ -34,6 +34,7 @@ private:
 	float m_scale;
 	float m_perlinScale;
 
+
 	float m_glossPower;
 	float m_glossFactor;
 	Vector3 m_glossColor;

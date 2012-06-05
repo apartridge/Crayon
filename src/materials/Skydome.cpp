@@ -25,7 +25,25 @@ void Skydome::sphereCoordinates(Vector3 raydir, int* res) const
 Vector3 Skydome::shade(const Ray& ray, const HitInfo& hit, const Scene& scene, const int depth) const
 {
 	int uvCoordinatesNormalized[2];
+	
 	sphereCoordinates(ray.direction(), uvCoordinatesNormalized);
 
-	return (3 * image[uvCoordinatesNormalized[0]*width + uvCoordinatesNormalized[1]]).saturated();
+	/*if(uvCoordinatesNormalized[0] >= height)
+	{
+		printf("UV0 too big! Skydome.cpp\n");
+		return 0;
+	}
+		
+
+	if(uvCoordinatesNormalized[1] >= width){
+		printf("UV1 too big! Skydome.cpp\n");
+		return 0;
+	}
+	*/
+
+	// This overflows all the time?
+	return Vector3(1,1,1);
+
+
+	return (1 * image[uvCoordinatesNormalized[0]*width + uvCoordinatesNormalized[1]]).saturated();
 }

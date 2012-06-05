@@ -1,5 +1,5 @@
 # Blender MTL File: 'World7.blend'
-# Material Count: 15
+# Material Count: 20
 newmtl 
 Ns 0
 Ka 0.000000 0.000000 0.000000
@@ -71,6 +71,56 @@ illum 2
 map_Kd C:\Users\Stian\Documents\Blender\CSE168Project\ObjectsFromNet\Chair2\CHR00401.jpg
 
 
+newmtl ChessBlack
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.006275 0.006275 0.006275
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+
+
+newmtl ChessBoard
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.407843 0.203922 0.103529
+Ks 0.249020 0.249020 0.249020
+Ni 1.000000
+d 1.000000
+illum 2
+
+
+newmtl ChessPiecesOne
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.442353 0.000000 0.000000
+Ks 0.500000 0.282353 0.282353
+Ni 1.000000
+d 0.480000
+illum 2
+
+
+newmtl ChessPiecesTwo
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.000000 0.000000 0.451765
+Ks 0.225490 0.350980 0.500000
+Ni 1.000000
+d 0.320000
+illum 2
+
+
+newmtl ChessWhite
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+
+
 newmtl Floor
 Ns 96.078431
 Ka 0.000000 0.000000 0.000000
@@ -83,10 +133,10 @@ map_Kd C:\\Users\\Stian\\Documents\\Blender\\CSE168Project\\Textures\\floor.jpg
 map_Bump C:\\Users\\Stian\\Documents\\Blender\\CSE168Project\\Textures\\floorNM.jpg
 
 
-newmtl FloorTrim
+newmtl FloorTrimY
 Ns 96.078431
 Ka 0.000000 0.000000 0.000000
-Kd 0.640000 0.137533 0.000000
+Kd 0.640000 0.640000 0.640000
 Ks 0.500000 0.500000 0.500000
 Ni 1.000000
 d 1.000000

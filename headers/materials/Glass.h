@@ -6,7 +6,7 @@
 class Glass : public Material
 {
 public:
-    Glass(float refractiveIndex = 1.5);
+    Glass(float refractiveIndex = 1.5, Vector3 color = Vector3(1,1,1));
     virtual ~Glass();
 
     virtual Vector3 shadeLight(const Light& light, const Ray& ray, 
@@ -14,12 +14,6 @@ public:
     
     virtual Vector3 shadeReflectance(const Ray& ray, 
         const HitInfo& hit, const Scene& scene, const int depth) const;
-
-    //int Shininess;
-
-    // float RefractiveIndex;
-    // Vector3 Rs;
-    // Vector3 Rd;
 };
 
 class FrostedGlass : public Material

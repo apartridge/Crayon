@@ -5,7 +5,7 @@
 Wood::Wood(Vector3 baseColor, Vector3 highColor, float scale, Vector3 stripesDirection, float stripesScale) : Lambert()
 {
 	m_baseColor = baseColor;
-	m_highColor = baseColor*1.1 + Vector3(5.0/255.0,5.0/255.0,0);
+	m_highColor = highColor;
 	m_scale = scale;
 	m_glossFactor = 0;
 	m_stripesDirection = stripesDirection;
@@ -30,7 +30,7 @@ void normalize(float& x)
 
 Vector3 Wood::diffuseColor(const HitInfo& hit) const
 {
-	Vector3 m_stretchDirection = m_stripesDirection;
+	Vector3 m_stretchDirection = Vector3(1,0,1) - m_stripesDirection;
 	float sinFactor = sin(dot(m_stretchDirection, hit.P*m_stripesScale));
 	bool stripe = sinFactor > 0;
 	bool subStripe = sin(2*dot(m_stretchDirection, hit.P*m_stripesScale)) > 0;
@@ -98,7 +98,7 @@ Vector3 Wood::diffuseColor(const HitInfo& hit) const
 		woodStripes = -woodStripes;
 	}
 	float gStripes = woodStripes - int(woodStripes);
-	gStripes = 0.7 + gStripes*0.3;
+	gStripes = 0.6 + 0.4*gStripes;
 	//gStripes = 1- ( 1 - pow(gStripes,14));
 
 	Vector3 color;
