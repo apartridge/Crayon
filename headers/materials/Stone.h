@@ -7,19 +7,18 @@
 #include "Worley.h"
 #include "../geometry/Vector3.h"
 #include "Perlin.h"
+#include "Lambert.h"
 
-class Stone : public Material
+class Stone : public Lambert
 {
 public:
     Stone();
     virtual ~Stone();
     virtual void preCalc() {};
     
-    virtual Vector3 shadeLight(const Light& light, const Ray& ray, const HitInfo& hit, const Scene& scene, const int depth) const;
+    virtual Vector3 diffuseColor(const HitInfo& hit) const;
     static const int WORLEY_ORDER = 4;
 
-private:
-    Vector3 stoneTexture(const HitInfo& hit) const;
 };
 
 #endif

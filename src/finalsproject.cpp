@@ -9,6 +9,7 @@
 #include "materials/LambertTwoColor.h"
 #include "materials/Skydome.h"
 #include "materials/Fabric.h"
+#include "materials/Stone.h"
 
 // local helper function declarations
 namespace
@@ -32,12 +33,12 @@ void makeFinalScene()
     
     // set up the camera
     g_camera->setBGColor(Vector3(0.0f, 0.0f, 0.2f));
-    g_camera->setEye(Vector3(-5.166, 5.292, -7.929));
-    g_camera->setLookAt(Vector3(-4.029, 4.765, -6.345));
+    g_camera->setEye(Vector3(-5.422, 5.444, -8.215));
+    g_camera->setLookAt(Vector3(-3.283, 4.077, -5.123));
     g_camera->setUp(Vector3(0, 1, 0));
     g_camera->setFOV(45);
-	g_camera->setFocalLength(3.5);
-	g_camera->setAperture(0.02);
+	g_camera->setFocalLength(3.9);
+	g_camera->setAperture(0.017);
 
     // Add HDR sphere map
     Sphere *hdrSphere = new Sphere();
@@ -77,7 +78,7 @@ void makeFinalScene()
         PointLight * light = new PointLight;
         light->setPosition(Vector3(88, 32, 21)); // Vector3(89.2, 11, 10)*3
         light->setColor(Vector3(1, 1, 1));
-        light->setPower(10000); // 4000
+        light->setPower(330000); // 4000
         // Set target at windows, to not waste photons
         LightTarget* target = new LightTarget(Vector3(15.81, 5.40, 9.3), 15);
         light->setTarget(target);
@@ -158,7 +159,7 @@ void makeFinalScene()
 	// Walls
 	*/
 
-	Material* ceiling = new Lambert(Vector3(1.0, 1.0, 1.0f));
+	Material* ceiling = new Lambert(Vector3(0.97));
 	Material* walls = new LambertTwoColor(Vector3(0.99), Vector3(54, 46, 37)*2/255.0 , 0.4, 5.0  );
 	mesh->connectNameToMaterial("Walls", walls);
 	mesh->connectNameToMaterial("Ceiling", ceiling);
@@ -179,16 +180,16 @@ void makeFinalScene()
 	Vector3 tableWoodHighColor = tableWoodBaseColor*1.1 + Vector3(5,5,0)/255.0;
 	const float scale = 0.70;
 	Wood* tableWood = new Wood(tableWoodBaseColor, tableWoodHighColor, scale, Vector3(1,0,0), 3.0f);
-
+    
 	Vector3 glossColor = Vector3(1);
 	int glossPower = 300;
-	float glossFactor = 0.01;
+	float glossFactor = 0.001;
 	tableWood->setGlossiness(glossPower, glossFactor, glossColor);
 	mesh->connectNameToMaterial("TableWood", tableWood);
 
 
 
-	Material* chairFabric = new Fabric(Vector3(0.7, 0.1, 0.1));
+	Material* chairFabric = new Fabric(Vector3(0.96, 0.02, 0.02));
 	mesh->connectNameToMaterial("ChairFabric_CHR00402.jpg", chairFabric);
 
 
@@ -204,13 +205,13 @@ void makeFinalScene()
 	/*
 	// Chess Board
 	*/
-	Material* white = new Lambert(Vector3(0.7));
-	Material* black = new Lambert(Vector3(0.1));
+	Material* white = new Lambert(Vector3(0.97));
+	Material* black = new Lambert(Vector3(0.03));
 	mesh->connectNameToMaterial("ChessWhite", white);
 	mesh->connectNameToMaterial("ChessBlack", black);
 
-    Material* glassChessPieceWhite = new Glass(1.5, Vector3(1, 1, 1));
-    Material* glassChessPieceBlack = new Glass(1.5, Vector3(0.6, 1, 0.6));
+    Material* glassChessPieceWhite = new Glass(1.5, 0.9*Vector3(0.6, 0.6, 1), Vector3(0, 0, 0.1));
+    Material* glassChessPieceBlack = new Glass(1.5, 0.9*Vector3(0.6, 1, 0.6), Vector3(0, 0.1, 0));
     mesh->connectNameToMaterial("ChessPiecesOne", glassChessPieceWhite);
     mesh->connectNameToMaterial("ChessPiecesTwo", glassChessPieceBlack);
 
@@ -229,34 +230,21 @@ void makeFinalScene()
 	Material* staircaseSides = new Wood(stairCaseBaseColor, stairCaseHighColor, 0.53, Vector3(0,1,0), 1.36);
 	mesh->connectNameToMaterial("StairsSides", staircaseSides);
 
-	// Dark Steps
-
-	Vector3 staircaseDarkStepBase = Vector3(45, 30, 18)/255.0;
-	Vector3 staircaseDarkStepHigh = Vector3(123, 82, 49)/255.0;
-
-	const float staircaseDarkStepScale = 1.5;
-	float staircaseDarkStepPerlinScale = 10;
-	Material* materialStairDarkSteps = new Wood(staircaseDarkStepBase, staircaseDarkStepHigh,
-												staircaseDarkStepScale,
-												staircaseDarkStepPerlinScale);
-
-	mesh->connectNameToMaterial("StairsSteps", materialStairDarkSteps);
-	mesh->connectNameToMaterial("StairsHandguards", materialStairDarkSteps);
-
 	/*
 	// SOFA AND TABLE
 	*/
-	Material* sofaFabric = new Lambert(Vector3(0.7,0.1,0.1));
-	mesh->connectNameToMaterial("SofaFabric", sofaFabric);
+	//Material* sofaFabric = new Lambert(Vector3(1,0.1,0.1));
+	mesh->connectNameToMaterial("SofaFabric", chairFabric);
 
 	Material* sofaFeet = new Lambert(Vector3(0.8,0.8,0.1));
 	mesh->connectNameToMaterial("SofaFeet", sofaFeet);
 
 	//Material* frostedGlassTable = new FrostedGlass(Vector3(0.2), Vector3(0.9));
-    mesh->connectNameToMaterial("TableTopGlass", new Glass());
+    mesh->connectNameToMaterial("TableTopGlass", new Glass(1.5, Vector3(0.9, 0.9, 1)));
 
+	mesh->connectNameToMaterial("TableSides", new Lambert(Vector3(0.3, 0.3, 0.3)));
 
-
+	mesh->connectNameToMaterial("TableMetalChrome", new Lambert(Vector3(0.3, 0.3, 0.3)));
 
     mesh->load("world.obj");
 	g_scene->addMesh(mesh);

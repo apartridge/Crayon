@@ -21,7 +21,7 @@ float stones(float x, float y, float z, float F[4], unsigned long id[4])
     return (0.95 - 0.9/(1+pow(F[1] - F[0], 1.1f))); 
 }
 
-Vector3 Stone::stoneTexture(const HitInfo& hit) const
+Vector3 Stone::diffuseColor(const HitInfo& hit) const
 {
     Vector3 color[] = {
         2*Vector3(0x33, 0x38, 0x37),
@@ -46,10 +46,10 @@ Vector3 Stone::stoneTexture(const HitInfo& hit) const
     float stone_detail = (1/(1+sqrt(Fcoarse[0]))) * std::abs(perlin_turb + 1) / 2.0f;
     
     Vector3 & pixel_color = color[id[0] % 5];
-    pixel_color *= 6 * stone_detail * stone_grid * fine_grid;
+    pixel_color *= 0.5 * stone_detail * stone_grid * fine_grid;
     return pixel_color;
 }
-
+/*
 Vector3 Stone::shadeLight(const Light& light, const Ray& ray, const HitInfo& hit, const Scene& scene, const int depth) const
 {
     Vector3 texture = stoneTexture(hit);
@@ -62,7 +62,7 @@ Vector3 Stone::shadeLight(const Light& light, const Ray& ray, const HitInfo& hit
     Ray shadowRay (hit.P, l.normalized());
     /*shadowRay.d = l.normalized(); 
     shadowRay.o = hit.P;*/
-    bool inShadow = scene.trace(shadowHit, shadowRay, epsilon);
+    /*bool inShadow = scene.trace(shadowHit, shadowRay, epsilon);
     bool outside = dot(-ray.direction(), hit.N) > 0;
 
     if (outside && !inShadow) 
@@ -74,4 +74,4 @@ Vector3 Stone::shadeLight(const Light& light, const Ray& ray, const HitInfo& hit
         L += texture * std::max(0.0f, nDotL/falloff * light.power() / PI) * light.color();
     }
     return L;
-}
+}*/

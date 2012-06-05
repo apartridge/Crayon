@@ -44,7 +44,7 @@ Vector3 Material::shadeGlobalIllumination(const Ray& ray, const HitInfo& hit, co
 #if USE_PHOTON_MAP
 
     Vector3 irradiance;
-    scene.photonMap()->irradiance_estimate(&irradiance[0], &hit.P[0], &hit.N[0], 0.2, 80);
+    scene.photonMap()->irradiance_estimate(&irradiance[0], &hit.P[0], &hit.N[0], 0.3, 80);
 
     L += (1/PI) * diffuseColor(hit) * irradiance;
 
@@ -85,7 +85,7 @@ Vector3 Material::lightDiffuseVisiblity(const Light& light, const HitInfo& hit, 
     float visibility = light.visibility(hit.P, scene);
     float falloff = l.length2();
     l /= sqrt(falloff);
-    return visibility * std::max(0.0f, dot(hit.N, l)/falloff * light.power() / PI) * light.color();
+    return visibility * (1/PI) * std::max(0.0f, dot(hit.N, l)/falloff * light.power() / PI) * light.color();
 }
 
 Vector3 Material::reflect(const Ray& ray, const HitInfo& hit)

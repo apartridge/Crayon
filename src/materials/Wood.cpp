@@ -129,14 +129,14 @@ Vector3 Wood::shadeLight(const Light& light, const Ray& ray, const HitInfo& hit,
 
 	// Blinn Phong Specular For Glossiness / "Lakkert" wood
 
-	if(m_glossFactor > 0)
+	/*if(m_glossFactor > 0)
 	{
 		Vector3 l = light.getPosition() - hit.P;
 		//Vector3 halfway = l - ray.direction();
-		Vector3 reflect = Material::reflect(ray, hit);
+		Vector3 reflect = Material::reflect(l, hit);
 		reflect.normalize();
-		L += 0.1*m_glossFactor*pow(dot(hit.N, reflect), m_glossPower)*m_glossColor*(m_glossPower+1)/(2*PI);
-	}
+		L += 0.1*m_glossFactor*pow(dot(hit.n, reflect), m_glossPower)*m_glossColor*(m_glossPower+1)/(2*PI);
+	}*/
 
     return L;
 }

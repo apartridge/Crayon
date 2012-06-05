@@ -2,10 +2,10 @@
 #include "geometry/Ray.h"
 #include "geometry/Scene.h"
 
-Glass::Glass(float refractiveIndex, Vector3 color) : Material(Vector3(0,0,0), Vector3(0.00), color)
+Glass::Glass(float refractiveIndex, Vector3 rt, Vector3 rd) : Material(rd, Vector3(0), rt)
 {
 	shininess = 500;
-    indexOfRefraction = refractiveIndex; // Override Material
+    indexOfRefraction = refractiveIndex;
 }
 
 Glass::~Glass()

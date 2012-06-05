@@ -24,7 +24,7 @@ public:
         const HitInfo& hit, const Scene& scene, const int depth) const { return Vector3(0); };
     
     Vector3 shadeGlobalIllumination(const Ray& ray, 
-        const HitInfo& hit, const Scene& scene, const int depth) const; // { return Vector3(0); };
+        const HitInfo& hit, const Scene& scene, const int depth) const;
 
     virtual Vector3 shadeReflectance(const Ray& ray, 
         const HitInfo& hit, const Scene& scene, const int depth) const { return Vector3(0); };
@@ -56,7 +56,6 @@ protected:
     float shininess;
 
 private:
-    //Vector3 ambient; // Deprecated
     static const int RecursionLimit = 5;
 };
 

@@ -112,6 +112,7 @@ void Image::doGammaCorrection()
 
 void Image::doLinearToneMapping()
 {
+    return;
     if (m_light == 0 || m_pixels == 0)
        return;
 
@@ -138,6 +139,7 @@ void Image::doLinearToneMapping()
 
 void Image::doToneMapping(float alpha, float saturation)
 {
+    return;
     if (m_light == 0 || m_pixels == 0)
         return;
     /*
