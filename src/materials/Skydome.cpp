@@ -41,9 +41,9 @@ Vector3 Skydome::shade(const Ray& ray, const HitInfo& hit, const Scene& scene, c
 	}
 	*/
 
-	// This overflows all the time?
 	return Vector3(0.75); //(1,1,1);
 
 
+	// This overflows all the time?
 	return (1 * image[uvCoordinatesNormalized[0]*width + uvCoordinatesNormalized[1]]).saturated();
 }

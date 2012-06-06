@@ -49,7 +49,7 @@ void makeFinalScene()
     PointLight * light = new PointLight;
     light->setPosition(Vector3(88, 32, 21)); // Vector3(89.2, 11, 10)*3
     light->setColor(Vector3(1, 1, 1));
-    light->setPower(300000);
+    light->setPower(200000);
 
     // Set target at windows, to not waste photons
     LightTarget* target = new LightTarget(Vector3(15.81, 5.40, 9.3), 15);
@@ -184,7 +184,7 @@ void makeFinalScene()
 	mesh->connectNameToMaterial("ChessBlack", black);
 
     Material* glassChessPieceWhite = new Glass(1.5, Vector3(1, 1, 1));
-    Material* glassChessPieceBlack = new Glass(1.5, Vector3(0.6, 1, 0.6));
+    Material* glassChessPieceBlack = new Glass(1.5, Vector3(0.4, 1, 0.4));
     mesh->connectNameToMaterial("ChessPiecesOne", glassChessPieceWhite);
     mesh->connectNameToMaterial("ChessPiecesTwo", glassChessPieceBlack);
 

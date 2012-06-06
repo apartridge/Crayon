@@ -6,7 +6,6 @@
 
 Vector3 LambertTwoColor::diffuseColor(const HitInfo& hit) const
 {
-	//return m_firstColor;
     Vector3 color;
     float sinf = sin((hit.P.x + hit.P.z)*m_scale) + m_wideness;
 
@@ -20,15 +19,3 @@ Vector3 LambertTwoColor::diffuseColor(const HitInfo& hit) const
 	}
     return color;
 }
-/*
-Vector3 LambertTwoColor::shadeLight(const Light& light, const Ray& ray, 
-        const HitInfo& hit, const Scene& scene, const int depth) const
-{
-    return diffuseColor(hit) * Material::lightDiffuseVisiblity(light, hit, scene);
-}*/
-/*
-Vector3 LambertTwoColor::shadeGlobalIllumination(const Ray& ray, const HitInfo& hit, const Scene& scene, const int depth) const
-{
-    return Lambert::shadeGlobalIllumination(ray, hit, scene, depth);
-}
-*/

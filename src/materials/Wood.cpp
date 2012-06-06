@@ -119,8 +119,6 @@ Vector3 Wood::diffuseColor(const HitInfo& hit) const
     return color*gStripes*g;
 }
 
-
-
 Vector3 Wood::shadeLight(const Light& light, const Ray& ray, const HitInfo& hit, const Scene& scene, const int depth) const
 {
     Vector3 L(0);
@@ -140,10 +138,3 @@ Vector3 Wood::shadeLight(const Light& light, const Ray& ray, const HitInfo& hit,
 
     return L;
 }
-
-
-/*
-Vector3 Wood::shadeGlobalIllumination(const Ray& ray, const HitInfo& hit, const Scene& scene, const int depth) const
-{
-    return diffuseColor(hit) * Lambert::shadeGlobalIllumination(ray, hit, scene, depth);
-}*/

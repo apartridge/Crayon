@@ -58,7 +58,7 @@ void PhotonTracer::traceLight(const Light& light, int numberOfPhotons)
 		}
 
     }
-    _photonMap->scale_photon_power(1 / (float)numberOfPhotons); // Maybe it should be 'n' here?
+    _photonMap->scale_photon_power(1 / (float)numberOfPhotons); 
 }
 
 int PhotonTracer::tracePhoton(const Ray& ray, Vector3 power, int bounce)
